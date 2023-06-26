@@ -1,24 +1,29 @@
 import React from "react";
 import "./App.css";
+import Home from "./Pages/Home";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
+
+const GlobalStyles = createGlobalStyle`
+  ${reset}
+  body{
+    font-family:'Noto Sans KR';
+    color: #101010;
+  }
+`;
 
 export default App;
