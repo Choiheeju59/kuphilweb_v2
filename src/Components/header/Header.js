@@ -40,13 +40,13 @@ const Header = () => {
 
 const StyledHeader = styled.div`
   width: 100%;
+  border-bottom: 1px solid rgb(235, 235, 235);
 `;
 const HeaderContent = styled.div`
   width: 90%;
   max-width: 1200px;
   height: 60px;
   margin: 0 auto;
-  border-bottom: 1px solid rgb(200, 200, 200);
   display: flex;
   align-items: center;
   flex-direction: row;
