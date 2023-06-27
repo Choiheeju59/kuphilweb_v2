@@ -33,13 +33,13 @@ const Footer = () => {
 
 const StyledFooter = styled.div`
   width: 100%;
+  border-top: 1px solid rgb(235, 235, 235);
 `;
 const FooterContent = styled.div`
   width: 90%;
   max-width: 1200px;
   height: 170px;
   margin: 0 auto;
-  border-top: 1px solid rgb(200, 200, 200);
   display: flex;
   align-items: center;
   flex-direction: row;
