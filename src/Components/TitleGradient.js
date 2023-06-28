@@ -9,10 +9,12 @@ const TitleGradient = (props) => {
   const [link2Clicked, setLink2Clicked] = useState(link2 === location.pathname);
 
   const movePage = () => {
-    navigate(link);
+    if(location.pathname === link) window.location.reload(); 
+    else navigate(link);
   }
   const movePage2 = () => {
-    navigate(link2);
+    if(location.pathname === link2) window.location.reload(); 
+    else navigate(link2);
   }
   return (
     <StyledTitleGradient>
@@ -65,7 +67,7 @@ const TitleContent = styled.div`
 
   @media screen and (max-width: 767px){
     padding-top: 40px;
-  padding-bottom: 20px;
+    padding-bottom: 20px;
   }
 `;
 const Title = styled.p`
@@ -94,6 +96,7 @@ const TitleSecond = styled.p`
 `;
 const Explain = styled.p`
   white-space: pre-line;
+  line-height: 1.2;
   @media screen and (max-width: 767px){
     font-size: 13px;
   }
