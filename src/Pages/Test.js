@@ -185,7 +185,7 @@ const RestartButton = styled.button`
   border: none;
   background-color: #ffffff;
   border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
