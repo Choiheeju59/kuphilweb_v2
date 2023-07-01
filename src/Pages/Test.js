@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import Header from '../Components/header/Header';
 import Footer from '../Components/footer/Footer';
 import TitleGradient from '../Components/TitleGradient';
@@ -7,6 +8,7 @@ import Question from '../Components/test/Question';
 import Answer from '../Components/test/Answer';
 
 const Test = () => {
+  const navigate = useNavigate();
   const [questionId, setQuestionId] = useState(0);
   const [question, setQuestion] = useState(
     {
@@ -103,7 +105,10 @@ const Test = () => {
                   <Answer
                     id={question.id}
                     answer={question.answer.answer2}
-                    setQuestionId={() => setQuestionId(questionId + 1)}
+                    setQuestionId={() => {
+                      if(questionId >= 1) setQuestionId(questionId + 1);
+                      else navigate(-1);
+                    }}
                   />
                 </StyledAnswerBox>
               </>
