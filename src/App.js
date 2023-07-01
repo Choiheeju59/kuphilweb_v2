@@ -5,6 +5,7 @@ import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 import Home from "./Pages/Home";
 import Test from './Pages/Test';
+import Playground from './Pages/Playground';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/playground" element={<Playground />} />
         </Routes>
       </BrowserRouter>
     </div>

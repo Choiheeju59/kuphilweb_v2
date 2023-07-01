@@ -14,8 +14,8 @@ const Menus = () => {
   const moveQnAPage = () => {
     navigate(`/qna`);
   }
-  const moveGamecenterPage = () => {
-    navigate(`/gamecenter`);
+  const movePlaygroundPage = () => {
+    navigate(`/playground`);
   }
   const moveLabPage = () => {
     navigate(`/lab`);
@@ -27,7 +27,7 @@ const Menus = () => {
         <StyledList onClick={moveIntroducePage}>소개</StyledList>
         <StyledList onClick={moveArchivePage}>아카이브</StyledList>
         <StyledList onClick={moveQnAPage}>Q&A</StyledList>
-        <StyledList onClick={moveGamecenterPage}>놀이터</StyledList>
+        <StyledList onClick={movePlaygroundPage}>놀이터</StyledList>
         <StyledList onClick={moveLabPage}>실험실</StyledList>
       </StyledMenus>
     </>
