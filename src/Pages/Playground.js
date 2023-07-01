@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from '../Components/header/Header';
 import Footer from '../Components/footer/Footer';
 import TitleGradient from '../Components/TitleGradient';
+import ContentsBox from '../Components/ContentsBox';
 
 const Playground = () => {
   return (
@@ -16,6 +17,29 @@ const Playground = () => {
             link="/playground"
             color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
           />
+          <Box>
+            <ContentsBox
+              title="너의 악기는?"
+              src="test.jpg"
+              info={
+                "새로운 악기를 시도해보고 싶다면?\n당신에게 어울리는 악기를 추천해드립니다!"
+              }
+              link="/test" />
+            <ContentsBox
+              title="내 최애 작곡가?!"
+              src="worldcup.jpg"
+              info={
+                "생각만 해도 두근두근!\n신중하게 최애 작곡가를 골라봐요!"
+              }
+              link="/worldcup" />
+              <ContentsBox
+              title="클래식 능력고사"
+              src="exam.jpg"
+              info={
+                "당신은 클래식을 많이 아십니까?\n이곳에서 당신의 능력을 확인해보십시오!"
+              }
+              link="/exam" />
+          </Box>
         </Contents>
       </Wrap>
       <Footer />
@@ -37,6 +61,16 @@ const Contents = styled.div`
   margin: 0 auto;
   @media screen and (max-width: 767px){
     max-width: 400px;
+  }
+`;
+const Box = styled.div`
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0;
+  @media screen and (max-width: 767px){
+    margin: 10px 0;
   }
 `;
 
