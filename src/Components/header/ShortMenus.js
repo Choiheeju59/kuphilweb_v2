@@ -12,8 +12,8 @@ function ShortMenus(props) {
   const moveArchivePage = () => {
     navigate(`/archive`);
   }
-  const moveQnAPage = () => {
-    navigate(`/qna`);
+  const moveBoardPage = () => {
+    navigate(`/board`);
   }
   const movePlaygroundPage = () => {
     navigate(`/playground`);
@@ -45,14 +45,13 @@ function ShortMenus(props) {
         </Close>
         <StyledList onClick={moveIntroducePage}>소개</StyledList>
         <StyledList onClick={moveArchivePage}>아카이브</StyledList>
-        <StyledList onClick={moveQnAPage}>Q&A</StyledList>
+        <StyledList onClick={moveBoardPage}>게시판</StyledList>
         <StyledList onClick={movePlaygroundPage}>놀이터</StyledList>
         <StyledList onClick={moveLabPage}>실험실</StyledList>
       </Content>
     </StyledShortMenus>
   );
 }
-
 
 const StyledShortMenus = styled.div`
   top: 0;
