@@ -7,45 +7,12 @@ import TitleGradient from '../Components/TitleGradient';
 import styled from 'styled-components';
 
 const Introduce = () => {
-    const [MapFrontIsOn, setMapFrontIsOn] = useState(true);
-    const [MapLibraryIsOn, setMapLibraryIsOn] = useState(false);
-    const [MapBackIsOn, setMapBackIsOn] = useState(false);
+    const [selectMap, setSelectMap] = useState("map_front");
 
-    const MapFront = () => {
-        let map_front = document.getElementById("map_front");
-        map_front.style.color = "#000000";
-        let map_library = document.getElementById("map_library");
-        map_library.style.color = "#989898";
-        let map_back = document.getElementById("map_back");
-        map_back.style.color = "#989898";
-        setMapFrontIsOn(true);
-        setMapLibraryIsOn(false);
-        setMapBackIsOn(false);
+    const onClick = (e) => {
+        setSelectMap(e.target.value);
     }
 
-    const MapLibrary = () => {
-        let map_front = document.getElementById("map_front");
-        map_front.style.color = "#989898";
-        let map_library = document.getElementById("map_library");
-        map_library.style.color = "#000000";
-        let map_back = document.getElementById("map_back");
-        map_back.style.color = "#989898";
-        setMapFrontIsOn(false);
-        setMapLibraryIsOn(true);
-        setMapBackIsOn(false);
-    }
-
-    const MapBack = () => {
-        let map_front = document.getElementById("map_front");
-        map_front.style.color = "#989898";
-        let map_library = document.getElementById("map_library");
-        map_library.style.color = "#989898";
-        let map_back = document.getElementById("map_back");
-        map_back.style.color = "#000000";
-        setMapFrontIsOn(false);
-        setMapLibraryIsOn(false);
-        setMapBackIsOn(true);
-    }
     
     return(
         <>
@@ -96,21 +63,27 @@ const Introduce = () => {
                         />
                         <Directions>
                             <WrapWay>
-                                <Way type="button" defaultValue={"수의과대학 (정문)"} onClick={MapFront} id="map_front" style={{color: "#000000"}}/>
-                                <Way type="button" defaultValue={"도서관 (중문)"} onClick={MapLibrary} id="map_library" style={{color: "#989898"}}/>
-                                <Way type="button" defaultValue={"경영대학 (후문)"} onClick={MapBack} id="map_back" style={{color: "#989898"}}/>
+                                <LabelWay>
+                                    <Way type="radio" name="map" value="map_front" onClick={onClick} style={{appearance: "none"}} checked/>
+                                    <span style={selectMap === "map_front" ? {color: "#000000"} : {color: "#989898"}}>수의과대학 (정문)</span>
+                                </LabelWay>
+                                <LabelWay>
+                                    <Way type="radio" name="map" value="map_library" onClick={onClick} style={{appearance: "none"}}/>
+                                    <span style={selectMap === "map_library" ? {color: "#000000"} : {color: "#989898"}}>도서관 (중문)</span>
+                                </LabelWay>
+                                <LabelWay>
+                                    <Way type="radio" name="map" value="map_back" onClick={onClick} style={{appearance: "none"}}/>
+                                    <span style={selectMap === "map_back" ? {color: "#000000"} : {color: "#989898"}}>경영대학 (후문)</span>
+                                </LabelWay>
                             </WrapWay>
                             {
-                                MapFrontIsOn &&
-                                <Map src="./images/introduce/map_front.jpg" alt="정문에서 동아리방 오는 길 이미지"/>
+                                selectMap === "map_front" ? <Map src="./images/introduce/map_front.jpg" alt="정문에서 동아리방 오는 길 이미지"/> : null
                             }
                             {
-                                MapLibraryIsOn &&
-                                <Map src="./images/introduce/map_library.jpg" alt="중문에서 동아리방 오는 길 이미지"/>
+                                selectMap === "map_library" ? <Map src="./images/introduce/map_library.jpg" alt="중문에서 동아리방 오는 길 이미지"/> : null
                             }
                             {
-                                MapBackIsOn &&
-                                <Map src="./images/introduce/map_back.jpg" alt="후문에서 동아리방 오는 길 이미지"/>
+                                selectMap === "map_back" ? <Map src="./images/introduce/map_back.jpg" alt="후문에서 동아리방 오는 길 이미지"/> : null
                             }
                             <LocationInfo>
                                 쿠필 동아리방은 <Location>제2학생회관 지하 B117호</Location>입니다.<br/>
@@ -154,8 +127,8 @@ const MainContents = styled.div`
 const Welcome = styled.div`
     margin: 30px auto;
     padding: 0 1.5%;
-  display: flex;
-  align-items: flex-start;
+    display: flex;
+    align-items: flex-start;
 
   @media screen and (max-width: 767px){
     display: block;
@@ -173,41 +146,41 @@ const ImgProfessor = styled.img`
 `
 
 const ProfessorWelcomeTitle = styled.article`
-width: 100%;
-font-size: 1.3rem;
+    width: 100%;
+    font-size: 21px;
     margin-left: 50px;
     line-height: 180%;
-  text-align: left;
-  font-weight: bold;
+    text-align: left;
+    font-weight: bold;
 
   @media screen and (max-width: 767px){
-    font-size: 1rem;
+    font-size: 16px;
     margin-left: 0;
 }
 `
 
 const ProfessorWelcome = styled.p`
-width: 100%;
-font-size: 1.1rem;
+    width: 100%;
+    font-size: 18px;
     margin-left: 50px;
     line-height: 150%;
-  text-align: left;
+    text-align: left;
 
   @media screen and (max-width: 767px){
-    font-size: 0.8rem;
+    font-size: 12.5px;
     margin-left: 0;
 }
 `
 
 const Closing = styled.p`
-width: 100%;
-font-size: 1.1rem;
-margin-left: 50px;
-  text-align: right;
-  line-height: 150%;
+    width: 100%;
+    font-size: 18px;
+    margin-left: 50px;
+    text-align: right;
+    line-height: 150%;
 
   @media screen and (max-width: 767px){
-    font-size: 0.8rem;
+    font-size: 12.5px;
     margin-left: 0;
 }
 `
@@ -216,71 +189,74 @@ const ImgIntroduce = styled.img`
     display: none;
 
     @media screen and (max-width: 767px){
-        width: 80%;
+        width: 300px;
     display: block;
     margin: 0 auto;
-    max-width: 600px;
     }
 `
 
 const ImgDeskTopIntroduce = styled.img`
-width: 80%;
-display: block;
-margin: 0 auto;
-max-width: 800px;
-
-@media screen and (max-width: 767px){
-    display: none;
-}
-`
-
-const Directions = styled.div`
-
-`
-
-const WrapWay = styled.div`
-margin: 30px auto;
-display: flex;
-justify-content: space-evenly;
-`
-
-const Way = styled.input`
-    border: none;
-    cursor: pointer;
-    background: #FFFFFF;
-    font-weight: bold;
-    font-size: 1.1rem;
+    width: 750px;
+    display: block;
+    margin: 0 auto;
 
     @media screen and (max-width: 767px){
-        font-size: 0.8rem;
+        display: none;
     }
 `
 
-const Map = styled.img`
-width: 500px;
+const Directions = styled.div`
+`
 
-@media screen and (max-width: 767px){
-    width: 300px;
-}
+const WrapWay = styled.div`
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-evenly;
+`
+
+const LabelWay = styled.label`
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-use-select: none;
+    user-select: none;
+
+    @media screen and (max-width: 767px){
+        font-size: 12.5px;
+    }
+`
+
+const Way = styled.input`
+`
+
+const Map = styled.img`
+    width: 500px;
+
+    @media screen and (max-width: 767px){
+        width: 300px;
+    }
 `
 
 const LocationInfo = styled.div`
-margin: 30px auto;
-line-height: 30px;
-font-size: 1rem;
+    margin: 30px auto;
+    line-height: 30px;
+    font-size: 16px;
 
     @media screen and (max-width: 767px){
-        font-size: 0.7rem;
+        font-size: 11.5px;
         line-height: 20px;
     }
 `
 
 const Location = styled.span`
-font-size: 1rem;
-font-weight: bold;
+    font-size: 16px;
+    font-weight: bold;
 
     @media screen and (max-width: 767px){
-        font-size: 0.7rem;
+        font-size: 11.5px;
     }
 `
 
