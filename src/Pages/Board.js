@@ -12,15 +12,13 @@ const Board = () => {
   const [ content, setContent ] = useState([]);
   const [ result, setResult ] = useState(null);
   const [ totalCount, setTotalCount ] = useState(0);
-  const [ nowPage, setNowPage ] = useState(1);
   const navigate = useNavigate();
   const location = useLocation();
-  
 
   useEffect(() => {
     if(content.length){
-      let contents = content.map((v, i) => {
-        return <BoardBox key={i} title={v.title} answerCount={v.answerCount} date={v.date} />
+      let contents = content.map((v) => {
+        return <BoardBox key={v.id} id={v.id} title={v.title} answerCount={v.answerCount} date={v.date} />
       });
       setResult(contents);
     } else {
@@ -35,13 +33,12 @@ const Board = () => {
     let _checked = queryParams.get('category') || 'notice';
     setChecked(_checked);
     let _nowPage = Number(queryParams.get('page')) || 1;
-    setNowPage(_nowPage);
 
     let newContent = [];
     let newTotalCount = 91;
     let for_end = (_nowPage * 10) > newTotalCount ? newTotalCount - ((_nowPage - 1) * 10) : 10;
     for(let i = 0; i < for_end; i++){
-      newContent[i] = {title: '[' + _checked + ']' + _nowPage + '-' + i, answerCount: i, date: '2023-07-04'};
+      newContent[i] = {id: i,title: '[' + _checked + ']' + _nowPage + '-' + i, answerCount: i, date: '2023-07-04'};
     }
     setTotalCount(newTotalCount);
     setContent([...newContent]);
@@ -80,7 +77,7 @@ const Board = () => {
                 <WritingBox>
                   <WritingBtn>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
-                    <WritingText>글쓰기</WritingText>
+                    글쓰기
                   </WritingBtn>
                 </WritingBox>
               </Writing>
@@ -164,8 +161,6 @@ const WritingBtn = styled.p`
     cursor: pointer;
     opacity: 50%;
   }
-`;
-const WritingText = styled.p`
 `;
 const ReadBox = styled.div`
   width: 100%;

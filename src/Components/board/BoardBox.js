@@ -1,14 +1,20 @@
 import React from "react";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const BoardBox = (props) => {
-  const { title, answerCount, date } = props;
+  const { id, title, answerCount, date } = props;
+  const navigate = useNavigate();
   
+  const MoveBoardRead = (id) => {
+    navigate(`/board/read/` + id);
+  }
+
   return (
-    <StyledBox>
+    <StyledBox onClick={() => MoveBoardRead(id)}>
       <BoxTitle>{title}</BoxTitle>
       <BoxDetail>
-        <BoxDetailText>답변 {answerCount}</BoxDetailText>
+        <BoxDetailText>댓글 {answerCount}</BoxDetailText>
         <BoxDetailText>등록 {date}</BoxDetailText>
       </BoxDetail>
     </StyledBox>
