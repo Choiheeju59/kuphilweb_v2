@@ -9,7 +9,7 @@ const Header = () => {
     <StyledHeader>
       <HeaderContent>
         <HeaderLogo>
-          <Logo src="./images/logo.png" />
+          <Logo src={process.env.PUBLIC_URL + '/images/logo.png'} />
         </HeaderLogo>
         <HeaderDesktop>
         <Menus />

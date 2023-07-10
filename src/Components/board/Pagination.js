@@ -16,7 +16,6 @@ const Pagination = (props) => {
     setNowPage(_nowPage);
     let _endPage = Math.floor((totalCount - 1) / 10) + 1 ? Math.floor((totalCount - 1) / 10) + 1 : 1 ;
     setEndPage(_endPage);
-    console.log(_endPage);
 
     let pageStart = Math.floor((_nowPage - 1) / 5) * 5 + 1;
     let pageEnd = (pageStart + 4) < _endPage ? (pageStart + 4) : _endPage;
@@ -81,7 +80,7 @@ const PageNum = styled.li`
   align-items: center;
   border-radius: 5px;
   line-height: 35px;
-  border: ${props => props.checked ? '1px solid black' : 'none'};
+  border: ${props => props.checked ? '1px solid black' : '1px solid #00000000'};
   &:hover{
     cursor: pointer;
   }

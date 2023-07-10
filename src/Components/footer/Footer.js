@@ -22,8 +22,8 @@ const Footer = () => {
             </FooterExplain>
           </div>
           <DesktopContent>
-            <img height="80px" src="./images/kuphil_logo.png" />
-            <img height="80px" src="./images/konkuk_logo.png" />
+            <img height="80px" src={process.env.PUBLIC_URL + '/images/kuphil_logo.png'} />
+            <img height="80px" src={process.env.PUBLIC_URL + '/images/konkuk_logo.png'} />
           </DesktopContent>
         </Content>
       </FooterContent>

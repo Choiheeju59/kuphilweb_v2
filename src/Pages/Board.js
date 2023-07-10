@@ -12,15 +12,13 @@ const Board = () => {
   const [ content, setContent ] = useState([]);
   const [ result, setResult ] = useState(null);
   const [ totalCount, setTotalCount ] = useState(0);
-  const [ nowPage, setNowPage ] = useState(1);
   const navigate = useNavigate();
   const location = useLocation();
-  
 
   useEffect(() => {
     if(content.length){
-      let contents = content.map((v, i) => {
-        return <BoardBox key={i} title={v.title} answerCount={v.answerCount} date={v.date} />
+      let contents = content.map((v) => {
+        return <BoardBox key={v.id} id={v.id} title={v.title} answerCount={v.answerCount} date={v.date} />
       });
       setResult(contents);
     } else {
@@ -35,13 +33,12 @@ const Board = () => {
     let _checked = queryParams.get('category') || 'notice';
     setChecked(_checked);
     let _nowPage = Number(queryParams.get('page')) || 1;
-    setNowPage(_nowPage);
 
     let newContent = [];
     let newTotalCount = 91;
     let for_end = (_nowPage * 10) > newTotalCount ? newTotalCount - ((_nowPage - 1) * 10) : 10;
     for(let i = 0; i < for_end; i++){
-      newContent[i] = {title: '[' + _checked + ']' + _nowPage + '-' + i, answerCount: i, date: '2023-07-04'};
+      newContent[i] = {id: i,title: '[' + _checked + ']' + _nowPage + '-' + i, answerCount: i, date: '2023-07-04'};
     }
     setTotalCount(newTotalCount);
     setContent([...newContent]);
@@ -73,6 +70,23 @@ const Board = () => {
             <CategoryText checked={checked === 'notice' ? true : false} onClick={() => movePage('notice')}>공지 사항</CategoryText>
             <CategoryText checked={checked === 'free' ? true : false} onClick={() => movePage('free')}>자유 게시판</CategoryText>
           </CategoryBox>
+          {
+            checked === 'free' ?
+            (
+              <Writing>
+                <WritingBox>
+                  <WritingBtn>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
+                    글쓰기
+                  </WritingBtn>
+                </WritingBox>
+              </Writing>
+            )
+            :
+            (
+              null
+            )
+          }
           <ReadBox>
             {result}
           </ReadBox>
@@ -108,14 +122,15 @@ const CategoryBox = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 70px;
+  margin-bottom: 30px;
   @media screen and (max-width: 767px){
     margin-top: 60px;
   }
 `;
-const CategoryText = styled.div`
+const CategoryText = styled.p`
+  height: auto;
   font-size: 18px;
   margin: 0 30px;
-  line-height: 0;
   text-decoration: ${props => props.checked ? 'underline' : 'none'};
   text-underline-position : under;
   &:hover{
@@ -127,10 +142,30 @@ const CategoryText = styled.div`
     font-size: 16px;
   }
 `;
+const Writing = styled.div`
+  width: 100%;
+`;
+const WritingBox = styled.div`
+  width: 600px;
+  padding: 10px 0;
+  margin: 0 auto;
+  text-align: end;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+`;
+const WritingBtn = styled.p`
+  display: flex;
+  flex-direction: row;
+  &:hover{
+    cursor: pointer;
+    opacity: 50%;
+  }
+`;
 const ReadBox = styled.div`
   width: 100%;
   height: auto;
-  margin: 30px 0;
+  margin: 0px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
