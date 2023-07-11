@@ -1,15 +1,16 @@
 import "./App.css";
-
+import React from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 import Home from "./Pages/Home";
 import Introduce from "./Pages/Introduce";
 import Lab from './Pages/Lab'
 import Playground from './Pages/Playground';
-import React from "react";
 import Test from './Pages/Test';
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
+import Board from './Pages/Board';
+import BoardRead from './Pages/BoardRead';
+import BoardCreate from './Pages/BoardCreate';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           <Route path="/test" element={<Test />} />
           <Route path="/playground" element={<Playground />} />
           <Route path="/lab" element={<Lab />} />
+          <Route path="/board" element={<Board />} />
+          <Route path="/board/read/:id" element={<BoardRead />} />
+          <Route path="/board/create" element={<BoardCreate />} />
         </Routes>
       </BrowserRouter>
     </div>
