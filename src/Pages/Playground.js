@@ -26,10 +26,10 @@ const Playground = () => {
               }
               link="/test" />
             <ContentsBox
-              title="내 최애 작곡가?!"
+              title="내 최애 OOO?!"
               src="worldcup.jpg"
               info={
-                "생각만 해도 두근두근!\n신중하게 최애 작곡가를 골라봐요!"
+                "생각만 해도 두근두근!\n신중하게 최애를 골라봐요!"
               }
               link="/worldcup" />
               <ContentsBox
