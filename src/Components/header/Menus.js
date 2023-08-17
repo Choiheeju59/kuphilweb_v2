@@ -8,27 +8,27 @@ const Menus = () => {
   const moveIntroducePage = () => {
     navigate(`/introduce`);
   }
+  const moveHistoryPage = () => {
+    navigate(`/history`);
+  }
   const moveArchivePage = () => {
     navigate(`/archive`);
   }
-  const moveBoardPage = () => {
-    navigate(`/board`);
+  const moveRecruitmentPage = () => {
+    navigate(`/recruitment`);
   }
-  const movePlaygroundPage = () => {
-    navigate(`/playground`);
-  }
-  const moveLabPage = () => {
-    navigate(`/lab`);
+  const moveEtcPage = () => {
+    navigate(`/etc`);
   }
 
   return (
     <>
       <StyledMenus>
         <StyledList onClick={moveIntroducePage}>소개</StyledList>
+        <StyledList onClick={moveHistoryPage}>연혁</StyledList>
         <StyledList onClick={moveArchivePage}>아카이브</StyledList>
-        <StyledList onClick={moveBoardPage}>게시판</StyledList>
-        <StyledList onClick={movePlaygroundPage}>놀이터</StyledList>
-        <StyledList onClick={moveLabPage}>실험실</StyledList>
+        <StyledList onClick={moveRecruitmentPage}>모집/제휴</StyledList>
+        <StyledList onClick={moveEtcPage}>etc.</StyledList>
       </StyledMenus>
     </>
   );
