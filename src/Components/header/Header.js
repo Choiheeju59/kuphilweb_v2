@@ -2,14 +2,21 @@ import React, {useState} from "react";
 import styled from 'styled-components';
 import Menus from './Menus';
 import ShortMenus from './ShortMenus';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [shortMenusOpen, setShortMenusOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const moveHome = () => {
+    navigate(`/`);  
+  }
+
   return (
     <StyledHeader>
       <HeaderContent>
         <HeaderLogo>
-          <Logo src={process.env.PUBLIC_URL + '/images/logo.png'} />
+          <Logo src={process.env.PUBLIC_URL + '/images/logo.png'} onClick={moveHome} />
         </HeaderLogo>
         <HeaderDesktop>
         <Menus />
@@ -66,6 +73,9 @@ const HeaderLogo = styled.div`
 `;
 const Logo = styled.img`
   height: 25px;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 const HeaderDesktop = styled.div`
   @media screen and (max-width: 767px){
