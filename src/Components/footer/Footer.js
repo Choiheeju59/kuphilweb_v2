@@ -8,6 +8,9 @@ const Footer = () => {
   const movePolicyPage = () => {
     navigate(`/policy`);
   }
+  const handleKonkukClick = () => {
+    window.open('http://www.konkuk.ac.kr/do/Index.do', '_blank');
+  };
 
   return (
     <StyledFooter>
@@ -22,8 +25,8 @@ const Footer = () => {
             </FooterExplain>
           </div>
           <DesktopContent>
-            <img height="80px" src={process.env.PUBLIC_URL + '/images/kuphil_logo.png'} />
-            <img height="80px" src={process.env.PUBLIC_URL + '/images/konkuk_logo.png'} />
+            <LogoImg src={process.env.PUBLIC_URL + '/images/kuphil_logo.png'} />
+            <LogoImg src={process.env.PUBLIC_URL + '/images/konkuk_logo.png'} onClick={handleKonkukClick} />
           </DesktopContent>
         </Content>
       </FooterContent>
@@ -73,6 +76,9 @@ const FooterPolicy = styled.p`
     text-align: center;
     font-size: 12px;
   }
+  &:hover{
+    cursor: pointer;
+  }
 `;
 const FooterExplain = styled.p`
   font-size: 14px;
@@ -86,6 +92,14 @@ const FooterExplain = styled.p`
 const DesktopContent = styled.div`
   @media screen and (max-width: 767px){
     display: none;
+  }
+`;
+const LogoImg = styled.img`
+height: 80px;
+  &:last-child{
+    &:hover{
+      cursor: pointer;
+    }
   }
 `;
 
