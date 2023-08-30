@@ -18,15 +18,14 @@ const Youtube = () => {
 };
 
 const StyledYoutube = styled.div`
-border-radius: 10px;
-  background-color: #111111;
+  border-radius: 10px;
+  background-color: #1a1a1a;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
 `;
 
 export default Youtube;
