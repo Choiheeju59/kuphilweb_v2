@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from '../Components/header/Header';
 import Footer from '../Components/footer/Footer';
 import Tip from '../Components/main/Tip';
+import Sns from '../Components/main/Sns';
 
 const Main = () => {
   return (
@@ -56,7 +57,7 @@ const Main = () => {
               </BoxContainer>
               <BoxContainer style={{top: '0', right: '0', width: '37%', paddingBottom: '14%'}}>
                 <Box>
-                
+                  <Sns />
                 </Box>
               </BoxContainer>
             </ResponsiveBox>
