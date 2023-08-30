@@ -4,6 +4,7 @@ import Header from '../Components/header/Header';
 import Footer from '../Components/footer/Footer';
 import Tip from '../Components/main/Tip';
 import Sns from '../Components/main/Sns';
+import Youtube from '../Components/main/Youtube';
 
 const Main = () => {
   return (
@@ -40,10 +41,10 @@ const Main = () => {
             </ResponsiveBox>
           </Floor>
           <Floor>
-            <ResponsiveBox $height='40%'>
-              <BoxContainer style={{top: '0', left: '0', width: '100%', paddingBottom: '40%'}}>
+            <ResponsiveBox $height='45%'>
+              <BoxContainer style={{top: '0', left: '0', width: '100%', paddingBottom: '45%'}}>
                 <Box>
-
+                  <Youtube />
                 </Box>
               </BoxContainer>
             </ResponsiveBox>
@@ -52,7 +53,7 @@ const Main = () => {
             <ResponsiveBox $height='14%'>
               <BoxContainer style={{top: '0', left: '0', width: '60%', paddingBottom: '14%'}}>
                 <Box>
-                
+
                 </Box>
               </BoxContainer>
               <BoxContainer style={{top: '0', right: '0', width: '37%', paddingBottom: '14%'}}>
