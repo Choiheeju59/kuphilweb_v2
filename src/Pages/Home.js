@@ -5,6 +5,7 @@ import Footer from '../Components/footer/Footer';
 import Tip from '../Components/main/Tip';
 import Sns from '../Components/main/Sns';
 import Youtube from '../Components/main/Youtube';
+import Cooperate from '../Components/main/Cooperate';
 
 const Main = () => {
   return (
@@ -53,7 +54,7 @@ const Main = () => {
             <ResponsiveBox $height='14%'>
               <BoxContainer style={{top: '0', left: '0', width: '60%', paddingBottom: '14%'}}>
                 <Box>
-
+                  <Cooperate />
                 </Box>
               </BoxContainer>
               <BoxContainer style={{top: '0', right: '0', width: '37%', paddingBottom: '14%'}}>
