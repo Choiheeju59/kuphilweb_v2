@@ -6,6 +6,9 @@ import Tip from '../Components/main/Tip';
 import Sns from '../Components/main/Sns';
 import Youtube from '../Components/main/Youtube';
 import Cooperate from '../Components/main/Cooperate';
+import Recruitment from '../Components/main/Recruitment';
+import Etc from '../Components/main/Etc';
+import Weather from '../Components/main/Weather';
 
 const Main = () => {
   return (
@@ -26,17 +29,17 @@ const Main = () => {
             <ResponsiveBox $height='40%'>
               <BoxContainer style={{top: '0', left: '0', width: '57%', paddingBottom: '7%'}}>
                 <Box>
-
+                  <Weather />
                 </Box>
               </BoxContainer>
               <BoxContainer style={{bottom: '0', left: '0', width: '57%', paddingBottom: '30%'}}>
                 <Box>
-
+                  <Recruitment />
                 </Box>
               </BoxContainer>
               <BoxContainer style={{top: '0', right: '0', width: '40%', paddingBottom: '40%'}}>
                 <Box>
-
+                  <Etc />
                 </Box>
               </BoxContainer>
             </ResponsiveBox>
