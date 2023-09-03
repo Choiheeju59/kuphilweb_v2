@@ -9,6 +9,7 @@ import Cooperate from '../Components/main/Cooperate';
 import Recruitment from '../Components/main/Recruitment';
 import Etc from '../Components/main/Etc';
 import Weather from '../Components/main/Weather';
+import Slide from '../Components/main/Slide';
 
 const Main = () => {
   return (
@@ -20,7 +21,7 @@ const Main = () => {
             <ResponsiveBox $height='30%'>
               <BoxContainer style={{top: '0', left: '0', width: '100%', paddingBottom: '30%'}}>
                 <Box>
-
+                  <Slide />
                 </Box>
               </BoxContainer>
             </ResponsiveBox>
