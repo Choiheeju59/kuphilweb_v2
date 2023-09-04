@@ -46,6 +46,9 @@ const StyledEtc = styled.div`
       font-size: 18px;
       line-height: 150%;
       letter-spacing: 5px;
+      @media screen and (max-width: 767px){
+        font-size: 12px;
+      }
     }
 
     & > button{
@@ -63,9 +66,20 @@ const StyledEtc = styled.div`
       &:hover{
         cursor: pointer;
       }
+      @media screen and (max-width: 767px){
+        margin-top: 10px;
+        padding: 12px;
+        font-size: 10px;
+      }
+    }
+
+    &:nth-child(2){
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     & > img{
-      margin-top: 5%;
       height: 90%;
     }
   }

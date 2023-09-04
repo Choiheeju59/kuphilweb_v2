@@ -39,6 +39,10 @@ const StyledSns = styled.div`
     &:hover{
       cursor: pointer;
     }
+
+    @media screen and (max-width: 767px){
+      width: 14%;
+    }
   }
 `;
 

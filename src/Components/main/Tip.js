@@ -83,6 +83,10 @@ const Reload = styled.div`
       stroke: #aaaaaa;
     }
   }
+
+  @media screen and (max-width: 767px){
+    font-size: 10px;
+  }
 `;
 const TipStatement = styled.div`
   width: 100%;
@@ -94,6 +98,9 @@ const TipStatement = styled.div`
   transform: translate(-50%, -50%);
   font-size: 16px;
   line-height: 1.2;
+  @media screen and (max-width: 767px){
+    font-size: 12px;
+  }
 `;
 
 export default Tip;

@@ -183,10 +183,15 @@ const StyledWeather = styled.div`
   align-items: center;
   padding: 10px;
   box-sizing: border-box;
+
+
+  @media screen and (max-width: 767px){
+    flex-direction: column;
+  }
 `;
 const WeatherInfo = styled.div`
   width: 100%;
-  height: 100%;
+  height: 80%;
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -211,7 +216,9 @@ const WeatherInfo = styled.div`
 `;
 const WeatherPlace = styled.p`
   font-size: 9px;
+  width: 100%;
   white-space: nowrap;
+  text-align: end;
 `;
 const Loading = styled.p`
   width: 100%;

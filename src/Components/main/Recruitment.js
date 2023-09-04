@@ -42,6 +42,9 @@ const StyledRecruitment = styled.div`
       font-size: 18px;
       line-height: 150%;
       letter-spacing: 10px;
+      @media screen and (max-width: 767px){
+        font-size: 12px;
+      }
     }
 
     & > button{
@@ -58,6 +61,11 @@ const StyledRecruitment = styled.div`
       letter-spacing: 0.2rem;
       &:hover{
         cursor: pointer;
+      }
+      @media screen and (max-width: 767px){
+        margin-top: 10px;
+        padding: 12px;
+        font-size: 10px;
       }
     }
   }
