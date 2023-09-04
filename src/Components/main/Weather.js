@@ -152,30 +152,23 @@ const Weather = () => {
   }
   return (
     <StyledWeather>
-      <WeatherInfo>
-        {weatherData ? (
-          <>
+      {weatherData ? (
+        <>
+          <WeatherInfo>
             <img src={process.env.PUBLIC_URL + '/images/weather/' +  weatherData['icon']} />
             <p>{weatherData['temp']}°C</p>
             <p>{weatherData['desc']}</p>
             <p style={{fontSize: '12px'}}>(습도 {weatherData['humidity']}%</p>
             <p style={{fontSize: '12px'}}>강수량 {weatherData['precipitation']}mm)</p>
             <svg onClick={handleReloadWeather} xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-          </>
-        ) : (
-          null
-        )}
-      </WeatherInfo>
-      <WeatherPlace>
-        {weatherData ? (
-          <>
-            건국대학교 기준
-          </>
-        ) : (
-          null
-        )}
-        
-      </WeatherPlace>
+          </WeatherInfo>
+          <WeatherPlace>건국대학교 기준</WeatherPlace>
+        </>
+      ) : (
+        <Loading>
+          <img src={process.env.PUBLIC_URL + '/images/main/loading.svg'} />
+        </Loading>
+      )}
     </StyledWeather>
   );
 };
@@ -190,10 +183,15 @@ const StyledWeather = styled.div`
   align-items: center;
   padding: 10px;
   box-sizing: border-box;
+
+
+  @media screen and (max-width: 767px){
+    flex-direction: column;
+  }
 `;
 const WeatherInfo = styled.div`
   width: 100%;
-  height: 100%;
+  height: 80%;
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -218,7 +216,19 @@ const WeatherInfo = styled.div`
 `;
 const WeatherPlace = styled.p`
   font-size: 9px;
+  width: 100%;
   white-space: nowrap;
+  text-align: end;
+`;
+const Loading = styled.p`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > img{
+    height: 80%;
+  }
 `;
 
 export default Weather;

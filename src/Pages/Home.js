@@ -18,8 +18,8 @@ const Main = () => {
         <Header />
         <Contents>
           <Floor>
-            <ResponsiveBox $height='30%'>
-              <BoxContainer style={{top: '0', left: '0', width: '100%', paddingBottom: '30%'}}>
+            <ResponsiveBox $height='30' $mheight='40'>
+              <BoxContainer width={'100'} top={true} left={true} mtop={0} padding={'30'} mpadding={'40'}>
                 <Box>
                   <Slide />
                 </Box>
@@ -27,18 +27,18 @@ const Main = () => {
             </ResponsiveBox>
           </Floor>
           <Floor>
-            <ResponsiveBox $height='40%'>
-              <BoxContainer style={{top: '0', left: '0', width: '57%', paddingBottom: '7%'}}>
+            <ResponsiveBox $height='40' $mheight='158'>
+              <BoxContainer width={'57'} top={true} left={true} mtop={0} padding={'7'} mpadding={'25'}>
                 <Box>
                   <Weather />
                 </Box>
               </BoxContainer>
-              <BoxContainer style={{bottom: '0', left: '0', width: '57%', paddingBottom: '30%'}}>
+              <BoxContainer width={'57'} bottom={true} left={true} mtop={29} padding={'30'} mpadding={'55'}>
                 <Box>
                   <Recruitment />
                 </Box>
               </BoxContainer>
-              <BoxContainer style={{top: '0', right: '0', width: '40%', paddingBottom: '40%'}}>
+              <BoxContainer width={'40'} top={true} right={true} mtop={87} padding={'40'} mpadding={'70'}>
                 <Box>
                   <Etc />
                 </Box>
@@ -46,8 +46,8 @@ const Main = () => {
             </ResponsiveBox>
           </Floor>
           <Floor>
-            <ResponsiveBox $height='45%'>
-              <BoxContainer style={{top: '0', left: '0', width: '100%', paddingBottom: '45%'}}>
+            <ResponsiveBox $height='45' $mheight='56.2'>
+              <BoxContainer width={'100'} top={true} left={true} mtop={0} padding={'45'} mpadding={'56.2'}>
                 <Box>
                   <Youtube />
                 </Box>
@@ -55,13 +55,13 @@ const Main = () => {
             </ResponsiveBox>
           </Floor>
           <Floor>
-            <ResponsiveBox $height='14%'>
-              <BoxContainer style={{top: '0', left: '0', width: '60%', paddingBottom: '14%'}}>
+            <ResponsiveBox $height='14' $mheight='64'>
+              <BoxContainer width={'60'} top={true} left={true} mtop={0} padding={'14'} mpadding={'30'}>
                 <Box>
                   <Cooperate />
                 </Box>
               </BoxContainer>
-              <BoxContainer style={{top: '0', right: '0', width: '37%', paddingBottom: '14%'}}>
+              <BoxContainer width={'37'} top={true} right={true} mtop={34} padding={'14'} mpadding={'30'}>
                 <Box>
                   <Sns />
                 </Box>
@@ -69,8 +69,8 @@ const Main = () => {
             </ResponsiveBox>
           </Floor>
           <Floor>
-            <ResponsiveBox $height='20%'>
-              <BoxContainer style={{top: '0', left: '0', width: '100%', paddingBottom: '20%'}}>
+            <ResponsiveBox $height='20' $mheight='40'>
+              <BoxContainer width={'100'} top={true} left={true} mtop={0} padding={'20'} mpadding={'40'}>
                 <Box>
                   <Tip />
                 </Box>
@@ -107,15 +107,39 @@ const Floor = styled.div`
   &:last-child{
     margin-bottom: 3%;
   }
+  @media screen and (max-width: 767px){
+    margin-top: 4%;
+    &:first-child{
+      margin-top: 3%;
+    }
+  }
 `;
 
 const ResponsiveBox = styled.div`
   position: relative;
   width: 100%;
-  padding-bottom: ${props => props.$height};
+  padding-bottom: ${props => props.$height}%;
+  @media screen and (max-width: 767px){
+    padding-bottom: ${props => props.$mheight}%;
+  }
 `;
 const BoxContainer = styled.div`
   position: absolute;
+  width: ${props => props.width}%;
+  padding-bottom: ${props => props.padding}%;
+  top: ${props => props.top ? '0' : null};
+  bottom: ${props => props.bottom ? '0' : null};
+  left: ${props => props.left ? '0' : null};
+  right: ${props => props.right ? '0' : null};
+  @media screen and (max-width: 767px){
+    width: 100%;
+    padding-bottom: ${props => props.mpadding}%;
+    margin-top: ${props => props.mtop}%;
+    top: unset;
+    bottom: unset;
+    left: unset;
+    right: unset;
+  }
 `;
 const Box = styled.div`
   position: absolute;

@@ -27,6 +27,9 @@ const StyledCooperate = styled.div`
   align-items: center;
   & > img{
     width: 50%;
+    @media screen and (max-width: 767px){
+      width: 45%;
+    }
   }
   & > button{
     padding: 15px;
@@ -41,6 +44,10 @@ const StyledCooperate = styled.div`
     letter-spacing: 0.2rem;
     &:hover{
       cursor: pointer;
+    }
+    @media screen and (max-width: 767px){
+      padding: 12px;
+      font-size: 10px;
     }
   }
 `;
