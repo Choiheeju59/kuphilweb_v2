@@ -2,16 +2,23 @@ import React from "react";
 import styled from "styled-components";
 
 const Sns = () => {
+  const movePage = (str) => {
+    if(str === 'instagram'){
+      window.open('https://www.instagram.com/kuphilharmonic/?hl=ko');
+    } else {
+        window.open('https://www.facebook.com/KUPhilharmonic/');
+    }
+  }
   return (
     <StyledSns>
       <p>KUPHIL SNS</p>
       <div>
         <Content>
-          <img src={process.env.PUBLIC_URL + "/images/sns/instagram.png"} />
+          <img src={process.env.PUBLIC_URL + "/images/sns/instagram.png"} onClick={() => movePage('instagram')} />
           <p>인스타그램</p>
         </Content>
         <Content>
-          <img src={process.env.PUBLIC_URL + "/images/sns/facebook.png"} />
+          <img src={process.env.PUBLIC_URL + "/images/sns/facebook.png"} onClick={() => movePage('facebook')} />
           <p>페이스북</p>
         </Content>
         <Content>
