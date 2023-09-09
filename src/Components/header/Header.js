@@ -1,15 +1,17 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import Menus from './Menus';
 import ShortMenus from './ShortMenus';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [shortMenusOpen, setShortMenusOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const moveHome = () => {
-    navigate(`/`);  
+    if(location.pathname !== '/') navigate(`/`);
+    else window.location.reload();
   }
 
   return (
@@ -21,7 +23,7 @@ const Header = () => {
         <HeaderDesktop>
         <Menus />
         </HeaderDesktop>
-        <HeaderPhone>
+        <HeaderPhone $display={shortMenusOpen}>
         <StyledSvg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -83,14 +85,13 @@ const HeaderDesktop = styled.div`
   }
 `;
 const HeaderPhone = styled.div`
-  display: none;
+  display: ${props => props.$display ? 'block' : 'none'};
   @media screen and (max-width: 767px){
     display: block;
   }
 `;
 const StyledSvg = styled.svg`
   cursor: pointer;
-  
 `;
 
 export default Header;

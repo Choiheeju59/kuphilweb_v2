@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 function ShortMenus(props) {
   const { shortMenusOpen, setShortMenusOpen } = props;
   const navigate = useNavigate();
+  const divRef = useRef(null);
 
   const moveIntroducePage = () => {
     navigate(`/introduce`);
@@ -21,8 +22,17 @@ function ShortMenus(props) {
   const moveEtcPage = () => {
     navigate(`/etc`);
   }
+
+  useEffect(() => {
+    if(shortMenusOpen) document.body.style.overflow = 'hidden';
+    
+    return () => {
+      document.body.style.overflow = 'scroll';
+    }
+  },[shortMenusOpen]);
+  
   return (
-    <StyledShortMenus shortMenusOpen={shortMenusOpen}>
+    <StyledShortMenus ref={divRef} shortMenusOpen={shortMenusOpen}>
       <Content>
         <Close>
           <svg
