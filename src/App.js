@@ -31,9 +31,6 @@ function App() {
             <Route path="/test" element={<Test />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/lab" element={<Lab />} />
-            <Route path="/board" element={<Board />} />
-            <Route path="/board/read/:id" element={<BoardRead />} />
-            <Route path="/board/create" element={<BoardCreate />} />
           </Routes>
         </BrowserRouter>
       </div>
