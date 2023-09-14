@@ -5,7 +5,6 @@ import axios from 'axios';
 
 const Tip = () => {
   const [tip, setTip] = useState(['']);
-  const [randNum, setRandNum] = useState(0);
   const axiosUrl = process.env.REACT_APP_AXIOS_URL;
 
   useEffect(() => {
@@ -16,7 +15,6 @@ const Tip = () => {
   const getTip = async () => {
     const res = await axios.get(`${axiosUrl}/api/v1/tip`);
       try {
-        console.log(res);
         let newTip = res.data.tip;
         setTip(newTip);
       } catch {
@@ -34,7 +32,7 @@ const Tip = () => {
         <p>새로고침</p>
       </Reload>
       <TipStatement>
-        {tip[randNum]}
+        {tip}
       </TipStatement>
     </StyledTip>
   );
