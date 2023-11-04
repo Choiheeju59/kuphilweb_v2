@@ -30,10 +30,7 @@ const Cooperate = () => {
             <img src={process.env.PUBLIC_URL + '/images/cooperate/second.jpg'} />
             <img src={process.env.PUBLIC_URL + '/images/cooperate/third.jpg'} />
           </Image>
-          
-          <SnsArea>
-            <Sns />
-          </SnsArea>
+          <Sns />
         </Contents>
       </Wrap>
       <Footer />
