@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const Slide = () => {
   const [image, setImage] = useState([
-    <SlideList><img src={'/images/main/slide1.png'} alt={`Slide 1`} /></SlideList>,
-    <SlideList><img src={'/images/main/slide2.png'} alt={`Slide 2`} /></SlideList>,
-    <SlideList><img src={'/images/main/slide3.png'} alt={`Slide 3`} /></SlideList>,
+    '/images/main/slide1.png',
+    '/images/main/slide2.png',
+    '/images/main/slide3.png',
   ]);
   const imageNum = useRef(1);
   const slideRef = useRef(null);
@@ -48,7 +48,10 @@ const Slide = () => {
   return (
     <StyledSlide>
       <SliderContainer ref={slideRef}>
-        {image}
+        {image.map((v,i) => 
+          <SlideList key={i}>
+            <img src={v} alt={'Slide' + i + 1} />
+          </SlideList>)}
       </SliderContainer>
     </StyledSlide>
   );
