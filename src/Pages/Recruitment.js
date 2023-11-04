@@ -26,10 +26,8 @@ const Recruitment = () => {
             title2="제휴"
             link2="/cooperate"
           />
+          <Sns />
           <Poster src={process.env.PUBLIC_URL + '/images/recruitment/poster.jpg'} />
-          <SnsArea>
-            <Sns />
-          </SnsArea>
         </Contents>
       </Wrap>
       <Footer />
@@ -54,21 +52,12 @@ const Contents = styled.div`
   }
 `;
 const Poster = styled.img`
-  margin-top: 50px;
   width: 60%;
   border-radius: 10px;
   box-shadow: 0px 0px 2px rgb(0,0,0,0.25);
-  @media screen and (max-width: 767px){
-    margin-top: 10px;
-    width: 100%;
-  }
-`;
-const SnsArea = styled.div`
-  width: 100%;
-  margin-top: 50px;
   margin-bottom: 50px;
   @media screen and (max-width: 767px){
-    margin-bottom: 10px;
+    width: 100%;
   }
 `;
 
