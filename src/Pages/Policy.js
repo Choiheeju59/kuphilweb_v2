@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Header from '../Components/header/Header';
 import Footer from '../Components/footer/Footer';
 import TitleGradient from '../Components/TitleGradient';
 
 const Policy = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    })
+  },[])
+  
   return (
     <>
       <Wrap>
