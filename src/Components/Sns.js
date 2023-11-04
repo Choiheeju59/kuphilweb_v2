@@ -5,56 +5,55 @@ const Sns = () => {
   const movePage = (str) => {
     if(str === 'instagram'){
       window.open('https://www.instagram.com/kuphilharmonic/?hl=ko');
-    } else {
+    } else if(str === 'facebook'){
         window.open('https://www.facebook.com/KUPhilharmonic/');
-    }
+    } else{
+      window.open('https://www.youtube.com/channel/UCyG3uwmWmLt8tYNOJ3I1QYA');
+  }
   }
   return (
     <StyledSns>
-      <p>KUPHIL SNS</p>
-      <div>
         <Content>
           <img src={process.env.PUBLIC_URL + "/images/sns/instagram.png"} onClick={() => movePage('instagram')} />
-          <p>인스타그램</p>
         </Content>
         <Content>
           <img src={process.env.PUBLIC_URL + "/images/sns/facebook.png"} onClick={() => movePage('facebook')} />
-          <p>페이스북</p>
         </Content>
         <Content>
-          <img src={process.env.PUBLIC_URL + "/images/sns/gmail.png"} />
-          <p>kuphilharmonic@gmail.com</p>
+          <img src={process.env.PUBLIC_URL + "/images/sns/youtube.png"} onClick={() => movePage('youtube')} />
         </Content>
-      </div>
     </StyledSns>
   );
 };
 
 const StyledSns = styled.div`
   width: 100%;
-  & > p {
-    font-size: 24px;
+  display: flex;
+  justify-content: center;
+  margin: 60px 0;
+  @media screen and (max-width: 767px){
+    justify-content: space-evenly;
+    margin: 30px 0;
   }
 `;
 
 const Content = styled.div`
+  width: 60px;
+  height: 60px;
+  margin: 0 40px;
   & > img {
-    width: 70px;
-    margin-top: 20px;
-    margin-bottom: 5px;
+    width: 100%;
     &:hover {
       cursor: pointer;
     }
   }
-  &:last-child {
-    & > img {
-      &:hover {
-        cursor: default;
-      }
-    }
-  }
-  & > p {
-    font-size: 18px;
+
+
+  @media screen and (max-width: 767px){
+    width: 50px;
+    max-height: 50px;
+    height: auto;
+    margin: 0 20px;
   }
 `;
 
