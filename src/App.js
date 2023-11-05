@@ -11,6 +11,7 @@ import Introduce from "./Pages/Introduce";
 import Policy from './Pages/Policy'
 import React from "react";
 import Recruitment from './Pages/Recruitment';
+import Etc from './Pages/Etc';
 import Test from './Pages/Test';
 import Worldcup from  './Pages/Worldcup'
 import { createGlobalStyle } from 'styled-components';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/recruitment" element={<Recruitment />} />
             <Route path="/cooperate" element={<Cooperate />} />
             <Route path="/policy" element={<Policy />} />
+            <Route path="/etc" element={<Etc />} />
             <Route path="/test" element={<Test />} />
             <Route path="/worldcup" element={<Worldcup />} />
             <Route path="/exam" element={<Exam />} />

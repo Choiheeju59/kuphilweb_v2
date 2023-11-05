@@ -21,10 +21,9 @@ const ContentsBox = (props) => {
 };
 
 const StyledContentsBox = styled.div`
-  margin: 15px 0;
-  width: 450px;
+  width: 100%;
   height: auto;
-  padding: 50px 25px;
+  padding: 20px 0;
   box-sizing: border-box;
   display:flex;
   flex-direction: column;
@@ -33,47 +32,33 @@ const StyledContentsBox = styled.div`
   border-radius: 20px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 
-  @media screen and (max-width: 767px){
-    margin: 5px 0;
-    width: 100%;
-    padding: 40px 15px;
-    height: auto;
-  }
 `;
 
 const ContentsBoxTitle = styled.p`
-  font-size: 28px;
+  font-size: 20px;
   @media screen and (max-width: 767px){
-    font-size: 25px;
+    font-size: 18px;
   }
 `;
 const ContentsBoxImg = styled.img`
-  width: 300px;
+  width:  60%;
   height: auto;
   border: 1px solid #dddddd;
   margin: 15px 0;
   &:hover{
     cursor: pointer;
   }
-
-  @media screen and (max-width: 767px){
-    width: 80%;
-    height: auto;
-  }
 `;
 const ContentsBoxInfo = styled.p`
   white-space: pre-line;
-  font-size: 18px;
-  @media screen and (max-width: 767px){
-    font-size: 16px;
-  }
+  font-size: 14px;
 `;
 const ContentsBoxBtn = styled.button`
-  font-size: 20px;
+  font-size: 16px;
   width: auto;
   height: auto;
-  padding: 15px 35px;
-  margin-top: 30px;
+  padding: 12px 30px;
+  margin-top: 20px;
   border: none;
   border-radius: 15px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
@@ -81,11 +66,6 @@ const ContentsBoxBtn = styled.button`
   color: #fefefe;
   &:hover{
     cursor: pointer;
-  }
-
-  @media screen and (max-width: 767px){
-    margin-top: 20px;
-    padding: 12px 30px;
   }
 `;
 
