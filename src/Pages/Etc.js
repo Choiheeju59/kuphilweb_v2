@@ -5,16 +5,16 @@ import Footer from '../Components/footer/Footer';
 import TitleGradient from '../Components/TitleGradient';
 import ContentsBox from '../Components/ContentsBox';
 
-const Playground = () => {
+const Etc = () => {
   return (
     <>
       <Wrap>
         <Header />
         <Contents>
           <TitleGradient
-            title="놀이터"
+            title="Etc."
             explain={"개발자들이 이것저것 만들어본 즐길거리들입니다!\n[버그 제보 환영]"}
-            link="/playground"
+            link="/etc"
             color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
           />
           <Box>
@@ -65,13 +65,17 @@ const Contents = styled.div`
 `;
 const Box = styled.div`
   width: auto;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 15px 0;
+  align-items: center; */
+  margin: 50px 0;
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: repeat(auto-fill,minmax(280px, auto));
   @media screen and (max-width: 767px){
-    margin: 10px 0;
+    margin: 20px 0;
+    grid-gap: 20px;
   }
 `;
 
-export default Playground;
+export default Etc;
