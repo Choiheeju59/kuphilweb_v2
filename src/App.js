@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Archive from './Pages/Archive';
 import Cooperate from './Pages/Cooperate';
 import Exam from  './Pages/Exam'
-import ExamPaper from  './Pages/ExamPaper'
 import History from './Pages/History';
 import Home from "./Pages/Home";
 import Introduce from "./Pages/Introduce";
@@ -34,10 +33,9 @@ function App() {
             <Route path="/cooperate" element={<Cooperate />} />
             <Route path="/policy" element={<Policy />} />
             <Route path="/etc" element={<Etc />} />
-            <Route path="/test" element={<Test />} />
-            <Route path="/worldcup" element={<Worldcup />} />
-            <Route path="/exam" element={<Exam />} />
-            <Route path="/exam/:id" element={<ExamPaper />} />
+            <Route path="/test/:id" element={<Test />} />
+            <Route path="/worldcup/:id" element={<Worldcup />} />
+            <Route path="/exam/:id" element={<Exam />} />
           </Routes>
         </BrowserRouter>
       </div>
