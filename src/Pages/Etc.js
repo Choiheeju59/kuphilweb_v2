@@ -6,6 +6,14 @@ import TitleGradient from '../Components/TitleGradient';
 import ContentsBox from '../Components/ContentsBox';
 
 const Etc = () => {
+  const etcs = [
+    {title: '너의 악기는?', src: 'test.jpg', link: '/test/1'},
+    {title: '나의 최애는?(작곡가 ver.)', src: 'worldcup.jpg', link: '/worldcup/1'},
+    {title: '나의 최애는?(교향곡 ver.)', src: 'worldcup.jpg', link: '/worldcup/2'},
+    {title: '제1회 클래식 능력고사', src: 'exam.jpg', link: '/exam/2'},
+    {title: '제2회 클래식 능력고사', src: 'exam.jpg', link: '/exam/3'},
+    {title: '제3회 클래식 능력고사', src: 'exam.jpg', link: '/exam/4'},
+  ]
   return (
     <>
       <Wrap>
@@ -18,27 +26,13 @@ const Etc = () => {
             color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
           />
           <Box>
-            <ContentsBox
-              title="너의 악기는?"
-              src="test.jpg"
-              info={
-                "새로운 악기를 시도해보고 싶다면?\n당신에게 어울리는 악기를 추천해드립니다!"
-              }
-              link="/test" />
-            <ContentsBox
-              title="내 최애 OOO?!"
-              src="worldcup.jpg"
-              info={
-                "생각만 해도 두근두근!\n신중하게 최애를 골라봐요!"
-              }
-              link="/worldcup" />
+            {etcs.map((v, i) => 
               <ContentsBox
-              title="클래식 능력고사"
-              src="exam.jpg"
-              info={
-                "당신은 클래식을 많이 아십니까?\n이곳에서 당신의 능력을 확인해보십시오!"
-              }
-              link="/exam" />
+                key={i}
+                title={v.title}
+                src={v.src}
+                link={v.link} />
+            )}
           </Box>
         </Contents>
       </Wrap>
@@ -70,11 +64,15 @@ const Box = styled.div`
   align-items: center; */
   margin: 50px 0;
   display: grid;
-  grid-gap: 50px;
-  grid-template-columns: repeat(auto-fill,minmax(280px, auto));
+  grid-gap: 20px;
+  /* grid-template-columns: repeat(auto-fill,minmax(230px, auto)); */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  @media screen and (max-width: 1024px){
+    grid-template-columns: 1fr 1fr 1fr;
+  }
   @media screen and (max-width: 767px){
-    margin: 20px 0;
-    grid-gap: 20px;
+    margin-top: 20px;
+    grid-template-columns: 1fr 1fr;
   }
 `;
 
