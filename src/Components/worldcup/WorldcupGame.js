@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
+import TitleGradient from '../TitleGradient';
 import WorldcupResult from './WorldcupResult';
+import { useLocation, useParams } from 'react-router-dom';
 
 export const RoundCount = ({round, now}) => {
   let roundText = '';
@@ -9,44 +13,32 @@ export const RoundCount = ({round, now}) => {
   } else roundText = round + '강';
 
   return (
-    <div style={{fontSize:'30px'}}>
-      {roundText} <span style={{fontSize:'30px'}}>( {now} / {round / 2} )</span>
+    <div style={{fontSize:'25px'}}>
+      {roundText} <span style={{fontSize:'25px'}}>( {now} / {round / 2} )</span>
     </div>
   );
 }
 
-export const Data = ({data, game, num, play}) => {
-  if(game === 1){
-    return (
-      <>
-        <MainSentence>{data.composer}</MainSentence>
-        <SubSentence>{data.kr}</SubSentence>
-        <ImgDiv>
-          <ImgData src={data.img} alt={data.img} onClick={() => play(num)} />
-        </ImgDiv>
-      </>
-    )
-  } else {
-    return (
-      <>
-        <MainSentence>{data.song}</MainSentence>
-        <SubSentence>{data.composer}</SubSentence>
-        <ImgDiv>
-          <ImgData src={data.img} alt={data.img} onClick={() => play(num)} />
-        </ImgDiv>
-      </>
-    )
-  }
+export const Data = ({data, num, play}) => {
+  return (
+    <>
+      <MainSentence>{data.title}</MainSentence>
+      <SubSentence>{data.semiTitle}</SubSentence>
+      <ImgDiv>
+        <ImgData src={data.img} alt={data.img} onClick={() => play(num)} />
+      </ImgDiv>
+    </>
+  )
 }
 const MainSentence = styled.p`
-  font-size: 25px;
+  font-size: 22px;
   margin-bottom: 10px;
   @media screen and (max-width: 767px){
     font-size: 20px;
   }
 `;
 const SubSentence = styled.p`
-  font-size: 20px;
+  font-size: 16px;
   margin-bottom: 10px;
   @media screen and (max-width: 767px){
     font-size: 16px;
@@ -80,12 +72,32 @@ const ImgData = styled.img`
 
 
 const WorldcupGame = (props) => {
-  const { round, setRound, game } = props;
-  const [ now, setNow ] = useState(1);
-  const [ left, setLeft ]  = useState(null);
-  const [ right, setRight ]  = useState(null);
-  const [ choice, setChoice ] = useState([]);
-  const [ semiChoice, setSemiChoice ] = useState([]);
+  const { title, round, setRound } = props;
+  const [now, setNow] = useState(1);
+  const [left, setLeft]  = useState(null);
+  const [right, setRight]  = useState(null);
+  const [choice, setChoice] = useState([]);
+  const [semiChoice, setSemiChoice] = useState([]);
+  
+  useEffect(() => {
+    getData();
+  }, [])  
+
+  useEffect(() => {
+    if(choice.length > 1){
+      setLeft(<Data data={choice[choice.length - 1]} num={1} play={play} />);
+      setRight(<Data data={choice[choice.length - 2]} num={2} play={play} />);
+    }
+  },[choice, semiChoice]);
+
+  const getData = async () => {
+    // data 가져오기
+    let _data = [];
+    for(let i = 0; i < round; i++){
+      _data.push({title: i + '번째 작곡가', semiTitle: i + '번째 작곡가', img: ''});
+    }
+    setChoice(_data);
+  }
 
   const play = (num) => {
     let arr = [...semiChoice];
@@ -113,64 +125,36 @@ const WorldcupGame = (props) => {
     }
   }
 
-  useEffect(() => {
-    // 초기 데이터 가져오기
-    let data = [];
-    if(game === 1){
-      for(let i = 1; i <= round; i++){
-        data.push({composer: i + '번째 작곡가',kr: i + '번째 작곡가', img: ''});
-      }
-    } else {
-      for(let i = 1; i <= round; i++){
-        data.push({song: i + '번째 곡', composer: i + '번째 작곡가', img: ''});
-      }
-    }
-    setChoice(data);
-  },[]);
-
-  useEffect(() => {
-    if(choice.length > 1){
-      setLeft(<Data data={choice[choice.length - 1]} game={game} num={1} play={play}/>);
-      setRight(<Data data={choice[choice.length - 2]} game={game} num={2} play={play}/>);
-    }
-  },[choice, semiChoice]);
-
-
   return (
     <StyledBox>
-      <TitleBox>
-        { choice.length === 1 ?
-          (
-            <>
-              <p style={{fontSize:'30px'}}>최종 우승</p>
-            </>
-          ) :
-          (
-            <>
-              <RoundCount round={round} now={now} />
-              <StartSubTitle>(* 환경에 따라 이미지 로딩 속도가 느릴 수 있습니다.)</StartSubTitle>
-            </>
-          )
-        }
-      </TitleBox>
-      <AnswerBox>
-        { choice.length === 1 ?
-          (
-            <>
-              <Result>
-                <WorldcupResult data={choice[0]} game={game} />
-              </Result>
-            </>
-          ) :
-          (
-            <>
-              <Content>{left}</Content>
-              <Versus>VS</Versus>
-              <Content>{right}</Content>
-            </>
-          )
-        }
-      </AnswerBox>
+      {choice.length === 1 ? (
+        <>
+          <TitleBox>
+            <p style={{ fontSize: "18px" }}>{title}</p>
+            <p style={{ fontSize: "25px" }}>최종 우승</p>
+          </TitleBox>
+          <AnswerBox>
+            <Result>
+              <WorldcupResult data={choice[0]} />
+            </Result>
+          </AnswerBox>
+        </>
+      ) : (
+        <>
+          <TitleBox>
+            <p style={{ fontSize: "18px" }}>{title}</p>
+            <RoundCount round={round} now={now} />
+            <StartSubTitle>
+              (* 환경에 따라 이미지 로딩 속도가 느릴 수 있습니다.)
+            </StartSubTitle>
+          </TitleBox>
+          <AnswerBox>
+            <Content>{left}</Content>
+            <Versus>VS</Versus>
+            <Content>{right}</Content>
+          </AnswerBox>
+        </>
+      )}
     </StyledBox>
   );
 };
@@ -190,6 +174,7 @@ const StyledBox = styled.div`
 const TitleBox = styled.div`
   width: 100%;
   margin-bottom: 50px;
+  line-height: 1.2;
 
   @media screen and (max-width: 767px){
     margin-bottom: 30px;
@@ -217,10 +202,10 @@ const AnswerBox = styled.div`
   }
 `;
 const Content = styled.div`
-  width: 400px;
+  width: 300px;
   margin: 10px;
   @media screen and (max-width: 767px){
-    width: 100%;
+    width: 80%;
   }
 `;
 const Versus = styled.div`

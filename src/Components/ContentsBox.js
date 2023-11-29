@@ -35,13 +35,13 @@ const StyledContentsBox = styled.div`
 `;
 
 const ContentsBoxTitle = styled.p`
-  font-size: 20px;
+  font-size: 16px;
   @media screen and (max-width: 767px){
-    font-size: 18px;
+    font-size: 14px;
   }
 `;
 const ContentsBoxImg = styled.img`
-  width:  60%;
+  width:  80%;
   height: auto;
   border: 1px solid #dddddd;
   margin: 15px 0;
@@ -54,11 +54,10 @@ const ContentsBoxInfo = styled.p`
   font-size: 14px;
 `;
 const ContentsBoxBtn = styled.button`
-  font-size: 16px;
+  font-size: 14px;
   width: auto;
   height: auto;
-  padding: 12px 30px;
-  margin-top: 20px;
+  padding: 10px 28px;
   border: none;
   border-radius: 15px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
