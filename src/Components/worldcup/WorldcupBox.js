@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 
 const WorldcupBox = (props) => {
-  const { title, thumbnail, setRound, setGame, gameNum } = props;
+  const { data, title, start } = props;
+  const [thumbnail, setThumbnail] = useState('');
+  const publicUrl = process.env.REACT_APP_PUBLIC_URL;
 
-  const start = (startnum) => {
-    setRound(startnum);
-    setGame(gameNum);
-  }
+  useEffect(() => {
+    let _thumbnail = publicUrl + '/images/thumbnail/worldcup.jpg';
+    setThumbnail(_thumbnail);
+  })
+
   return (
     <StyledBox>
-      <TitleBox>
-        <WorldcupTitle>{title}</WorldcupTitle>
-        <StartSubTitle>(* 퍼블릭 도메인으로 지정된 이미지만 사용했습니다.)</StartSubTitle>
+      <div>
+        <Title>{title}</Title>
+        <Notice>(* 퍼블릭 도메인으로 지정된 이미지만 사용했습니다.)</Notice>
         <Thumbnail src={thumbnail} />
-      </TitleBox>
+      </div>
       <AnswerBox>
         <SelectRound onClick={() => start(8)}>8강</SelectRound>
         <SelectRound onClick={() => start(16)}>16강</SelectRound>
@@ -26,42 +29,26 @@ const WorldcupBox = (props) => {
 };
 
 const StyledBox = styled.div`
-  width: 600px;
-  padding: 50px 20px;
-  margin: 0 auto;
-  margin-bottom: 50px;
-  box-sizing: border-box;
-
-  @media screen and (max-width: 767px){
-    width: 100%;
-    padding: 30px 10px;
-  }
-`;
-const TitleBox = styled.div`
+  margin: 50px auto;
   width: 100%;
-  margin-bottom: 40px;
-
-  @media screen and (max-width: 767px){
-    margin-bottom: 10px;
-  }
+  max-width: 400px;
 `;
+
 const Thumbnail = styled.img`
-  width: 500px;
+  width: 300px;
   height: auto;
   border-radius: 15px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-  @media screen and (max-width: 767px){
-    width: 90%;
-  }
+
 `;
-const WorldcupTitle = styled.div`
-  font-size: 25px;
+const Title = styled.div`
+  font-size: 22px;
 
   @media screen and (max-width: 767px){
-    font-size: 20px;
+    font-size: 18px;
 }
 `;
-const StartSubTitle = styled.p`
+const Notice = styled.p`
   margin-top: 5px;
   margin-bottom: 20px;
   font-size: 12px;
@@ -72,25 +59,21 @@ const StartSubTitle = styled.p`
   }
 `;
 const AnswerBox = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: center;
-
-  @media screen and (max-width: 767px){
-    flex-direction: column;
-  }
+  margin: 20px 0;
 `;
 const SelectRound = styled.div`
-  margin: 0 30px;
-  font-size: 20px;
+  width: 100%;
+  margin: 15px 0;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+
   &:hover{
     cursor: pointer;
-    color: #aaaaaa;
-  }
-
-  @media screen and (max-width: 767px){
-    margin: 15px 0;
+    background-color: #f5f5f5;
   }
 `;
 

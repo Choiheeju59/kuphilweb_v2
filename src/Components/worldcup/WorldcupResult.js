@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const WorldcupResult = (props) => {
-  const { data, game } = props;
+  const { data, game = 1 } = props;
 
   return (
     <StyledResult>
