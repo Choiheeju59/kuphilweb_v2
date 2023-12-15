@@ -10,9 +10,9 @@ const Etc = () => {
     {title: '너의 악기는?', src: 'test.jpg', link: '/test/1'},
     {title: '나의 최애는?(작곡가 ver.)', src: 'worldcup.jpg', link: '/worldcup/1'},
     {title: '나의 최애는?(교향곡 ver.)', src: 'worldcup.jpg', link: '/worldcup/2'},
-    {title: '제1회 클래식 능력고사', src: 'exam.jpg', link: '/exam/2'},
-    {title: '제2회 클래식 능력고사', src: 'exam.jpg', link: '/exam/3'},
-    {title: '제3회 클래식 능력고사', src: 'exam.jpg', link: '/exam/4'},
+    {title: '제1회 클래식 능력고사', src: 'exam.jpg', link: '/exam/1'},
+    {title: '제2회 클래식 능력고사', src: 'exam.jpg', link: '/exam/2'},
+    {title: '제3회 클래식 능력고사', src: 'exam.jpg', link: '/exam/3'},
   ]
   return (
     <>
