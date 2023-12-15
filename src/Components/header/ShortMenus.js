@@ -24,10 +24,10 @@ function ShortMenus(props) {
   }
 
   useEffect(() => {
-    if(shortMenusOpen) document.body.style.overflow = 'hidden';
+    if(shortMenusOpen) document.body.style.overflowY = 'hidden';
     
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflowY = 'scroll';
     }
   },[shortMenusOpen]);
   
