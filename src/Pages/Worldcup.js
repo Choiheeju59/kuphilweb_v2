@@ -28,7 +28,7 @@ const Worldcup = () => {
       }
       setTitle(_title);
     }
-  }, []);
+  }, [params]);
 
   const start = (num) => {
     setGameStart(1);

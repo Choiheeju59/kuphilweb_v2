@@ -63,7 +63,7 @@ const AnswerBox = styled.div`
 `;
 const SelectRound = styled.div`
   width: 100%;
-  margin: 15px 0;
+  margin: 15px auto;
   padding: 12px 20px;
   font-size: 16px;
   border: none;
