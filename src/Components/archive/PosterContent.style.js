@@ -35,6 +35,8 @@ export const WrapPoster = styled.div`
     height: ${(props) => props.divWidth * 1.4}px;
     min-width: 160px;
     min-height: 224px;
+    max-width: 200px;
+    max-height: 280px;
     transition: background-size 0.3s;
     box-shadow: 2px 2px 5px #ccc;
     background-size: cover;
