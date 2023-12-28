@@ -2,30 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const WorldcupResult = (props) => {
-  const { data, game = 1 } = props;
+  const { data } = props;
 
   return (
     <StyledResult>
-      { game === 1 ?
-        (
-          <>
-            <ImgDiv>
-              <ImgData src={data.img} alt={data.img} />
-            </ImgDiv>
-            <MainSentence>{data.composer}</MainSentence>
-            <SubSentence>{data.kr}</SubSentence>
-          </>
-        ) :
-        (
-          <>
-            <ImgDiv>
-              <ImgData src={data.img} alt={data.img} />
-            </ImgDiv>
-            <MainSentence>{data.song}</MainSentence>
-            <SubSentence>{data.composer}</SubSentence>
-          </>
-        )
-      }
+      <div>
+        <MainSentence>{data.composer_en}</MainSentence>
+        <SubSentence>{data.composer_kr}</SubSentence>
+        <ImgDiv>
+          <ImgData src={""} alt={""} />
+        </ImgDiv>
+      </div>
       <ButtonArea>
         <Button onClick={() => window.location.reload()}>
           <StyledSvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></StyledSvg>
@@ -41,26 +28,20 @@ const WorldcupResult = (props) => {
 }
 
 const StyledResult = styled.div`
-  width: 500px;
+  width: 350px;
+  max-width: 100%;
   margin: 0 auto;
-
-  @media screen and (max-width: 767px){
-    width: 100%;
-  }
 `;
 const MainSentence = styled.p`
-  font-size: 25px;
+  font-size: 22px;
   margin-bottom: 10px;
   @media screen and (max-width: 767px){
     font-size: 20px;
   }
 `;
 const SubSentence = styled.p`
-  font-size: 20px;
+  font-size: 16px;
   margin-bottom: 10px;
-  @media screen and (max-width: 767px){
-    font-size: 16px;
-  }
 `;
 const ImgDiv = styled.div`
   width: 100%;
@@ -87,7 +68,7 @@ const ImgData = styled.img`
 const ButtonArea = styled.div`
   width: 100%;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
