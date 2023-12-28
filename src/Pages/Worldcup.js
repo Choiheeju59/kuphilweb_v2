@@ -4,25 +4,23 @@ import Header from '../Components/header/Header';
 import Footer from '../Components/footer/Footer';
 import TitleGradient from '../Components/TitleGradient';
 import WorldcupBox from '../Components/worldcup/WorldcupBox';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import WorldcupGame from '../Components/worldcup/WorldcupGame';
 
 const Worldcup = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
   const [title, setTitle] = useState('');
   const [gameStart, setGameStart] = useState(0);
   const [round, setRound] = useState(0);
-  const [choice, setChoice] = useState([]);
   
   useEffect(() => {
     if(params.id){
       let _title;
       if(params.id === '1'){
-        _title = '나의 최애는?(작곡가 ver.)'
+        _title = '작곡가 ver.'
       } else if(params.id === '2'){
-        _title = '나의 최애는?(교향곡 ver.)'
+        _title = '교향곡 ver.'
       } else{ // 잘못된 주소 접근 -> 404
         navigate(`/worldcup/1`);
       }
@@ -33,15 +31,6 @@ const Worldcup = () => {
   const start = (num) => {
     setGameStart(1);
     setRound(num);
-    getData();
-  }
-  const getData = async () => {
-    // data 가져오기
-    let _data = [];
-    for(let i = 0; i < round; i++){
-      _data.push({title: i + '번째 작곡가', semiTitle: i + '번째 작곡가', img: ''});
-    }
-    setChoice(_data);
   }
 
   return (
@@ -58,7 +47,7 @@ const Worldcup = () => {
           {!gameStart ? (
             <WorldcupBox title={title} data={params.id} start={start} />
           ) : (
-            <WorldcupGame round={round} setRound={setRound} choice={choice} setChoice={setChoice} />
+            <WorldcupGame title={title} round={round} setRound={setRound} />
           )}
         </Contents>
       </Wrap>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 
 const WorldcupBox = (props) => {
-  const { data, title, start } = props;
+  const { title, start } = props;
   const [thumbnail, setThumbnail] = useState('');
   const publicUrl = process.env.REACT_APP_PUBLIC_URL;
 
@@ -36,6 +36,7 @@ const StyledBox = styled.div`
 
 const Thumbnail = styled.img`
   width: 300px;
+  max-width: 100%;
   height: auto;
   border-radius: 15px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
