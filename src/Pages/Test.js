@@ -15,12 +15,6 @@ const Test = () => {
       id: 0,
       question:{
         text: '악기 추천 받으러 갈까요?',
-        instrument: {
-          conductor: 0,
-          firstViolin: 0,
-          secondViolin: 0,
-          viola: 0,
-        },
       },
       answer:{
         answer1: '너무 좋아요 :)',
@@ -54,23 +48,34 @@ const Test = () => {
         id: questionId,
         question:{
           text: questionId + '번째 질문',
-          instrument: {
-            conductor: 0,
-            firstViolin: 0,
-            secondViolin: 0,
-            viola: 0,
-          },
+          instrument: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
         },
         answer:{
           answer1: '답변1',
           answer2: '답변2',
         },
       })
-    } else if(questionId >= 20){
+    } else if(questionId > 20){
       setInstrument([...instrument].sort((a, b) => b.score - a.score));
       setQuestion(null);
     }
   },[questionId]);
+
+  const setScore = (score, answer) => {
+    let addition = [...instrument];
+    if(answer === 1){
+      // 1번 버튼 클릭
+      for(let i = 0; i < 17; i++){
+        addition[i].score += score[i];
+      }
+    } else{
+      // 2번 버튼 클릭
+      for(let i = 0; i < 17; i++){
+        addition[i].score += (5 - score[i]);
+      }
+    }
+    setInstrument(addition);
+  }
 
   return (
     <>
@@ -82,13 +87,21 @@ const Test = () => {
             explain={
               "새로운 악기를 시도해보고 싶다면?\n당신에게 어울리는 악기를 추천해드립니다!"
             }
-            link="/test"
+            link="/test/1"
             color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
           />
           <TestContent>
             {questionId <= 20 ? (
               <>
                 <StyledQuestionBox>
+                  {questionId > 0 ? (
+                    <ProgressBox>
+                      <p>{(questionId-1) * 5}%</p>
+                      <progress value={questionId - 1} max={20}></progress>
+                    </ProgressBox>
+                  ) : (
+                    null
+                  )}
                   <Question id={question.id} question={question.question} />
                   {questionId === 0 ? (
                     <StartSubTitle>
@@ -100,13 +113,21 @@ const Test = () => {
                   <Answer
                     id={question.id}
                     answer={question.answer.answer1}
-                    setQuestionId={() => setQuestionId(questionId + 1)}
+                    handleClickAnswer={() => {
+                      if(questionId >= 1) {
+                        setScore(question.question.instrument, 1);
+                      }
+                      setQuestionId(questionId + 1);
+                    }}
                   />
                   <Answer
                     id={question.id}
                     answer={question.answer.answer2}
-                    setQuestionId={() => {
-                      if(questionId >= 1) setQuestionId(questionId + 1);
+                    handleClickAnswer={() => {
+                      if(questionId >= 1) {
+                        setQuestionId(questionId + 1);
+                        setScore(question.question.instrument, 2);
+                      }
                       else navigate(-1);
                     }}
                   />
@@ -114,7 +135,7 @@ const Test = () => {
               </>
             ) : (
               <>
-                <img src={'./images/testResult/' + instrument[0].id + '.jpg'} />
+                <ResultImg src={process.env.PUBLIC_URL + '/images/testResult/result' + instrument[0].id + '.png'} />
                 <RestartButton onClick={() => window.location.reload()}>다시하기</RestartButton>
               </>
             )}
@@ -159,6 +180,48 @@ const StyledQuestionBox = styled.div`
     margin-bottom: 30px;
   }
 `;
+const ProgressBox = styled.div`
+  width: 600px;
+  
+  margin: 0 auto;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  
+  @media screen and (max-width: 767px){
+    width: 90%;
+  }
+
+  & > p{
+    flex-shrink: 0;
+    width: 55px;
+    text-align: start;
+    margin-right: 10px;
+    font-size: 20px;
+    @media screen and (max-width: 767px){
+      font-size: 16px;
+      width: 45px;
+    }
+  }
+  & > progress{
+    width: 100%;
+    height: 15px;
+    appearance: none;
+
+    &::-webkit-progress-bar{
+      background-color: #FFFFFF;
+      border-radius: 20px;
+      border: 1px solid #cccccc;
+      overflow: hidden;
+    }
+    &::-webkit-progress-value{
+      background-color: #E6E0F8;
+      animation: 3s linear slidein;
+      
+    }
+  }
+`;
 const StartSubTitle = styled.p`
   margin-top: 5px;
   font-size: 12px;
@@ -176,6 +239,13 @@ const StyledAnswerBox = styled.div`
 
   @media screen and (max-width: 767px){
     flex-direction: column;
+  }
+`;
+
+const ResultImg = styled.img`
+  width: 500px;
+  @media screen and (max-width: 767px){
+    width: 90%;
   }
 `;
 const RestartButton = styled.button`

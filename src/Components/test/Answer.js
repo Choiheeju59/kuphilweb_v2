@@ -2,10 +2,10 @@ import React from "react";
 import styled from 'styled-components';
 
 const Answer = (props) => {
-  const { id, answer, setQuestionId } = props;
+  const { answer, handleClickAnswer } = props;
   return (
     <>
-      <StyledButton onClick={setQuestionId}>
+      <StyledButton onClick={handleClickAnswer}>
         {answer}
       </StyledButton>
     </>
