@@ -10,6 +10,7 @@ import WorldcupGame from '../Components/worldcup/WorldcupGame';
 const Worldcup = () => {
   const params = useParams();
   const navigate = useNavigate();
+  const [gameId, setGameId] = useState(0);
   const [title, setTitle] = useState('');
   const [gameStart, setGameStart] = useState(0);
   const [round, setRound] = useState(0);
@@ -20,11 +21,12 @@ const Worldcup = () => {
       if(params.id === '1'){
         _title = '작곡가 ver.'
       } else if(params.id === '2'){
-        _title = '교향곡 ver.'
+        _title = '곡 ver.'
       } else{ // 잘못된 주소 접근 -> 404
         navigate(`/worldcup/1`);
       }
       setTitle(_title);
+      setGameId(params.id);
     }
   }, [params]);
 
@@ -47,7 +49,7 @@ const Worldcup = () => {
           {!gameStart ? (
             <WorldcupBox title={title} data={params.id} start={start} />
           ) : (
-            <WorldcupGame title={title} round={round} setRound={setRound} />
+            <WorldcupGame gameId={gameId} title={title} round={round} setRound={setRound} />
           )}
         </Contents>
       </Wrap>

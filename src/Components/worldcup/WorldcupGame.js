@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import WorldcupResult from './WorldcupResult';
-import axios from 'axios';
+import { getWorldcupData } from '../../utils/api';
 
 export const RoundCount = ({round, now}) => {
   let roundText = '';
@@ -17,25 +17,31 @@ export const RoundCount = ({round, now}) => {
 }
 
 export const Data = ({data, num, play}) => {
+  const [image, setImage] = useState('');
+  useEffect(() => {
+    setImage('');
+  }, [data]);
+  useEffect(() => {
+    if(image.length === 0) setImage(data.img);
+  }, [image])
   return (
     <>
-      <MainSentence>{data.composer_en}</MainSentence>
-      <SubSentence>{data.composer_kr}</SubSentence>
+      <MainSentence>{data.title}</MainSentence>
+      <SubSentence>{data.semiTitle}</SubSentence>
       <ImgDiv>
-        <ImgData src={data.img} alt={data.img} onClick={() => play(num)} />
+        <ImgData src={image} alt={image} onClick={() => play(num)} />
       </ImgDiv>
     </>
   )
 }
 
 const WorldcupGame = (props) => {
-  const { title, round, setRound } = props;
+  const { gameId, title, round, setRound } = props;
   const [now, setNow] = useState(1);
   const [left, setLeft]  = useState(null);
   const [right, setRight]  = useState(null);
   const [choice, setChoice] = useState([]);
   const [semiChoice, setSemiChoice] = useState([]);
-  const axiosUrl = process.env.REACT_APP_AXIOS_URL;
   
   useEffect(() => {
     getData();
@@ -49,7 +55,7 @@ const WorldcupGame = (props) => {
   },[choice, semiChoice]);
 
   const getData = async () => {
-    axios.get(`${axiosUrl}/api/v1/etc/worldcup/round?num=${round}`)
+    getWorldcupData(round, gameId)
       .then((res) => {
         setChoice(res.data);
       })
