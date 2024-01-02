@@ -21,10 +21,8 @@ const Introduce = () => {
                 <Contents>
                     <TitleGradient
                         title="소개"
-                        title2="연혁"
                         explain={"건국대학교 아마추어 오케스트라 동아리 'KUphil'입니다.\nKUphil의 전반적인 활동 내용 및 위치를 소개합니다."}
                         link="/introduce"
-                        link2="/history"
                         color="linear-gradient(91.48deg, rgba(255, 224, 196, 0.44) 0%, #FFFBD9 100%)"
                     />
                     <MainContents>
@@ -129,6 +127,7 @@ const Welcome = styled.div`
     padding: 0 1.5%;
     display: flex;
     align-items: flex-start;
+    gap: 50px;
 
   @media screen and (max-width: 767px){
     display: block;
@@ -148,40 +147,34 @@ const ImgProfessor = styled.img`
 const ProfessorWelcomeTitle = styled.article`
     width: 100%;
     font-size: 21px;
-    margin-left: 50px;
     line-height: 180%;
     text-align: left;
     font-weight: bold;
 
   @media screen and (max-width: 767px){
     font-size: 16px;
-    margin-left: 0;
 }
 `
 
 const ProfessorWelcome = styled.p`
     width: 100%;
     font-size: 18px;
-    margin-left: 50px;
     line-height: 150%;
     text-align: left;
 
   @media screen and (max-width: 767px){
     font-size: 12.5px;
-    margin-left: 0;
 }
 `
 
 const Closing = styled.p`
     width: 100%;
     font-size: 18px;
-    margin-left: 50px;
     text-align: right;
     line-height: 150%;
 
   @media screen and (max-width: 767px){
     font-size: 12.5px;
-    margin-left: 0;
 }
 `
 
