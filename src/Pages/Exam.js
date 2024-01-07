@@ -5,6 +5,7 @@ import Footer from '../Components/footer/Footer';
 import TitleGradient from '../Components/TitleGradient';
 import { useParams, useNavigate } from 'react-router-dom';
 import ExamPaper from '../Components/exam/ExamPaper';
+import { getExamData, getExamScoreData } from '../utils/api';
 
 const Exam = () => {
   const params = useParams();
@@ -12,7 +13,14 @@ const Exam = () => {
   const [title, setTitle] = useState('');
   const [problemNumber, setProblemNumber] = useState(0); // 문제 번호
   const [problems, setProblems] = useState([]); // 문제, 보기, 답
+  // [
+  //   {id:1, question:"", choices:["","","",""]},
+  //   {id:2, question:"", choices:["","","",""]},
+  //   ...
+  // ]
   const [submitAnswers, setSubmitAnswers] = useState([]); // 사용자 답
+  // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     if(params.id){
@@ -28,43 +36,42 @@ const Exam = () => {
   const examStart = (start) => {
     if(start === 1){ // 바로 시작하기
       getData();
-      setProblemNumber(1);
     } else{ // 다음에 하기
       navigate(-1);
     }
   }
+
   const getData = async () => {
-    // data 가져오기
-    let _problems = [];
-    for(let i = 0; i < 10; i++){
-      _problems.push(
-        {
-          id: i,
-          question: (i + 1)+'번째 문제',
-          problem: [
-            '1번', '2번2번2번2번2번2번2번2번2번2번2번2번2번2번2번2번2번2번2번', '3번3번3번3번3번3번3번3번3번3번3번3번', '4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번4번'
-          ],
-          answer: 1
-        }
-      )
-    }
-    setProblems(_problems);
-    console.log(_problems);
+    getExamData(params.id)
+      .then((res) => {
+        setProblems([...res.data]);
+        setProblemNumber(1);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
+
   const nextQuestion = (num) => {
     setSubmitAnswers([...submitAnswers, num]);
     if(problemNumber <= 10) setProblemNumber(n => n + 1);
   }
 
   useEffect(() => {
-    if (problemNumber > 10) {
+    if(submitAnswers.length >= 10){
       checkAnswer();
     }
-  }, [problemNumber]);
-  
+  }, [submitAnswers]);
+
   const checkAnswer = () => {
-    // 답 체크
-    console.log(submitAnswers);
+    // 백엔드에 정답 체크 요청
+    getExamScoreData(params.id, submitAnswers)
+      .then((res) => {
+        setScore(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   const examEnd = (end) => {
@@ -90,13 +97,13 @@ const Exam = () => {
           />
           <ExamContent>
             {!problemNumber ? (
-              <ExamPaper id={problemNumber} question={title} problem={['바로 시작하기', '다음에 하기']} handleClickEvent={examStart} />
+              <ExamPaper id={problemNumber} question={title} choices={['바로 시작하기', '다음에 하기']} handleClickEvent={examStart} />
             ) : (
               <>
                 {problemNumber <= 10 ? (
-                  <ExamPaper id={problemNumber} question={problems[problemNumber - 1]['question']} problem={problems[problemNumber - 1]['problem']} handleClickEvent={nextQuestion} />
+                  <ExamPaper id={problemNumber} question={problems[problemNumber - 1]['question']} choices={problems[problemNumber - 1]['choices']} handleClickEvent={nextQuestion} />
                 ) : (
-                  <ExamPaper id={problemNumber} handleClickEvent={examEnd} score={100} />
+                  <ExamPaper id={problemNumber} handleClickEvent={examEnd} score={score} />
                 )}
               </>
             )}
