@@ -12,7 +12,7 @@ const Worldcup = () => {
   const navigate = useNavigate();
   const [gameId, setGameId] = useState(0);
   const [title, setTitle] = useState('');
-  const [gameStart, setGameStart] = useState(0);
+  const [gameStart, setGameStart] = useState(false);
   const [round, setRound] = useState(0);
   
   useEffect(() => {
@@ -31,7 +31,7 @@ const Worldcup = () => {
   }, [params]);
 
   const start = (num) => {
-    setGameStart(1);
+    setGameStart(true);
     setRound(num);
   }
 

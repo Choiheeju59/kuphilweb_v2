@@ -29,7 +29,7 @@ export const Data = ({data, num, play}) => {
       <MainSentence>{data.title}</MainSentence>
       <SubSentence>{data.semiTitle}</SubSentence>
       <ImgDiv>
-        <ImgData src={image} alt={image} onClick={() => play(num)} />
+        <ImgData src={image} alt={data.title} onClick={() => play(num)} />
       </ImgDiv>
     </>
   )
@@ -100,7 +100,7 @@ const WorldcupGame = (props) => {
           </TitleBox>
           <AnswerBox>
             <Result>
-              <WorldcupResult data={choice[0]} />
+              <WorldcupResult gameId={gameId} data={choice[0]} />
             </Result>
           </AnswerBox>
         </>
@@ -160,6 +160,7 @@ const ImgData = styled.img`
   object-fit: cover;
   border-radius: 15px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: start;
 
   &:hover{
     cursor: pointer;
