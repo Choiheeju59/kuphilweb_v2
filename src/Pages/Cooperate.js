@@ -26,9 +26,9 @@ const Cooperate = () => {
             link2="/cooperate"
           />
           <Image>
-            <img src={process.env.PUBLIC_URL + '/images/cooperate/first.jpg'} />
-            <img src={process.env.PUBLIC_URL + '/images/cooperate/second.jpg'} />
-            <img src={process.env.PUBLIC_URL + '/images/cooperate/third.jpg'} />
+            <img src={process.env.PUBLIC_URL + '/images/cooperate/cooperation1.jpeg'} />
+            <img src={process.env.PUBLIC_URL + '/images/cooperate/cooperation2.jpeg'} />
+            <img src={process.env.PUBLIC_URL + '/images/cooperate/cooperation3.jpeg'} />
           </Image>
           <Sns />
         </Contents>
@@ -57,10 +57,13 @@ const Contents = styled.div`
 
 const Image = styled.div`
   width: 100%;
+  margin-top: 40px;
   & > img {
-    width: 100%;
+    
+    margin: 0 auto;
   }
   & > img:first-child {
+    width: 80%;
     display: block;
   }
   & > img:nth-child(2) {
@@ -71,16 +74,23 @@ const Image = styled.div`
   }
   @media screen and (max-width: 1023px) {
     & > img:first-child {
+      width: 90%;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    margin-top: 20px;
+    & > img:first-child {
       display: none;
     }
     & > img:nth-child(2) {
+      width: 100%;
       display: block;
     }
     & > img:nth-child(3) {
       display: none;
     }
   }
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 468px) {
     & > img:first-child {
       display: none;
     }
@@ -88,6 +98,7 @@ const Image = styled.div`
       display: none;
     }
     & > img:nth-child(3) {
+      width: 60%;
       display: block;
     }
   }
