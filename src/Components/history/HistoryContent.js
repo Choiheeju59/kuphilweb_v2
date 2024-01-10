@@ -1,67 +1,60 @@
+import { HistoryContents } from "../../utils/historyContents";
 import React from "react";
 import styled from 'styled-components';
-import { useQuery } from '@tanstack/react-query'
 
 const HistoryContent = () => {
-    const YearArr = [2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
 
+    const renderComments = (comments) => {
+        return comments.map(comment => (
+            <WrapComment key={comment.content}>
+                <Date>{comment.date}</Date>
+                <Text>{comment.content}</Text>
+            </WrapComment>
+        ));
+    };
 
-    // Dummy Data로 형태 잡기
-    // 실제 DB에서 가져올 때는 Typescript로 Migration해서 type을 정의해 전체 -> 연도 -> 해당연도 연혁 순으로 Array에 담아준 뒤 활용할 계획
-    // 혹은 {year: 2003, date: '02월', text: '세레나데 창단'} 형식으로 가져온다면 filter를 활용해서 나열할 계획
+    const years = Array.from(new Array(21), (_, index) => 2023 - index);
 
-    
-    const getComments = async () => {
-        return await (await fetch("https://jsonplaceholder.typicode.com/posts/1/comments")).json();
-      };
-    
-    
-    const { data, isLoading, error } = useQuery(["comments"], getComments);
+    const groupCommentsByYear = (year) => {
+        let dataByYear = [];
 
-    if (isLoading) return <div>'Loading...'</div>;
+        for (let i = 0; i < HistoryContents.length; i++) {
+            if (HistoryContents[i].year === year) {
+                dataByYear.push(HistoryContents[i]);
+            }
+        }
 
-    if (error) return <div>'Error..'</div>
-    
-    if(data !== undefined) {
-      let comments = data.map(
-        (comment) =>
-        <WrapComment>
-            <Date>00일</Date>
-            <Text key={comment.name}>{comment.name}</Text>
-        </WrapComment>);
-       
-      return (
+        return renderComments(dataByYear);
+    };
+
+    return (
         <>
             <WrapContent>
-                {YearArr.map((v) => (
-                    <>
-                        <Year key={v}><a name={v}>{v}</a></Year>
-                        <WrapComments>{comments}</WrapComments>
-                    </>
-                 ))}
+                {years.map(year => (
+                    <div key={year}>
+                        <Year>{year}</Year>
+                        <WrapComments>{groupCommentsByYear(year)}</WrapComments>
+                    </div>
+                ))}
             </WrapContent>
         </>
-      )
-    }
-    
-    return(
-        <WrapContent/>
-    )
+    );
 }
 
 export default HistoryContent;
+
 
 const WrapContent = styled.section`
 `
 
 const WrapComments = styled.div`
-    height: 150px;
+    height: fit-content;
     margin: 30px 0 80px 20px;
     padding: 5px 0 5px 10px;
     border-left: 3px solid #ccd0d3;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 20px;
 
     @media screen and (max-width: 767px){
         height: auto;
