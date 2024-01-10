@@ -1,12 +1,9 @@
-import React, {useState} from "react";
-
 import Footer from '../Components/footer/Footer';
 import Header from '../Components/header/Header';
 import HistoryContent from "../Components/history/HistoryContent";
+import React from "react";
 import TitleGradient from '../Components/TitleGradient';
 import styled from 'styled-components';
-
-//api 생성 후에는 map으로 받아서 뿌려준다.
 
 const History = () => {
     return(
@@ -15,21 +12,12 @@ const History = () => {
                 <Header/>
                 <Contents>
                     <TitleGradient
-                            title="소개"
-                            title2="연혁"
+                            title="연혁"
                             explain={"2003년 창단 이후의 활동을 살펴보세요."}
-                            link="/introduce"
-                            link2="/history"
-                            color="linear-gradient(91.48deg, rgba(255, 224, 196, 0.44) 0%, #FFFBD9 100%)"
+                            link="/history"
+                            color="linear-gradient(91.48deg, #FFFBD9 0%, #ECFDE5 100%)"
                     />
                     <MainContent>
-                        <SelectStartYear>
-                            <StartYearBtn><YearHref href="#2003">2003~</YearHref></StartYearBtn>
-                            <StartYearBtn className="subYear"><YearHref href='#2005'>2005~</YearHref></StartYearBtn>
-                            <StartYearBtn><YearHref href='#2010'>2010~</YearHref></StartYearBtn>
-                            <StartYearBtn className="subYear"><YearHref href='#2015'>2015~</YearHref></StartYearBtn>
-                            <StartYearBtn><YearHref href='#2020'>2020~</YearHref></StartYearBtn>
-                        </SelectStartYear>
                         <HistoryContent/>
                     </MainContent>
                 </Contents>
@@ -69,39 +57,5 @@ const MainContent = styled.div`
   } 
 `;
 
-const SelectStartYear = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  margin: 70px auto;
-
-  @media screen and (max-width: 767px){
-    margin-top: 30px;
-} 
-`
-
-const StartYearBtn = styled.button`
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  font-size: 20px;
-  user-select: none;
-
-  &:hover {
-    color: gray;
-    font-weight: bold;
-  }
-
-  @media screen and (max-width: 767px){
-    ${props => props.className === "subYear" && `
-        display: none;
-    `};
-
-    font-size: 16px;
-}  
-`
-
-const YearHref = styled.a`
-  all: unset; 
-`
 
 export default History;
