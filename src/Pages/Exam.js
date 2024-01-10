@@ -18,8 +18,7 @@ const Exam = () => {
   //   {id:2, question:"", choices:["","","",""]},
   //   ...
   // ]
-  const [submitAnswers, setSubmitAnswers] = useState([]); // 사용자 답
-  // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  const [submitAnswers, setSubmitAnswers] = useState([0,0,0,0,0,0,0,0,0,0]); // 사용자 답
   const [score, setScore] = useState(0);
 
   useEffect(() => {
@@ -53,15 +52,32 @@ const Exam = () => {
   }
 
   const nextQuestion = (num) => {
-    setSubmitAnswers([...submitAnswers, num]);
-    if(problemNumber <= 10) setProblemNumber(n => n + 1);
+    let _answer = [...submitAnswers];
+    _answer[problemNumber - 1] = num;
+
+    let temp = 1;
+    if(problemNumber === 10 && _answer.indexOf(0) > -1){
+      if(window.confirm('풀지 않은 문제가 있습니다. 그래도 채점하시겠습니까?')) temp = 1;
+      else temp = 0;
+    }
+    if(temp){
+      setSubmitAnswers(_answer);
+      if(problemNumber <= 10) setProblemNumber(n => n + 1);
+    }
+    
+  }
+  const prevQuestion = (num) => {
+    let _answer = [...submitAnswers];
+    _answer[problemNumber - 1] = num;
+    setSubmitAnswers(_answer);
+    if(problemNumber <= 10) setProblemNumber(n => n - 1);
   }
 
   useEffect(() => {
-    if(submitAnswers.length >= 10){
+    if(problemNumber > 10){
       checkAnswer();
     }
-  }, [submitAnswers]);
+  }, [problemNumber]);
 
   const checkAnswer = () => {
     // 백엔드에 정답 체크 요청
@@ -97,13 +113,13 @@ const Exam = () => {
           />
           <ExamContent>
             {!problemNumber ? (
-              <ExamPaper id={problemNumber} question={title} choices={['바로 시작하기', '다음에 하기']} handleClickEvent={examStart} />
+              <ExamPaper id={problemNumber} question={title} choices={['바로 시작하기', '다음에 하기']} nextQuestion={examStart} />
             ) : (
               <>
                 {problemNumber <= 10 ? (
-                  <ExamPaper id={problemNumber} question={problems[problemNumber - 1]['question']} choices={problems[problemNumber - 1]['choices']} handleClickEvent={nextQuestion} />
+                  <ExamPaper id={problemNumber} question={problems[problemNumber - 1]['question']} choices={problems[problemNumber - 1]['choices']} nextQuestion={nextQuestion} prevQuestion={prevQuestion} check={submitAnswers[problemNumber - 1]} />
                 ) : (
-                  <ExamPaper id={problemNumber} handleClickEvent={examEnd} score={score} />
+                  <ExamPaper id={problemNumber} nextQuestion={examEnd} score={score} />
                 )}
               </>
             )}

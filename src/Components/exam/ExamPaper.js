@@ -4,17 +4,19 @@ import { getExamData } from '../../utils/api';
 import { useParams } from 'react-router-dom';
 
 const ExamPaper = (props) => {
-  const { id, question, choices, handleClickEvent, score } = props;
+  const { id, question, choices, nextQuestion, prevQuestion, check, score } = props;
   const params = useParams();
   const [loading, setLoading] = useState(false);
   const [openAnswer, setOpenAnswer] = useState(false);
   const [answerDiv, setAnswerDiv] = useState(null);
+  const [checked, setChecked] = useState(check);
 
   useEffect(() => {
     if(id > 10){
       // 3초 동안 로딩
       setLoading(true);
     }
+    setChecked(check);
   }, [id]);
 
   useEffect(() => {
@@ -60,6 +62,10 @@ const ExamPaper = (props) => {
     }
   }, [openAnswer])
 
+  const checkItem = (num) => {
+    checked === num ? setChecked(0) : setChecked(num);
+  }
+
   return (
     <StyledExamPaper>
       {id <= 10 ? (
@@ -75,14 +81,20 @@ const ExamPaper = (props) => {
             }
           </div>
           <div>
-            <ProblemList>
+            <div>
               {choices.map((v, i) =>
-                <ProblemItem key={i} onClick={() => {handleClickEvent(i + 1)}}>
+                <ProblemItem key={i} checked={checked === i+1} onClick={() => {
+                  id === 0 ? nextQuestion(i + 1) : checkItem(i + 1)
+                }}>
                   {v}
                 </ProblemItem>
               )}
-            </ProblemList>
+            </div>
           </div>
+          <ProblemArrowKey $display={id === 0}>
+            <p onClick={() => prevQuestion(checked)}>{id === 1 ? null : '◀︎ 이전 문제'}</p>
+            <p onClick={() => nextQuestion(checked)}>{id === 10 ? '채점 하기 ▶︎' : '다음 문제 ▶︎'}</p>
+          </ProblemArrowKey>
         </>
       ) : (
         <>
@@ -97,10 +109,10 @@ const ExamPaper = (props) => {
                 <Question>당신의 점수는 "{score}점" 입니다!</Question>
               </div>
               <div>
-                <ProblemList>
-                  <ProblemItem onClick={() => {handleClickEvent(1)}}>다시하기</ProblemItem>
-                  <ProblemItem onClick={() => {handleClickEvent(2)}}>종료하기</ProblemItem>
-                </ProblemList>
+                <div>
+                  <ProblemItem onClick={() => {nextQuestion(1)}}>다시하기</ProblemItem>
+                  <ProblemItem onClick={() => {nextQuestion(2)}}>종료하기</ProblemItem>
+                </div>
               </div>
               <ShowAnswer>
                 <ShowAnswerBtn onClick={() => setOpenAnswer(v => !v)}>{!openAnswer ? '정답 보기 ▼' : '정답 접기 ▲'}</ShowAnswerBtn>
@@ -150,29 +162,7 @@ const Question = styled.div`
     font-size: 18px;
   }
 `;
-// const ProblemList = styled.ol`
-//   list-style: decimal;
-//   list-style-position: inside;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: start;
-  
-// `;
-// const ProblemItem = styled.li`
-//   padding: 10px 0;
-  
-//   &:hover{
-//     color: red;
-//     cursor: pointer;
-//   }
 
-//   @media screen and (max-width: 767px){
-//     font-size: 14px;
-//   }
-// `;
-
-const ProblemList = styled.div`
-`;
 const ProblemItem = styled.div`
   width: 100%;
   height: 60px;
@@ -181,14 +171,26 @@ const ProblemItem = styled.div`
   box-sizing: border-box;
   border-radius: 5px;
   background-color: white;
-  opacity: 60%;
+  opacity: ${props => props.checked ? '100%' : '60%'};
   display: flex;
   align-items: center;
+  
   &:hover{
     opacity: 100%;
     cursor: pointer;
   }
-`; 
+`;
+const ProblemArrowKey = styled.div`
+  display: ${props => props.$display ? 'none' : 'flex'};
+  justify-content: space-between;
+  & p{
+    font-size: 14px;
+    &:hover{
+      cursor: pointer;
+      color: #aaaaaa;
+    }
+  }
+`;
 
 const Loading = styled.div`
   width: 100%;
