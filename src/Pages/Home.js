@@ -18,8 +18,8 @@ const Main = () => {
         <Header />
         <Contents>
           <Floor>
-            <ResponsiveBox $height='30' $mheight='40'>
-              <BoxContainer width={'100'} top={true} left={true} mtop={0} padding={'30'} mpadding={'40'}>
+            <ResponsiveBox $height='35' $mheight='35'>
+              <BoxContainer width={'100'} top={true} left={true} mtop={0} padding={'35'} mpadding={'35'}>
                 <Box>
                   <Slide />
                 </Box>
@@ -104,6 +104,9 @@ const Contents = styled.div`
 const Floor = styled.div`
   width: 100%;
   margin-top: 3%;
+  &:first-child{
+    margin-top: 1%;
+  }
   &:last-child{
     margin-bottom: 3%;
   }
@@ -149,7 +152,8 @@ const Box = styled.div`
   height: 100%;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: -1px 5px 15px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 `;
 
 export default Main;
