@@ -49,7 +49,10 @@ const Header = () => {
 
 const StyledHeader = styled.div`
   width: 100%;
-  border-bottom: 1px solid rgb(235, 235, 235);
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 999;
 `;
 const HeaderContent = styled.div`
   width: 90%;
