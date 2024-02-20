@@ -23,3 +23,7 @@ export const getExamData = (examId) => {
 export const getExamScoreData = (examId, answers) => {
   return instance.post(`/api/v1/etc/exam/score?examId=${examId}`, {answers: answers});
 };
+
+export const getConcertData = (num) => {
+  return instance.get(`/api/v1/archive?num=${num}`);
+}

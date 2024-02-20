@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +15,7 @@ function ShortMenus(props) {
     navigate(`/history`);
   }
   const moveArchivePage = () => {
-    navigate(`/archive`);
+    navigate(`/archive/1`);
   }
   const moveRecruitmentPage = () => {
     navigate(`/recruitment`);
