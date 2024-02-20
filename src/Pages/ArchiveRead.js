@@ -1,11 +1,12 @@
+import ConcertInfoContent from '../Components/archive/ConcertInfoContent';
 import Footer from '../Components/footer/Footer';
 import Header from '../Components/header/Header';
-import PosterContent from "../Components/archive/PosterContent"
 import React from "react";
 import TitleGradient from '../Components/TitleGradient';
 import styled from 'styled-components';
 
-const Archive = () => {
+const ArchiveRead = () => {
+  
     return(
         <>
             <Wrap>
@@ -17,7 +18,7 @@ const Archive = () => {
                         color="linear-gradient(91.48deg, #ECFDE5 0%, rgba(189, 222, 236, 0.31) 100%)"
                     />
                     <MainContent>
-                        <PosterContent/>
+                        <ConcertInfoContent/>
                     </MainContent>
                 </Contents>
             </Wrap>
@@ -48,7 +49,7 @@ const Contents = styled.div`
 const MainContent = styled.div`
     width: 84%;
     padding: 0 8%;
-    margin: 70px auto;
+    margin: 30px auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,8 +57,8 @@ const MainContent = styled.div`
     
     @media screen and (max-width: 767px){
       padding: 0 5%;
-      margin-top: 30px;
+      margin: 30px auto;
     } 
 `;
 
-export default Archive;
+export default ArchiveRead;

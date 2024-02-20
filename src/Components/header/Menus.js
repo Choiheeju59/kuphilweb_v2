@@ -12,7 +12,7 @@ const Menus = () => {
     navigate(`/history`);
   }
   const moveArchivePage = () => {
-    navigate(`/archive`);
+    navigate(`/archive/1`);
   }
   const moveRecruitmentPage = () => {
     navigate(`/recruitment`);
