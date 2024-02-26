@@ -55,7 +55,7 @@ const songtitleKeys = songtitleObject && Object.keys(songtitleObject);
 
 const songtitleList = songtitleKeys && songtitleKeys.map((key, index) => (
   <div key={index}>
-    <Content style={{fontSize: "0.9em"}}>{songtitleObject[key]}</Content>
+    <Content style={{fontSize: "0.9em", color: "#444444"}}>{songtitleObject[key]}</Content>
   </div>
 ));
 
@@ -90,7 +90,7 @@ const pairedList = songtitleList && songtitleList.map((songtitle, index) => (
       <Wrap>
         <PosterImg style={{backgroundImage: `url(../../../images/poster/poster_${num}.jpg)`}}/>
         <WrapInfo>
-          <Title>제 {num}회 정기 연주회</Title>
+          <Title>제{num}회 정기 연주회</Title>
           <WrapContent>
             <ContentTitle>장소 </ContentTitle>
             <Content>{concertData && concertData.place}</Content>
@@ -148,11 +148,11 @@ const WrapInfo = styled.div`
 
 const Title = styled.p`
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 20px;
 
     @media screen and (max-width: 767px) {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       text-align: center;
     }
 `
@@ -191,6 +191,7 @@ const Button = styled.div`
   padding: 10px;
   border-radius: 20px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
 
   @media screen and (max-width: 767px) {
     font-size: 0.7rem;
