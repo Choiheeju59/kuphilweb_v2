@@ -103,6 +103,7 @@ const pairedList = songtitleList && songtitleList.map((songtitle, index) => (
             <ContentTitle>지휘 </ContentTitle>
             <Content>{concertData && concertData.conductor}</Content>
           </WrapContent>
+          <Divider/>
           <ContentTitle style={{marginBottom: "5px"}}>프로그램</ContentTitle>
           <Content>{pairedList}</Content>
         </WrapInfo>
@@ -195,6 +196,17 @@ const Button = styled.div`
 
   @media screen and (max-width: 767px) {
     font-size: 0.7rem;
+  }
+`
+
+const Divider = styled.div`
+  width: 100%; 
+  height: 1px;
+  background-color: #aaaaaa;
+  margin-bottom: 7px;
+
+  @media screen and (max-width: 767px) {
+    display: none;
   }
 `
 
