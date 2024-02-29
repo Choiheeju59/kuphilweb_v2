@@ -41,6 +41,7 @@ const Test = () => {
     { id: 15, score: 0 },
     { id: 16, score: 0 },
   ]);
+  const result = ['cr0o0n','f0ni1r','sn0e2c','v0ai3o','co0e4l','c0so5n','fe0l6u','o0eb7o','ct0l8a','b0na9s','tt1r0u','t1er1o','hn1o2r','t1au3b','ti1i4m','p1ne5r','po1i6a']
 
   useEffect(()=>{
     if(0 < questionId && questionId <= 20){
@@ -56,8 +57,8 @@ const Test = () => {
         },
       })
     } else if(questionId > 20){
-      setInstrument([...instrument].sort((a, b) => b.score - a.score));
-      setQuestion(null);
+      let _code = result[instrument.sort((a, b) => b.score - a.score)[0].id];
+      navigate(`./result/${_code}`);
     }
   },[questionId]);
 
@@ -91,54 +92,45 @@ const Test = () => {
             color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
           />
           <TestContent>
-            {questionId <= 20 ? (
-              <>
-                <StyledQuestionBox>
-                  {questionId > 0 ? (
-                    <ProgressBox>
-                      <p>{(questionId-1) * 5}%</p>
-                      <progress value={questionId - 1} max={20}></progress>
-                    </ProgressBox>
-                  ) : (
-                    null
-                  )}
-                  <Question id={question.id} question={question.question} />
-                  {questionId === 0 ? (
-                    <StartSubTitle>
-                      (* 이 테스트는 오로지 재미를 위해 만들어진 테스트입니다.^^)
-                    </StartSubTitle>
-                  ) : null}
-                </StyledQuestionBox>
-                <StyledAnswerBox>
-                  <Answer
-                    id={question.id}
-                    answer={question.answer.answer1}
-                    handleClickAnswer={() => {
-                      if(questionId >= 1) {
-                        setScore(question.question.instrument, 1);
-                      }
-                      setQuestionId(questionId + 1);
-                    }}
-                  />
-                  <Answer
-                    id={question.id}
-                    answer={question.answer.answer2}
-                    handleClickAnswer={() => {
-                      if(questionId >= 1) {
-                        setQuestionId(questionId + 1);
-                        setScore(question.question.instrument, 2);
-                      }
-                      else navigate(-1);
-                    }}
-                  />
-                </StyledAnswerBox>
-              </>
-            ) : (
-              <>
-                <ResultImg src={process.env.PUBLIC_URL + '/images/testResult/result' + instrument[0].id + '.png'} />
-                <RestartButton onClick={() => window.location.reload()}>다시하기</RestartButton>
-              </>
-            )}
+            <StyledQuestionBox>
+              {questionId > 0 ? (
+                <ProgressBox>
+                  <p>{(questionId-1) * 5}%</p>
+                  <progress value={questionId - 1} max={20}></progress>
+                </ProgressBox>
+              ) : (
+                null
+              )}
+              <Question id={question.id} question={question.question} />
+              {questionId === 0 ? (
+                <StartSubTitle>
+                  (* 이 테스트는 오로지 재미를 위해 만들어진 테스트입니다.^^)
+                </StartSubTitle>
+              ) : null}
+            </StyledQuestionBox>
+            <StyledAnswerBox>
+              <Answer
+                id={question.id}
+                answer={question.answer.answer1}
+                handleClickAnswer={() => {
+                  if(questionId >= 1) {
+                    setScore(question.question.instrument, 1);
+                  }
+                  setQuestionId(questionId + 1);
+                }}
+              />
+              <Answer
+                id={question.id}
+                answer={question.answer.answer2}
+                handleClickAnswer={() => {
+                  if(questionId >= 1) {
+                    setQuestionId(questionId + 1);
+                    setScore(question.question.instrument, 2);
+                  }
+                  else navigate(`/etc`);
+                }}
+              />
+            </StyledAnswerBox>
           </TestContent>
         </Contents>
       </Wrap>
@@ -239,34 +231,6 @@ const StyledAnswerBox = styled.div`
 
   @media screen and (max-width: 767px){
     flex-direction: column;
-  }
-`;
-
-const ResultImg = styled.img`
-  width: 500px;
-  @media screen and (max-width: 767px){
-    width: 90%;
-  }
-`;
-const RestartButton = styled.button`
-  width: 120px;
-  height: 50px;
-  margin: 10px auto;
-  border: none;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &:hover{
-    cursor: pointer;
-    background-color: #f5f5f5;
-  }
-
-  @media screen and (max-width: 767px){
-    width: 100px;
-    height: 40px;
   }
 `;
 

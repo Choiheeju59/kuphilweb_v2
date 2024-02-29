@@ -13,6 +13,7 @@ import Policy from './Pages/Policy'
 import React from "react";
 import Recruitment from './Pages/Recruitment';
 import Test from './Pages/Test';
+import TestResult from './Pages/TestResult';
 import Worldcup from  './Pages/Worldcup'
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
@@ -35,6 +36,7 @@ function App() {
             <Route path="/policy" element={<Policy />} />
             <Route path="/etc" element={<Etc />} />
             <Route path="/test/:id" element={<Test />} />
+            <Route path="/test/:id/result/:code" element={<TestResult />} />
             <Route path="/worldcup/:id" element={<Worldcup />} />
             <Route path="/exam/:id" element={<Exam />} />
             <Route path="/concert/:num" element={<ArchiveRead />}/>
