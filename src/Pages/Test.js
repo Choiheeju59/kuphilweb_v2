@@ -6,22 +6,20 @@ import Footer from '../Components/footer/Footer';
 import TitleGradient from '../Components/TitleGradient';
 import Question from '../Components/test/Question';
 import Answer from '../Components/test/Answer';
+import { getTestData } from '../utils/api';
 
 const Test = () => {
   const navigate = useNavigate();
   const [questionId, setQuestionId] = useState(0);
-  const [question, setQuestion] = useState(
+  const [questions, setQuestions] = useState([
     {
       id: 0,
-      question:{
-        text: '악기 추천 받으러 갈까요?',
-      },
-      answer:{
-        answer1: '너무 좋아요 :)',
-        answer2: '다음에 봐요 :(',
-      },
+      question: '악기 추천 받으러 갈까요?',
+      answer: '너무 좋아요 :)',
+      sanswer: '다음에 봐요 :(',
+      score: [],
     },
-  );
+  ]);
   const [instrument, setInstrument] = useState([
     { id: 0, score: 0 },
     { id: 1, score: 0 },
@@ -43,36 +41,41 @@ const Test = () => {
   ]);
   const result = ['cr0o0n','f0ni1r','sn0e2c','v0ai3o','co0e4l','c0so5n','fe0l6u','o0eb7o','ct0l8a','b0na9s','tt1r0u','t1er1o','hn1o2r','t1au3b','ti1i4m','p1ne5r','po1i6a']
 
-  useEffect(()=>{
-    if(0 < questionId && questionId <= 20){
-      setQuestion({
-        id: questionId,
-        question:{
-          text: questionId + '번째 질문',
-          instrument: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        },
-        answer:{
-          answer1: '답변1',
-          answer2: '답변2',
-        },
+  useEffect(() => {
+    getData();
+  },[]);
+  const getData = async () => {
+    getTestData()
+      .then((res) => {
+        res.data.forEach((v) => v.score = v.score.split(','));
+        let arr = [...questions];
+        arr = arr.concat(res.data);
+        setQuestions(arr);
       })
-    } else if(questionId > 20){
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  useEffect(()=>{
+    if(questionId > 20){
       let _code = result[instrument.sort((a, b) => b.score - a.score)[0].id];
       navigate(`./result/${_code}`);
     }
   },[questionId]);
+
 
   const setScore = (score, answer) => {
     let addition = [...instrument];
     if(answer === 1){
       // 1번 버튼 클릭
       for(let i = 0; i < 17; i++){
-        addition[i].score += score[i];
+        addition[i].score += Number(score[i]);
       }
     } else{
       // 2번 버튼 클릭
       for(let i = 0; i < 17; i++){
-        addition[i].score += (5 - score[i]);
+        addition[i].score += Number(5 - score[i]);
       }
     }
     setInstrument(addition);
@@ -101,7 +104,7 @@ const Test = () => {
               ) : (
                 null
               )}
-              <Question id={question.id} question={question.question} />
+              {questionId <= 20 ? (<Question id={questions[questionId].id} question={questions[questionId].question} />) : null}
               {questionId === 0 ? (
                 <StartSubTitle>
                   (* 이 테스트는 오로지 재미를 위해 만들어진 테스트입니다.^^)
@@ -109,27 +112,31 @@ const Test = () => {
               ) : null}
             </StyledQuestionBox>
             <StyledAnswerBox>
-              <Answer
-                id={question.id}
-                answer={question.answer.answer1}
-                handleClickAnswer={() => {
-                  if(questionId >= 1) {
-                    setScore(question.question.instrument, 1);
-                  }
-                  setQuestionId(questionId + 1);
-                }}
-              />
-              <Answer
-                id={question.id}
-                answer={question.answer.answer2}
-                handleClickAnswer={() => {
-                  if(questionId >= 1) {
-                    setQuestionId(questionId + 1);
-                    setScore(question.question.instrument, 2);
-                  }
-                  else navigate(`/etc`);
-                }}
-              />
+              {questionId <= 20 ? (
+                <>
+                  <Answer
+                    id={questions[questionId].id}
+                    answer={questions[questionId].answer}
+                    handleClickAnswer={() => {
+                      if(questionId >= 1) {
+                        setScore(questions[questionId].score, 1);
+                      }
+                      setQuestionId((prev) => prev + 1);
+                    }}
+                  />
+                  <Answer
+                    id={questions[questionId].id}
+                    answer={questions[questionId].sanswer}
+                    handleClickAnswer={() => {
+                      if(questionId >= 1) {
+                        setQuestionId((prev) => prev + 1);
+                        setScore(questions[questionId].score, 2);
+                      }
+                      else navigate(`/etc`);
+                    }}
+                  />
+                </>
+              ) : null}
             </StyledAnswerBox>
           </TestContent>
         </Contents>
