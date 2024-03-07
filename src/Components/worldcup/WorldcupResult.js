@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { getWorldcupResultData, getWorldcupResultDataRe } from '../../utils/api';
+import { postWorldcupResultData, getWorldcupResultData, getWorldcupResultDataRe } from '../../utils/api';
 
 export const Statistics = (props) => {
   const { data, index, statisticCount } = props;
@@ -14,8 +14,8 @@ export const Statistics = (props) => {
           <p>{data.semiTitle}</p>
         </StatisticItemTitle>
         <StatisticItemProgress>
-          <p>{(data.choice * 100 / statisticCount).toFixed(2)}%</p>
-          <progress value={data.choice} max={statisticCount}></progress>
+          <p>{(Number(data.win) * 100 / statisticCount).toFixed(2)}%</p>
+          <progress value={Number(data.win)} max={statisticCount}></progress>
         </StatisticItemProgress>  
       </div>
       <img src={data.img} alt='이미지' />
@@ -99,14 +99,26 @@ const WorldcupResult = (props) => {
   const [statisticCount, setStatisticCount] = useState(0);
 
   useEffect(() => {
-    getResult();
+    postResult();
   }, []);
   
-  const getResult = async () => {
-    getWorldcupResultData(data.id, gameId)
+  const postResult = async () => {
+    postWorldcupResultData(data.id, gameId)
       .then((res) => {
+        getResult();
+      })
+      .catch((err) => {
+        console.log(err);
+        loadingClear();
+      })
+  }
+  
+  const getResult = async () => {
+    getWorldcupResultData(gameId)
+      .then((res) => {
+        console.log(res.data)
         setStatistic(res.data);
-        setStatisticCount(res.count); //count들의 합
+        setStatisticCount(res.data.reduce((a, c) => a += Number(c.win), 0));
         loadingClear();
       })
       .catch((err) => {
@@ -119,7 +131,7 @@ const WorldcupResult = (props) => {
     getWorldcupResultDataRe(gameId)
       .then((res) => {
         setStatistic(res.data);
-        setStatisticCount(res.count);
+        setStatisticCount(res.count); //count들의 합
         loadingClear();
       })
       .catch((err) => {
@@ -150,7 +162,7 @@ const WorldcupResult = (props) => {
     <StyledResult>
       {loading ? (
         <Loading>
-          <img src={process.env.REACT_APP_PUBLIC_URL + '/images/purple_loading.svg'} />
+          <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/purple_loading.svg'} />
         </Loading>
       ) : (
         <>

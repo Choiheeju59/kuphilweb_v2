@@ -2,7 +2,6 @@
   "name": "kuphilweb_v2",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://13.124.56.187:8080/",
   "dependencies": {
     "@tanstack/react-query": "^4.29.25",
     "@tanstack/react-query-devtools": "^4.29.25",
