@@ -13,7 +13,7 @@ const Question = (props) => {
             :
             null
         }
-        {question.text}
+        {question}
       </StyledQuestion>
     </>
   );

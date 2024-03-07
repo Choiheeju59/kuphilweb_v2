@@ -30,3 +30,6 @@ export const getExamScoreData = (examId, answers) => {
 export const getConcertData = (num) => {
   return instance.get(`/api/v1/archive?num=${num}`);
 }
+export const getTestData = () => {
+  return instance.get(`/api/v1/etc/test`);
+};
