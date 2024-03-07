@@ -26,7 +26,7 @@ const TestResult = () => {
           />
           <TestContent>
             <ResultImg src={`${IMAGE_URL}/images/testResult/${testId}/result-${code}.png`} />
-            <RestartButton onClick={() => navigate(`../test/${testId}`, {replace: true})}>다시하기</RestartButton>
+            <RestartButton onClick={() => navigate(`../test/${testId}`)}>다시하기</RestartButton>
           </TestContent>
         </Contents>
       </Wrap>
@@ -60,11 +60,6 @@ const TestContent = styled.div`
     padding-top: 80px;
   }
 `;
-const Loading = styled.div`
-  width: 100%;
-  text-align: center;
-  padding: 50px 0;
-`;
 const ResultImg = styled.img`
   width: 500px;
   @media screen and (max-width: 767px){
@@ -74,7 +69,8 @@ const ResultImg = styled.img`
 const RestartButton = styled.button`
   width: 120px;
   height: 50px;
-  margin: 10px auto;
+  margin: 0 auto;
+  margin-top: 30px;
   border: none;
   background-color: #ffffff;
   border-radius: 15px;
