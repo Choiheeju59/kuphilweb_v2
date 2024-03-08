@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { getExamData } from '../../utils/api';
 import { useParams } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ const ExamPaper = (props) => {
   const [openAnswer, setOpenAnswer] = useState(false);
   const [answerDiv, setAnswerDiv] = useState(null);
   const [checked, setChecked] = useState(check);
+  const [rank, setRank] = useState('');
 
   useEffect(() => {
     if(id > 10){
@@ -34,7 +35,6 @@ const ExamPaper = (props) => {
     if(openAnswer){
       getExamData(params.id)
         .then((res) => {
-          console.log(res.data);
           let _answer = [];
           res.data.map((v, i) => {
             _answer.push(
@@ -60,7 +60,16 @@ const ExamPaper = (props) => {
           console.log(err);
         })
     }
-  }, [openAnswer])
+  }, [openAnswer]);
+
+  useEffect(() => {
+    if(score === 100) setRank('A+');
+    else if(score >= 90) setRank('A');
+    else if(score >= 80) setRank('B+');
+    else if(score >= 70) setRank('B');
+    else if(score >= 60) setRank('C+');
+    else setRank('C+');
+  }, [score])
 
   const checkItem = (num) => {
     checked === num ? setChecked(0) : setChecked(num);
@@ -100,14 +109,14 @@ const ExamPaper = (props) => {
         <>
           {loading ? (
             <Loading>
-              <img src={process.env.REACT_APP_PUBLIC_URL + '/images/purple_loading.svg'} />
+              <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/purple_loading.svg'} />
             </Loading>
           ) : (
             <>
-              <div>
-                <img src="" />
+              <ResultDiv>
+                <RankImg src={`${process.env.REACT_APP_KUPHIL_PUBLIC_URL}/images/exam/${rank}.png`} />
                 <Question>당신의 점수는 "{score}점" 입니다!</Question>
-              </div>
+              </ResultDiv>
               <div>
                 <div>
                   <ProblemItem onClick={() => {nextQuestion(1)}}>다시하기</ProblemItem>
@@ -167,16 +176,27 @@ const ProblemItem = styled.div`
   width: 100%;
   height: 60px;
   margin: 20px 0;
-  padding: 0 10px;
+  padding: 0 10px 0 30px;
   box-sizing: border-box;
   border-radius: 5px;
-  background-color: white;
-  opacity: ${props => props.checked ? '100%' : '60%'};
+  background-color: #ffffff50;
   display: flex;
   align-items: center;
-  
+  position: relative;
+  ${props => props.checked && css`
+    &::after{
+      content: '⋁';
+      font-weight: bold;
+      color: red;
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translate(0, -50%);
+    }
+  `}
+
   &:hover{
-    opacity: 100%;
+    background-color: white;
     cursor: pointer;
   }
 `;
@@ -225,6 +245,16 @@ const AnswerQuestion = styled.div`
 const AnswerProblemItem = styled.div`
   margin: 10px 0;
   color: ${props => props.check ? 'red' : 'black'};
+`;
+
+const ResultDiv = styled.div`
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+`;
+const RankImg = styled.img`
+  width: 200px;
+  height: auto;
 `;
 
 export default ExamPaper;
