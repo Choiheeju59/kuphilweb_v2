@@ -94,7 +94,7 @@ const Exam = () => {
     if(end === 1){ // 다시하기
       window.location.reload();
     } else{ // 종료하기
-      navigate(-1);
+      navigate(`/etc`);
     }
   }
 
