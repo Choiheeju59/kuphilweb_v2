@@ -54,7 +54,7 @@ const songtitleObject = concertData && concertData.songtitle;
 const songtitleKeys = songtitleObject && Object.keys(songtitleObject);
 
 const songtitleList = songtitleKeys && songtitleKeys.map((key, index) => (
-  <div key={index}>
+  <div key={`ST${index}`}>
     <Content style={{fontSize: "0.9em", color: "#444444"}}>{songtitleObject[key]}</Content>
   </div>
 ));
@@ -64,13 +64,13 @@ const composerObject = concertData && concertData.composer;
 const composerKeys = composerObject && Object.keys(composerObject);
 
 const composerList = composerKeys && composerKeys.map((key, index) => (
-  <div key={index}>
+  <div key={`C${index}`}>
     <Content style={{fontSize: "0.9em"}}>{composerObject[key]}</Content>
   </div>
 ));
 
 const pairedList = songtitleList && songtitleList.map((songtitle, index) => (
-  <div key={index}>
+  <div key={`P${index}`}>
     {composerList && composerList[index]}
     {songtitle}
     <br/>
@@ -147,7 +147,7 @@ const WrapInfo = styled.div`
     }
 `
 
-const Title = styled.p`
+const Title = styled.div`
     font-weight: bold;
     font-size: 1.5rem;
     margin-bottom: 20px;
@@ -169,7 +169,7 @@ const WrapContent = styled.div`
     }
 `
 
-const ContentTitle = styled.p`
+const ContentTitle = styled.div`
   font-weight: bold;
 
   @media screen and (max-width: 767px) {
@@ -178,7 +178,7 @@ const ContentTitle = styled.p`
   }
 `
 
-const Content = styled.p`
+const Content = styled.div`
   @media screen and (max-width: 767px) {
     text-align: center;
     font-size: 0.8rem;

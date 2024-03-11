@@ -29,8 +29,8 @@ const PosterContent = () => {
             <PosterContainer>
             {page !== String(imageName.length) ? indexArr.map((elem, idx) => {
         return(
-            <Wrap onClick={() => navigate(`/concert/${imageName[Number(page)-1]-elem}`)}>
-                <WrapPoster key={idx} divWidth={divWidth} style={{backgroundImage: `url(../../../images/poster/poster_${imageName[Number(page)-1]-elem}.jpg)` }}/>
+            <Wrap key={idx} onClick={() => navigate(`/concert/${imageName[Number(page)-1]-elem}`)}>
+                <WrapPoster divWidth={divWidth} style={{backgroundImage: `url(../../../images/poster/poster_${imageName[Number(page)-1]-elem}.jpg)` }}/>
                 <WrapConcertNumber>
                     <ConcertNumber>제</ConcertNumber>
                     <ConcertNumber>{imageName[Number(page)-1]-elem}</ConcertNumber>
@@ -40,8 +40,8 @@ const PosterContent = () => {
             )}
             ) : indexArr2.map((elem, idx) => {
         return(
-            <Wrap onClick={() => navigate(`/concert/${imageName[Number(page)-1]-elem}`)}>
-                <WrapPoster key={idx} divWidth={divWidth} style={{backgroundImage: `url(../../../images/poster/poster_${imageName[Number(page)-1]-elem}.jpg)` }}/>
+            <Wrap key={idx} onClick={() => navigate(`/concert/${imageName[Number(page)-1]-elem}`)}>
+                <WrapPoster divWidth={divWidth} style={{backgroundImage: `url(../../../images/poster/poster_${imageName[Number(page)-1]-elem}.jpg)` }}/>
                 <WrapConcertNumber>
                     <ConcertNumber>제</ConcertNumber>
                     <ConcertNumber>{imageName[Number(page)-1]-elem}</ConcertNumber>
