@@ -62,7 +62,7 @@ const Introduce = () => {
                         <Directions>
                             <WrapWay>
                                 <LabelWay>
-                                    <Way type="radio" name="map" value="map_front" onClick={onClick} style={{appearance: "none"}} checked/>
+                                    <Way type="radio" name="map" value="map_front" onClick={onClick} style={{appearance: "none"}} defaultChecked/>
                                     <span style={selectMap === "map_front" ? {color: "#000000"} : {color: "#989898"}}>수의과대학 (정문)</span>
                                 </LabelWay>
                                 <LabelWay>
