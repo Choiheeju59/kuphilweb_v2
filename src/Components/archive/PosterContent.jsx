@@ -20,9 +20,9 @@ const PosterContent = () => {
         };
       }, []);
     
-      let imageName = [41, 35, 29, 23, 17, 11, 5];
+      let imageName = [42, 36, 30, 24, 18, 12, 6];
       let indexArr = [0, 1, 2, 3, 4, 5];
-      let indexArr2 = [0, 1, 2, 3, 4]
+      let indexArr2 = [0, 1, 2, 3, 4, 5]
       
     return(
         <>
