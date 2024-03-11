@@ -8,11 +8,12 @@ import ContentsBox from '../Components/ContentsBox';
 const Etc = () => {
   const etcs = [
     {title: '너의 악기는?', src: 'test.jpg', link: '/test/1'},
-    {title: '나의 최애는?(작곡가 ver.)', src: 'worldcup.jpg', link: '/worldcup/1'},
-    {title: '나의 최애는?(곡 ver.)', src: 'worldcup.jpg', link: '/worldcup/2'},
-    {title: '제1회 클래식 능력고사', src: 'exam.jpg', link: '/exam/1'},
-    {title: '제2회 클래식 능력고사', src: 'exam.jpg', link: '/exam/2'},
-    {title: '제3회 클래식 능력고사', src: 'exam.jpg', link: '/exam/3'},
+    {title: '나의 최애는?(작곡가 ver.)', src: 'worldcup_composer.png', link: '/worldcup/1'},
+    {title: '나의 최애는?(곡 ver.)', src: 'worldcup_classic.png', link: '/worldcup/2'},
+    {title: '제1회 클래식 능력고사', src: 'exam1.png', link: '/exam/1'},
+    {title: '제2회 클래식 능력고사', src: 'exam2.png', link: '/exam/2'},
+    {title: '제3회 클래식 능력고사', src: 'exam3.png', link: '/exam/3'},
+    {title: 'Coming Soon', src: '', link: ''},
   ]
   return (
     <>
@@ -62,7 +63,7 @@ const Box = styled.div`
   /* display: flex;
   flex-direction: column;
   align-items: center; */
-  margin: 50px 0;
+  padding: 50px 0;
   display: grid;
   grid-gap: 20px;
   /* grid-template-columns: repeat(auto-fill,minmax(230px, auto)); */
