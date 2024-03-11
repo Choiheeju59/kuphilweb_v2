@@ -13,7 +13,7 @@ const HistoryContent = () => {
         ));
     };
 
-    const years = Array.from(new Array(21), (_, index) => 2023 - index);
+    const years = Array.from(new Array(21), (_, index) => 2024 - index);
 
     const groupCommentsByYear = (year) => {
         let dataByYear = [];

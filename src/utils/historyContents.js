@@ -1,4 +1,9 @@
 export const HistoryContents = [
+    {
+        year: 2024,
+        date: '02월 29일',
+        content: '제 42회 정기연주회'
+    },
     {   
         year: 2023,
         date: '08월 25일',
