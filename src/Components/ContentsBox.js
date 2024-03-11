@@ -13,9 +13,17 @@ const ContentsBox = (props) => {
   return (
     <StyledContentsBox>
       <ContentsBoxTitle>{title}</ContentsBoxTitle>
-      <ContentsBoxImg src={"./images/thumbnail/" + src} onClick={movePage} />
-      <ContentsBoxInfo>{info}</ContentsBoxInfo>
-      <ContentsBoxBtn onClick={movePage}>Go!</ContentsBoxBtn>
+      {src === '' && link === '' ? (
+        <></>
+      ) : (
+        <>
+          <ContentsBoxImgDiv>
+            <ContentsBoxImg src={`${process.env.REACT_APP_KUPHIL_PUBLIC_URL}/images/thumbnail/${src}`} onClick={movePage} />
+          </ContentsBoxImgDiv>
+          <ContentsBoxInfo>{info}</ContentsBoxInfo>
+          <ContentsBoxBtn onClick={movePage}>Go!</ContentsBoxBtn>
+        </>
+      )}
     </StyledContentsBox>
   );
 };
@@ -40,11 +48,19 @@ const ContentsBoxTitle = styled.p`
     font-size: 14px;
   }
 `;
-const ContentsBoxImg = styled.img`
-  width:  80%;
-  height: auto;
+const ContentsBoxImgDiv = styled.div`
+  width: 80%;
+  padding-bottom: 80%;
+  position: relative;
   border: 1px solid #dddddd;
   margin: 15px 0;
+`;
+const ContentsBoxImg = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   &:hover{
     cursor: pointer;
   }
