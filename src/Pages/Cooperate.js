@@ -21,7 +21,7 @@ const Cooperate = () => {
             title="모집"
             explain={"쿠필과 함께할 수 있는 다양한 제안들을 기다립니다.\n후원을 원하시면 하단의 sns를 통해 연락주세요!"}
             link="/recruitment"
-            color="linear-gradient(91.48deg, #FFF2E7 0%, rgba(254, 204, 190, 0.57) 100%)"
+            color="linear-gradient(91.48deg, #E5FAFD 0%, rgba(189, 193, 236, 0.31) 100%)"
             title2="제휴"
             link2="/cooperate"
           />

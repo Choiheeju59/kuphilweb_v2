@@ -22,7 +22,7 @@ const Recruitment = () => {
             title="모집"
             explain={"KUPhil 입단 안내 페이지입니다.\n기타 문의는 안내 하단의 SNS계정을 통해 연락해 주세요."}
             link="/recruitment"
-            color="linear-gradient(91.48deg, #FFF2E7 0%, rgba(254, 204, 190, 0.57) 100%)"
+            color="linear-gradient(91.48deg, #E5FAFD 0%, rgba(189, 193, 236, 0.31) 100%)"
             title2="제휴"
             link2="/cooperate"
           />
