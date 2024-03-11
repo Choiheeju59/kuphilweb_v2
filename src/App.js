@@ -50,7 +50,7 @@ function App() {
 const GlobalStyles = createGlobalStyle`
   ${reset}
   body{
-    font-family:'Noto Sans KR';
+    font-family: 'Pretendard';
     color: #101010;
     text-align: center;
   }
