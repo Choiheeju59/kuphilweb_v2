@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 
 const WorldcupBox = (props) => {
-  const { title, start } = props;
+  const { title, gameId, start } = props;
   const [thumbnail, setThumbnail] = useState('');
-  const publicUrl = process.env.REACT_APP_PUBLIC_URL;
 
   useEffect(() => {
-    let _thumbnail = publicUrl + '/images/thumbnail/worldcup.jpg';
+    console.log(gameId)
+    let imgName = gameId === 1 ? 'composer' : 'classic';
+    let _thumbnail = `${process.env.REACT_APP_KUPHIL_PUBLIC_URL}/images/thumbnail/worldcup_${imgName}.png`;
     setThumbnail(_thumbnail);
   })
 

@@ -26,7 +26,7 @@ const Worldcup = () => {
         navigate(`/worldcup/1`);
       }
       setTitle(_title);
-      setGameId(params.id);
+      setGameId(Number(params.id));
     }
   }, [params]);
 
@@ -43,11 +43,11 @@ const Worldcup = () => {
           <TitleGradient
             title="나의 최애는?"
             explain={"생각만 해도 두근두근!\n신중하게 최애를 골라봐요!"}
-            link={"/worldcup/" + params.id}
+            link={"/worldcup/" + gameId}
             color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
           />
           {!gameStart ? (
-            <WorldcupBox title={title} data={params.id} start={start} />
+            <WorldcupBox title={title} gameId={gameId} start={start} />
           ) : (
             <WorldcupGame gameId={gameId} title={title} round={round} setRound={setRound} />
           )}
