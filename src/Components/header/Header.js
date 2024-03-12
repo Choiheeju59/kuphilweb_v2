@@ -18,7 +18,7 @@ const Header = () => {
     <StyledHeader>
       <HeaderContent>
         <HeaderLogo>
-          <Logo src={process.env.PUBLIC_URL + '/images/logo.png'} onClick={moveHome} />
+          <Logo src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/logo.png'} onClick={moveHome} />
         </HeaderLogo>
         <HeaderDesktop>
         <Menus />

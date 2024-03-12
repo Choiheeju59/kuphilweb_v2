@@ -9,7 +9,7 @@ const Recruitment = () => {
   }
   return (
     <StyledRecruitment>
-      <img src={process.env.PUBLIC_URL + '/images/main/recruitment.png'} />
+      <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/main/recruitment.png'} />
       <div>
         <p>쿠필과 연주할</p>
         <p>신입 부원을</p>

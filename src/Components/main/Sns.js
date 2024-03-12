@@ -17,9 +17,9 @@ const Sns = () => {
   }
   return (
     <StyledSns>
-      <img onClick={() => handleSnsClick('facebook')} src={process.env.PUBLIC_URL + '/images/sns/facebook.png'} />
-      <img onClick={() => handleSnsClick('instagram')} src={process.env.PUBLIC_URL + '/images/sns/instagram.png'} />
-      <img onClick={() => handleSnsClick('youtube')} src={process.env.PUBLIC_URL + '/images/sns/youtube.png'} />
+      <img onClick={() => handleSnsClick('facebook')} src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/sns/facebook.png'} />
+      <img onClick={() => handleSnsClick('instagram')} src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/sns/instagram.png'} />
+      <img onClick={() => handleSnsClick('youtube')} src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/sns/youtube.png'} />
     </StyledSns>
   );
 };
