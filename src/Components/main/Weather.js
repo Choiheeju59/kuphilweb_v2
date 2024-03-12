@@ -155,7 +155,7 @@ const Weather = () => {
       {weatherData ? (
         <>
           <WeatherInfo>
-            <img src={process.env.PUBLIC_URL + '/images/weather/' +  weatherData['icon']} />
+            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/weather/' +  weatherData['icon']} />
             <p>{weatherData['temp']}°C</p>
             <p>{weatherData['desc']}</p>
             <p style={{fontSize: '12px'}}>(습도 {weatherData['humidity']}%</p>
@@ -166,7 +166,7 @@ const Weather = () => {
         </>
       ) : (
         <Loading>
-          <img src={process.env.PUBLIC_URL + '/images/main/loading.svg'} />
+          <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/main/loading.svg'} />
         </Loading>
       )}
     </StyledWeather>

@@ -26,9 +26,9 @@ const Cooperate = () => {
             link2="/cooperate"
           />
           <Image>
-            <img src={process.env.PUBLIC_URL + '/images/cooperate/cooperation1.jpeg'} />
-            <img src={process.env.PUBLIC_URL + '/images/cooperate/cooperation2.jpeg'} />
-            <img src={process.env.PUBLIC_URL + '/images/cooperate/cooperation3.jpeg'} />
+            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation1.jpeg'} />
+            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation2.jpeg'} />
+            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation3.jpeg'} />
           </Image>
           <Sns />
         </Contents>

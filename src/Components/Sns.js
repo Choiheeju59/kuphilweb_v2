@@ -14,13 +14,13 @@ const Sns = () => {
   return (
     <StyledSns>
         <Content>
-          <img src={process.env.PUBLIC_URL + "/images/sns/instagram.png"} onClick={() => movePage('instagram')} />
+          <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + "/images/sns/instagram.png"} onClick={() => movePage('instagram')} />
         </Content>
         <Content>
-          <img src={process.env.PUBLIC_URL + "/images/sns/facebook.png"} onClick={() => movePage('facebook')} />
+          <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + "/images/sns/facebook.png"} onClick={() => movePage('facebook')} />
         </Content>
         <Content>
-          <img src={process.env.PUBLIC_URL + "/images/sns/youtube.png"} onClick={() => movePage('youtube')} />
+          <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + "/images/sns/youtube.png"} onClick={() => movePage('youtube')} />
         </Content>
     </StyledSns>
   );

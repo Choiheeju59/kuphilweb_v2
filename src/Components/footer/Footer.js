@@ -25,8 +25,8 @@ const Footer = () => {
             </FooterExplain>
           </div>
           <DesktopContent>
-            <LogoImg src={process.env.PUBLIC_URL + '/images/kuphil_logo.png'} />
-            <LogoImg src={process.env.PUBLIC_URL + '/images/konkuk_logo.png'} onClick={handleKonkukClick} />
+            <LogoImg src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/kuphil_logo.png'} />
+            <LogoImg src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/konkuk_logo.png'} onClick={handleKonkukClick} />
           </DesktopContent>
         </Content>
       </FooterContent>

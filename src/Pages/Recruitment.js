@@ -27,7 +27,7 @@ const Recruitment = () => {
             link2="/cooperate"
           />
           <Sns />
-          <Poster src={process.env.PUBLIC_URL + '/images/recruitment/poster.jpg'} />
+          <Poster src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/recruitment/poster.jpg'} />
         </Contents>
       </Wrap>
       <Footer />
