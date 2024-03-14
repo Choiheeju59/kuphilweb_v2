@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# 쿠웹(Kuphil Website) version.2
+웹사이트 링크 : [http://3.38.46.26](http://3.38.46.26)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 프로젝트 소개
+건국대학교 교내 오케스트라 동아리 '쿠필(Kuphil)'의 자체 제작 홈페이지입니다.
 
-## Available Scripts
+[쿠웹(Kuphil Website) version.1](https://github.com/rkddusen/Kuphil_Web)를 배포하여 사용자 평가를 진행한 후, 리팩토링을 진행하고 있는 버전입니다.
 
-In the project directory, you can run:
+## 멤버 구성
 
-### `npm start`
+- 팀장 강두연 - `메인`, `모집/제휴`, `etc`, `심리테스트/이상형 월드컵/능력고사` 페이지, AWS를 이용한 서버 배포
+- 팀원 최희주 - 백엔드, Database 관리, QA 진행
+- 팀원 권세린 - `소개`, `연혁`, `아카이브` 페이지
+- 팀원 강수빈 - 전체 디자인
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 사용 기술
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Figma
+- JavaScript, React, React-router, React-query, Styled-components
+- Node.js, Express
+- AWS EC2, AWS RDS
 
-### `npm test`
+## 미리보기
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![2024-03-1512 04 03-ezgif com-video-to-gif-converter](https://github.com/Choiheeju59/kuphilweb_v2/assets/50242266/a7fba496-90d6-4e50-b345-08678d59fb91)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 주요 기능
+1. 동아리 `소개` 및 찾아오시는 길 안내
+2. 동아리 `연혁`
+3. 동아리에서 진행한 연주회 정보를 모아놓은 `아카이브`
+4. 동아리 `모집 및 제휴 제안` 안내
+5. 클래식과 관련된 내용의 `게임 및 즐길거리`(심리테스트, 이상형 월드컵, 클래식 능력고사)
