@@ -42,6 +42,7 @@ const WorldcupGame = (props) => {
   const [right, setRight]  = useState(null);
   const [choice, setChoice] = useState([]);
   const [semiChoice, setSemiChoice] = useState([]);
+  const [imageLoading, setImageLoading] = useState(true);
   
   useEffect(() => {
     getData();
@@ -57,7 +58,12 @@ const WorldcupGame = (props) => {
   const getData = async () => {
     getWorldcupData(round, gameId)
       .then((res) => {
+        for(let i = 0; i < res.data.length; i++){
+          const img = new Image();
+          img.src = res.data[i].img;
+        }
         setChoice(res.data);
+        setImageLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -113,11 +119,18 @@ const WorldcupGame = (props) => {
               (* 환경에 따라 이미지 로딩 속도가 느릴 수 있습니다.)
             </StartSubTitle>
           </TitleBox>
-          <AnswerBox>
-            <Content>{left}</Content>
-            <Versus>VS</Versus>
-            <Content>{right}</Content>
-          </AnswerBox>
+          {imageLoading ? (
+            <Loading>
+              <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/purple_loading.svg'} />
+            </Loading>
+          ) : (
+            <AnswerBox>
+              <Content>{left}</Content>
+              <Versus>VS</Versus>
+              <Content>{right}</Content>
+            </AnswerBox>
+          )}
+          
         </>
       )}
     </StyledBox>
@@ -242,6 +255,12 @@ const Versus = styled.div`
 
 const Result = styled.div`
   width: 100%;
+`;
+
+const Loading = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 50px 0;
 `;
 
 export default WorldcupGame;
