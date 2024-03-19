@@ -1,26 +1,48 @@
-import { HistoryContents } from "../../utils/historyContents";
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import { getHistoryData } from "../../utils/api";
 import styled from 'styled-components';
 
 const HistoryContent = () => {
+    const [historyData, setHistoryData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const renderComments = (comments) => {
-        return comments.map(comment => (
-            <WrapComment key={comment.content}>
-                <Date>{comment.date}</Date>
-                <Text>{comment.content}</Text>
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await getHistoryData();
+            setHistoryData(response.data);
+            setIsLoading(false);
+          } catch (error) {
+            console.error(error);
+            setIsLoading(false);
+          }
+        };
+    
+        fetchData();
+        
+      }, []);
+
+
+      const renderComments = (comments) => {
+        return comments.reverse().map(comment => (
+            <WrapComment key={comment.context}>
+                <Date>{comment.month}월 {comment.day ? comment.day + '일' : ''}</Date>
+                <Text>{comment.context}</Text>
             </WrapComment>
         ));
     };
+
+    if (isLoading) return <>Loading...</>
 
     const years = Array.from(new Array(21), (_, index) => 2024 - index);
 
     const groupCommentsByYear = (year) => {
         let dataByYear = [];
-
-        for (let i = 0; i < HistoryContents.length; i++) {
-            if (HistoryContents[i].year === year) {
-                dataByYear.push(HistoryContents[i]);
+        
+        for (let i = 0; i < historyData.length; i++) {
+            if (historyData[i].year === year) {
+                dataByYear.push(historyData[i]);
             }
         }
 

@@ -33,3 +33,7 @@ export const getConcertData = (num) => {
 export const getTestData = () => {
   return instance.get(`/api/v1/etc/test`);
 };
+
+export const getHistoryData = () => {
+  return instance.get(`/api/v1/history`);
+}
