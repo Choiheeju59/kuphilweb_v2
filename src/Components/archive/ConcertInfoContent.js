@@ -26,7 +26,7 @@ const ConcertInfoContent = () => {
         { min: 18, max: 23, value: 4 },
         { min: 24, max: 29, value: 3 },
         { min: 30, max: 35, value: 2 },
-        { min: 36, max: 41, value: 1 }
+        { min: 36, max: 42, value: 1 }
     ];
 
     for (const range of ranges) {
