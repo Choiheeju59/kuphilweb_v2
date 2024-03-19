@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import Menus from './Menus';
 import ShortMenus from './ShortMenus';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useScrollTop from '../../hooks/useScrollTop';
 
 const Header = () => {
   const [shortMenusOpen, setShortMenusOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useScrollTop();
 
   const moveHome = () => {
     if(location.pathname !== '/') navigate(`/`);

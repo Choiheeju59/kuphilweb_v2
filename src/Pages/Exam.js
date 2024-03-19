@@ -6,6 +6,7 @@ import TitleGradient from '../Components/TitleGradient';
 import { useParams, useNavigate } from 'react-router-dom';
 import ExamPaper from '../Components/exam/ExamPaper';
 import { getExamData, getExamScoreData } from '../utils/api';
+import { useScrollTopAlways } from '../hooks/useScrollTop';
 
 const Exam = () => {
   const params = useParams();
@@ -20,6 +21,8 @@ const Exam = () => {
   // ]
   const [submitAnswers, setSubmitAnswers] = useState([0,0,0,0,0,0,0,0,0,0]); // 사용자 답
   const [score, setScore] = useState(0);
+
+  useScrollTopAlways();
 
   useEffect(() => {
     if(params.id){

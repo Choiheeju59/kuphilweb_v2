@@ -6,6 +6,7 @@ import TitleGradient from '../Components/TitleGradient';
 import WorldcupBox from '../Components/worldcup/WorldcupBox';
 import { useNavigate, useParams } from 'react-router-dom';
 import WorldcupGame from '../Components/worldcup/WorldcupGame';
+import { useScrollTopAlways } from '../hooks/useScrollTop';
 
 const Worldcup = () => {
   const params = useParams();
@@ -14,6 +15,8 @@ const Worldcup = () => {
   const [title, setTitle] = useState('');
   const [gameStart, setGameStart] = useState(false);
   const [round, setRound] = useState(0);
+  
+  useScrollTopAlways();
   
   useEffect(() => {
     if(params.id){

@@ -1,12 +1,15 @@
 import { ConcertNumber, PageBtn, PosterContainer, Wrap, WrapConcertNumber, WrapPageNum, WrapPoster } from "./PosterContent.style";
 import React, {useEffect, useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useScrollTopAlways } from '../../hooks/useScrollTop';
 
 const PosterContent = () => {
     const { page } = useParams();
     const navigate = useNavigate();
 
     const [divWidth, setDivWidth] = useState(window.innerWidth * 0.15);
+
+    useScrollTopAlways();
     
       useEffect(() => {
         const handleResize = () => {
