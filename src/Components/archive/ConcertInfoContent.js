@@ -4,11 +4,14 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { getConcertData } from "../../utils/api";
 import styled from "styled-components";
+import { useScrollTopAlways } from '../../hooks/useScrollTop';
 
 const ConcertInfoContent = () => {
   const { num } = useParams();
   const navigate = useNavigate();
   const [concertData, setConcertData] = useState(null);
+
+  useScrollTopAlways();
 
   const handleGoBack = () => {
     let page = getValue(num);
