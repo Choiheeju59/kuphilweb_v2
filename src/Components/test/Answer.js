@@ -16,6 +16,8 @@ const StyledButton = styled.div`
   width: 300px;
   height: 80px;
   margin: 10px;
+  padding: 10px;
+  box-sizing: border-box;
   border: none;
   background-color: #ffffff;
   border-radius: 15px;
@@ -27,6 +29,7 @@ const StyledButton = styled.div`
   -moz-user-select:none;
   -ms-user-select:none;
   user-select:none;
+  white-space: pre-wrap;
   
   &:hover{
     cursor: pointer;
@@ -35,7 +38,7 @@ const StyledButton = styled.div`
 
   @media screen and (max-width: 767px){
     width: 100%;
-    height: 50px;
+    height: 60px;
     margin-bottom: 10px;
     font-size: 12px;
   }
