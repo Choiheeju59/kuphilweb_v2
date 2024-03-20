@@ -77,6 +77,7 @@ const ExamPaper = (props) => {
 
   return (
     <StyledExamPaper>
+      <div>
       {id <= 10 ? (
         <>
           <div>
@@ -135,6 +136,7 @@ const ExamPaper = (props) => {
           )}
         </>
       )}
+      </div>
     </StyledExamPaper>
   );
 };
@@ -142,13 +144,20 @@ const ExamPaper = (props) => {
 const StyledExamPaper = styled.div`
   width: 640px;
   margin: 0 auto;
-  padding: 50px 30px 30px 30px;
   box-sizing: border-box;
+  overflow: hidden;
   border-radius: 15px;
-  //background-image: url('/images/exam/exam_paper.jpg');
-  background-color: #dddddd;
+  background-image: url('/images/exam/exam_paper.png');
+  background-size: cover;
+  
   text-align: start;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+
+  & > div{
+    padding: 30px;
+    background-color: #ddddddb0;
+  }
+
   @media screen and (max-width: 767px){
     width: 100%;
   }
@@ -179,7 +188,8 @@ const ProblemItem = styled.div`
   padding: 0 10px 0 30px;
   box-sizing: border-box;
   border-radius: 5px;
-  background-color: #ffffff50;
+  border: 1px solid #dddddd;
+  background-color: #ffffff80;
   display: flex;
   align-items: center;
   position: relative;
