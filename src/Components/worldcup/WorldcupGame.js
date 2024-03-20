@@ -183,7 +183,6 @@ const StyledBox = styled.div`
   width: 100%;
   padding: 50px 20px;
   margin: 0 auto;
-  margin-bottom: 50px;
   box-sizing: border-box;
 
   @media screen and (max-width: 767px){

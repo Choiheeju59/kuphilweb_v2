@@ -30,7 +30,8 @@ const WorldcupBox = (props) => {
 };
 
 const StyledBox = styled.div`
-  margin: 50px auto;
+  margin: 0 auto;
+  padding: 50px 0;
   width: 100%;
   max-width: 400px;
 `;
