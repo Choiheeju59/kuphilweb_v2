@@ -17,6 +17,7 @@ import TestResult from './Pages/TestResult';
 import Worldcup from  './Pages/Worldcup'
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import Admin from './Pages/Admin';
 
 const queryClient = new QueryClient()
 
@@ -40,6 +41,7 @@ function App() {
             <Route path="/worldcup/:id" element={<Worldcup />} />
             <Route path="/exam/:id" element={<Exam />} />
             <Route path="/concert/:num" element={<ArchiveRead />}/>
+            <Route path="/admin" element={<Admin />}/>
           </Routes>
         </BrowserRouter>
       </div>
