@@ -1,27 +1,33 @@
 import React, { useEffect, useRef } from "react";
 
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function ShortMenus(props) {
   const { shortMenusOpen, setShortMenusOpen } = props;
   const navigate = useNavigate();
+  const location = useLocation();
   const divRef = useRef(null);
 
   const moveIntroducePage = () => {
-    navigate(`/introduce`);
+    if(location.pathname === '/introduce') navigate(0, {replace: true});
+    else navigate(`/introduce`);
   }
   const moveHistoryPage = () => {
-    navigate(`/history`);
+    if(location.pathname === '/history') navigate(0, {replace: true});
+    else navigate(`/history`);
   }
   const moveArchivePage = () => {
-    navigate(`/archive/1`);
+    if(location.pathname === '/archive/1') navigate(0, {replace: true});
+    else navigate(`/archive/1`);
   }
   const moveRecruitmentPage = () => {
-    navigate(`/recruitment`);
+    if(location.pathname === '/recruitment') navigate(0, {replace: true});
+    else navigate(`/recruitment`);
   }
   const moveEtcPage = () => {
-    navigate(`/etc`);
+    if(location.pathname === '/etc') navigate(0, {replace: true});
+    else navigate(`/etc`);
   }
 
   useEffect(() => {
