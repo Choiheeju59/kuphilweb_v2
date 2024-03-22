@@ -77,7 +77,6 @@ export const WrapPageNum = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
 `
 
 export const PageBtn = styled.button`
@@ -85,4 +84,6 @@ export const PageBtn = styled.button`
     border: none;
     background: none;
     font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
 `

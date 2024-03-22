@@ -1,6 +1,7 @@
 import { ConcertNumber, PageBtn, PosterContainer, Wrap, WrapConcertNumber, WrapPageNum, WrapPoster } from "./PosterContent.style";
 import React, {useEffect, useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { useScrollTopAlways } from '../../hooks/useScrollTop';
 
 const PosterContent = () => {
@@ -57,7 +58,7 @@ const PosterContent = () => {
             <WrapPageNum>
                 {imageName.map((elem, idx) => {
                     return(
-                        <PageBtn key={idx} name="page" id={(idx + 1).toString()} onClick={() => navigate(`/archive/${idx + 1}`)} style={(idx + 1).toString() === page ? { fontWeight: 'bold' } : {}}>{idx + 1}</PageBtn>
+                        <PageBtn key={idx} name="page" id={(idx + 1).toString()} onClick={() => navigate(`/archive/${idx + 1}`)} style={(idx + 1).toString() === page ? { color: "#555555", border: "1px solid #555555", borderRadius: '5px'} : {color: "black"}}>{idx + 1}</PageBtn>
                     )
                 })}
             </WrapPageNum>
