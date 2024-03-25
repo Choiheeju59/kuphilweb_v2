@@ -13,6 +13,8 @@ const Etc = () => {
     {title: '제1회 클래식 능력고사', src: 'exam1.png', link: '/exam/1'},
     {title: '제2회 클래식 능력고사', src: 'exam2.png', link: '/exam/2'},
     {title: '제3회 클래식 능력고사', src: 'exam3.png', link: '/exam/3'},
+    {title: '악보 퀴즈 (쉬움)', src: '', link: '/quiz/1'},
+    {title: '악보 퀴즈 (어려움)', src: '', link: '/quiz/2'},
     {title: 'Coming Soon', src: '', link: ''},
   ]
   return (

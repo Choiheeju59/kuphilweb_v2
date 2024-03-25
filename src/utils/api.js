@@ -37,3 +37,10 @@ export const getTestData = () => {
 export const getHistoryData = () => {
   return instance.get(`/api/v1/history`);
 }
+
+export const postQuizResultData = (quizId, quizOrder) => {
+  return instance.post(`/api/v1/etc/quiz/result?quizId=${quizId}&quizOrder=${quizOrder}`);
+};
+export const getQuizResultData = (quizId, quizOrder) => {
+  return instance.get(`/api/v1/etc/quiz/result?quizId=${quizId}&quizOrder=${quizOrder}`);
+};
