@@ -58,10 +58,10 @@ const WorldcupGame = (props) => {
   const getData = async () => {
     getWorldcupData(round, gameId)
       .then((res) => {
-        for(let i = 0; i < res.data.length; i++){
-          const img = new Image();
-          img.src = res.data[i].img;
-        }
+        // for(let i = 0; i < res.data.length; i++){
+        //   const img = new Image();
+        //   img.src = res.data[i].img;
+        // }
         setChoice(res.data);
         setImageLoading(false);
       })
