@@ -5,6 +5,7 @@ import axios from 'axios';
 const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [currentHour, setCurrentHour] = useState(new Date().getHours());
+  const [error, setError] = useState(null);
 
   const fetchWeatherData = async () => {
     try {
@@ -124,7 +125,10 @@ const Weather = () => {
         precipitation: precipitation,
       }
       setWeatherData(_weatherData);
+      setError(false);
     } catch (error) {
+      setError(true);
+      setWeatherData(null);
       console.error('Error fetching weather data:', error);
     }
   };
@@ -148,6 +152,7 @@ const Weather = () => {
 
   const handleReloadWeather = () => {
     setWeatherData(null);
+    setError(false);
     fetchWeatherData();
   }
   return (
@@ -165,9 +170,18 @@ const Weather = () => {
           <WeatherPlace>건국대학교 기준</WeatherPlace>
         </>
       ) : (
-        <Loading>
-          <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/main/loading.svg'} />
-        </Loading>
+        <>
+          {error ? (
+            <WeatherInfo>
+              <WeatherError>날씨 정보를 불러오는 데 실패했습니다.</WeatherError>
+              <svg onClick={handleReloadWeather} xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+            </WeatherInfo>
+          ) : (
+            <Loading>
+              <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/main/loading.svg'} />
+            </Loading>
+          )}
+        </>
       )}
     </StyledWeather>
   );
@@ -229,6 +243,10 @@ const Loading = styled.p`
   & > img{
     height: 80%;
   }
+`;
+
+const WeatherError = styled.p`
+  font-size: 14px;
 `;
 
 export default Weather;
