@@ -58,12 +58,17 @@ const WorldcupGame = (props) => {
   const getData = async () => {
     getWorldcupData(round, gameId)
       .then((res) => {
-        for(let i = 0; i < res.data.length; i++){
+        let loadCount = 0;
+        let totalCount = res.data.length;
+        for(let i = 0; i < totalCount; i++){
           const img = new Image();
           img.src = res.data[i].img;
+          img.onload = () => {
+            loadCount++;
+            if(loadCount === totalCount) setImageLoading(false);
+          }
         }
         setChoice(res.data);
-        setImageLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -122,6 +127,7 @@ const WorldcupGame = (props) => {
           {imageLoading ? (
             <Loading>
               <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/purple_loading.svg'} />
+              <p>이미지 로딩 중..</p>
             </Loading>
           ) : (
             <AnswerBox>
