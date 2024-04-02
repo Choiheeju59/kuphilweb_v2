@@ -12,7 +12,6 @@ const Introduce = () => {
     const onClick = (e) => {
         setSelectMap(e.target.value);
     }
-
     
     return(
         <>
@@ -30,7 +29,9 @@ const Introduce = () => {
                             title="인사말"
                         />
                         <Welcome>
-                            <ImgProfessor src="./images/introduce/professor.jpg" alt="교수님 사진"/>
+                            <WrapImgProfessor>
+                                <ImgProfessor src="./images/introduce/professor.jpg" alt="교수님 사진"/>
+                            </WrapImgProfessor>
                             <div>
                                 <ProfessorWelcomeTitle>
                                     "건국인들의 열정이 모여 만들어진 오케스트라, KUPhil을 소개합니다."
@@ -49,11 +50,11 @@ const Introduce = () => {
                         </Welcome>
                     </MainContents>
                     <MainContents>
-                        <MainContentsTitle
-                            title="ABOUT KUPhil"
-                        />
-                        <ImgIntroduce src="./images/introduce/introduce_2.png"/>
-                        <ImgDeskTopIntroduce src="./images/introduce/introduce_1.png"/>
+                        <MainContentsTitle title="ABOUT KUPhil"/>
+                        <WrapImgIntroduce>
+                            <ImgIntroduce src="./images/introduce/introduce_2.png"/>
+                            <ImgDeskTopIntroduce src="./images/introduce/introduce_1.png"/>
+                        </WrapImgIntroduce>
                     </MainContents>
                     <MainContents>
                         <MainContentsTitle
@@ -74,15 +75,35 @@ const Introduce = () => {
                                     <span style={selectMap === "map_back" ? {color: "#000000"} : {color: "#989898"}}>경영대학 (후문)</span>
                                 </LabelWay>
                             </WrapWay>
-                            {
-                                selectMap === "map_front" ? <Map src="./images/introduce/map_front.jpg" alt="정문에서 동아리방 오는 길 이미지"/> : null
-                            }
-                            {
-                                selectMap === "map_library" ? <Map src="./images/introduce/map_library.jpg" alt="중문에서 동아리방 오는 길 이미지"/> : null
-                            }
-                            {
-                                selectMap === "map_back" ? <Map src="./images/introduce/map_back.jpg" alt="후문에서 동아리방 오는 길 이미지"/> : null
-                            }
+                            <div style={{display: "flex", width: "inherit", justifyContent: "center"}}>
+                                {
+                                    selectMap === "map_front" ?
+                                    <WrapMap>
+                                        <Map src="./images/introduce/map_front.jpg" alt="정문에서 동아리방 오는 길 이미지" style={{zIndex: "1", opacity: "1"}}/> 
+                                        <Map src="./images/introduce/map_library.jpg" alt="중문에서 동아리방 오는 길 이미지" style={{zIndex: "2", opacity: "0"}}/>
+                                        <Map src="./images/introduce/map_back.jpg" alt="후문에서 동아리방 오는 길 이미지" style={{zIndex: "3", opacity: "0"}}/>
+                                    </WrapMap>
+                                    : null
+                                }
+                                {
+                                    selectMap === "map_library" ? 
+                                    <WrapMap>
+                                        <Map src="./images/introduce/map_front.jpg" alt="정문에서 동아리방 오는 길 이미지" style={{zIndex: "1", opacity: "0"}}/> 
+                                        <Map src="./images/introduce/map_library.jpg" alt="중문에서 동아리방 오는 길 이미지" style={{zIndex: "2", opacity: "1"}}/>
+                                        <Map src="./images/introduce/map_back.jpg" alt="후문에서 동아리방 오는 길 이미지" style={{ zIndex: "3", opacity: "0"}}/>
+                                    </WrapMap>
+                                    : null
+                                }
+                                {
+                                    selectMap === "map_back" ? 
+                                    <WrapMap>
+                                        <Map src="./images/introduce/map_front.jpg" alt="정문에서 동아리방 오는 길 이미지" style={{zIndex: "1", opacity: "0"}}/> 
+                                        <Map src="./images/introduce/map_library.jpg" alt="중문에서 동아리방 오는 길 이미지" style={{zIndex: "2", opacity: "0"}}/>
+                                        <Map src="./images/introduce/map_back.jpg" alt="후문에서 동아리방 오는 길 이미지" style={{zIndex: "3", opacity: "1"}}/>
+                                    </WrapMap>
+                                    : null
+                                }
+                            </div>
                             <LocationInfo>
                                 쿠필 동아리방은 <Location>제2학생회관 지하 B117호</Location>입니다.<br/>
                                 제2학생회관 지하로 내려오는 계단은 홍예교 앞 또는 공과대학 맞은편 노천극장 입구에 있습니다.
@@ -134,12 +155,27 @@ const Welcome = styled.div`
 }  
 `
 
+const WrapImgProfessor = styled.div`
+    width: 180px;
+    height: 180px;
+
+    @media screen and (max-width: 767px){
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
+    }
+`
+
 const ImgProfessor = styled.img`
   width: 180px;
-  border-radius: 70%;
+  height: 180px;
+  min-height: 180px;
+  border-radius: 50%;
 
   @media screen and (max-width: 767px){
     width: 150px;
+    height: 150px;
+    min-height: 150px;
     margin-bottom: 20px;
 }
 `
@@ -178,13 +214,24 @@ const Closing = styled.p`
 }
 `
 
+const WrapImgIntroduce = styled.div`
+    width: 750px;
+    height: 580px;
+    margin: 0 auto;
+    
+    @media screen and (max-width: 767px){
+        width: 300px;
+        height: 975px;
+    }
+`
+
 const ImgIntroduce = styled.img`
     display: none;
 
     @media screen and (max-width: 767px){
         width: 300px;
-    display: block;
-    margin: 0 auto;
+        display: block;
+        margin: 0 auto;
     }
 `
 
@@ -224,12 +271,26 @@ const LabelWay = styled.label`
 
 const Way = styled.input`
 `
-
-const Map = styled.img`
+const WrapMap = styled.div`
     width: 500px;
+    height: 490px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @media screen and (max-width: 767px){
         width: 300px;
+        height: 294px;
+    }
+`
+
+const Map = styled.img`
+    width: 500px;
+    margin: -245px -250px;
+    
+    @media screen and (max-width: 767px){
+        width: 300px;
+        margin: -147px -150px;
     }
 `
 
