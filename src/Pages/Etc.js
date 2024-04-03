@@ -86,7 +86,6 @@ const ComingSoon = styled.div`
     color: black;
     text-decoration: underline;
     text-underline-position: under;
-    display: block;
     margin-top: 10px;
     &:hover{
       color: #888888;
