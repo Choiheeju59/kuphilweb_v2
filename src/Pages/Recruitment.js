@@ -7,12 +7,6 @@ import Sns from '../Components/Sns';
 
 const Recruitment = () => {
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'instant'
-    })
-  },[])
   return (
     <>
       <Wrap>
@@ -27,7 +21,9 @@ const Recruitment = () => {
             link2="/cooperate"
           />
           <Sns />
-          <Poster src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/recruitment/poster.jpg'} />
+          <PosterArea>
+            <Poster src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/recruitment/poster.jpg'} />
+          </PosterArea>
         </Contents>
       </Wrap>
       <Footer />
@@ -51,14 +47,24 @@ const Contents = styled.div`
     max-width: 400px;
   }
 `;
-const Poster = styled.img`
+const PosterArea = styled.div`
   width: 60%;
-  border-radius: 10px;
-  box-shadow: 0px 0px 2px rgb(0,0,0,0.25);
+  padding-top: 85%;
+  margin: 0 auto;
+  position: relative;
   margin-bottom: 50px;
   @media screen and (max-width: 767px){
     width: 100%;
+    padding-top: 141%;
   }
+`;
+const Poster = styled.img`
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px rgb(0,0,0,0.25);
 `;
 
 export default Recruitment;
