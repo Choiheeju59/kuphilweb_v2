@@ -109,53 +109,25 @@ const WorldcupResult = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        loadingClear();
+        setLoading(false);
       })
   }
   
   const getResult = async () => {
     getWorldcupResultData(gameId)
       .then((res) => {
-        console.log(res.data)
         setStatistic(res.data);
         setStatisticCount(res.data.reduce((a, c) => a += Number(c.win), 0));
-        loadingClear();
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
-        loadingClear();
+        setLoading(false);
       })
   }
-
-  const getResultRe = async () => {
-    getWorldcupResultDataRe(gameId)
-      .then((res) => {
-        setStatistic(res.data);
-        setStatisticCount(res.count); //count들의 합
-        loadingClear();
-      })
-      .catch((err) => {
-        console.log(err);
-        // 임시 데이터. 추후 삭제
-        let _statistic = [
-          {id:4, title:"Pyotr Ilyich Tchaikovsky", semiTitle:"차이콥스키", img:"https://upload.wikimedia.org/wikipedia/commons/4/4d/Tchaikovsky_by_Reutlinger.jpg", choice:500},
-          {id:2, title:"Nikolai Rimsky-Korsakov", semiTitle:"림스키코르사코프", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Nikolay_A_Rimsky_Korsakov_1897.jpg/250px-Nikolay_A_Rimsky_Korsakov_1897.jpg", choice:4},
-          {id:1, title:"Wolfgang Amadeus Mozart", semiTitle:"모차르트", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Wolfgang-amadeus-mozart_1.jpg/800px-Wolfgang-amadeus-mozart_1.jpg", choice:3},
-          {id:5, title:"Johann Nepomuk Hummel", semiTitle:"홈멜", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/JNHummel_2.jpg/1024px-JNHummel_2.jpg", choice:2},
-          {id:3, title:"Max Bruch", semiTitle:"브루흐", img:"https://upload.wikimedia.org/wikipedia/commons/f/f5/Max_bruch.jpg", choice:1}
-        ];
-        setStatistic(_statistic);
-        setStatisticCount(510);
-        loadingClear();
-      })
-  }
-
-  const loadingClear = () => {
-    const timeoutId = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timeoutId);
+  const handleReloadResult = () => {
+    setLoading(true);
+    getResult();
   }
 
   return (
@@ -187,12 +159,10 @@ const WorldcupResult = (props) => {
                 ))}
               </>
             ) : (
-              <>
-                <button onClick={() => {
-                    setLoading(true);
-                    getResultRe()
-                }}>Reload Result</button>
-              </>
+              <StatisticError>
+                <svg onClick={handleReloadResult} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                <p>통계 정보를 불러오는 데 실패했습니다.</p>
+              </StatisticError>
             )}
           </StatisticArea>
         </>
@@ -275,6 +245,27 @@ const SelectRound = styled.div`
 const StatisticArea = styled.div`
   width: 100%;
   margin-top: 50px;
+`;
+
+const StatisticError = styled.div`
+  padding: 10px 0;
+  & svg{
+    margin-bottom: 10px;
+    stroke: black;
+    width: 22px;
+    height: 22px;
+    &:hover{
+      cursor: pointer;
+      stroke: #888888;
+    }
+  }
+  @media screen and (max-width: 767px){
+    font-size: 14px;
+    & svg{
+      width: 18px;
+      height: 18px;
+    }
+  }
 `;
 
 export default WorldcupResult

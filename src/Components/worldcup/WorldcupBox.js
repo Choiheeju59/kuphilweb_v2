@@ -6,7 +6,6 @@ const WorldcupBox = (props) => {
   const [thumbnail, setThumbnail] = useState('');
 
   useEffect(() => {
-    console.log(gameId)
     let imgName = gameId === 1 ? 'composer' : 'classic';
     let _thumbnail = `${process.env.REACT_APP_KUPHIL_PUBLIC_URL}/images/thumbnail/worldcup_${imgName}.png`;
     setThumbnail(_thumbnail);
