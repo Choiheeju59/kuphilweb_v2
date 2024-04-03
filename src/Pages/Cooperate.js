@@ -22,9 +22,9 @@ const Cooperate = () => {
           />
           <Sns />
           <Image>
-            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation1.jpeg'} />
-            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation2.jpeg'} />
-            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation3.jpeg'} />
+            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation1.jpeg'} alt='KUPHIL 제휴 안내' />
+            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation2.jpeg'} alt='KUPHIL 제휴 안내' />
+            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation3.jpeg'} alt='KUPHIL 제휴 안내' />
           </Image>
         </Contents>
       </Wrap>
@@ -61,6 +61,7 @@ const Image = styled.div`
     left: 50%;
     transform: translate(-50%, 0);
     display: none;
+    text-align: start;
   }
   & > img:first-child {
     width: 80%;
