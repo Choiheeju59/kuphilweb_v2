@@ -6,12 +6,7 @@ import TitleGradient from '../Components/TitleGradient';
 import Sns from '../Components/Sns';
 
 const Cooperate = () => {
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'instant'
-    })
-  },[])
+  
   return (
     <>
       <Wrap>
@@ -25,12 +20,12 @@ const Cooperate = () => {
             title2="제휴"
             link2="/cooperate"
           />
+          <Sns />
           <Image>
             <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation1.jpeg'} />
             <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation2.jpeg'} />
             <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation3.jpeg'} />
           </Image>
-          <Sns />
         </Contents>
       </Wrap>
       <Footer />
@@ -57,28 +52,28 @@ const Contents = styled.div`
 
 const Image = styled.div`
   width: 100%;
-  margin-top: 40px;
+  margin: 40px 0;
+  position: relative;
+  padding-top: 30%;
   & > img {
-    
-    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: none;
   }
   & > img:first-child {
     width: 80%;
     display: block;
   }
-  & > img:nth-child(2) {
-    display: none;
-  }
-  & > img:nth-child(3) {
-    display: none;
-  }
   @media screen and (max-width: 1023px) {
+    padding-top: 35%;
     & > img:first-child {
       width: 90%;
     }
   }
   @media screen and (max-width: 767px) {
-    margin-top: 20px;
+    padding-top: 145%;
     & > img:first-child {
       display: none;
     }
@@ -91,6 +86,7 @@ const Image = styled.div`
     }
   }
   @media screen and (max-width: 468px) {
+    padding-top: 330%;
     & > img:first-child {
       display: none;
     }
@@ -104,13 +100,5 @@ const Image = styled.div`
   }
 `;
 
-const SnsArea = styled.div`
-  width: 100%;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  @media screen and (max-width: 767px){
-    margin-bottom: 10px;
-  }
-`;
 
 export default Cooperate;
