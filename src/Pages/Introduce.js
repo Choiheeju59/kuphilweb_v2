@@ -151,7 +151,10 @@ const Welcome = styled.div`
     gap: 50px;
 
   @media screen and (max-width: 767px){
-    display: block;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }  
 `
 
