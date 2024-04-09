@@ -21,6 +21,8 @@ const Exam = () => {
   // ]
   const [submitAnswers, setSubmitAnswers] = useState([0,0,0,0,0,0,0,0,0,0]); // 사용자 답
   const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useScrollTopAlways();
 
@@ -87,11 +89,24 @@ const Exam = () => {
     getExamScoreData(params.id, submitAnswers)
       .then((res) => {
         setScore(res.data);
+        setIsLoading(true);
       })
       .catch((err) => {
         console.log(err);
       })
   }
+
+  useEffect(() => {
+    if(loading && isLoading){
+      // 1초 뒤 로딩 해제
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isLoading]);
+
 
   const examEnd = (end) => {
     if(end === 1){ // 다시하기
@@ -122,7 +137,16 @@ const Exam = () => {
                 {problemNumber <= 10 ? (
                   <ExamPaper id={problemNumber} question={problems[problemNumber - 1]['question']} choices={problems[problemNumber - 1]['choices']} nextQuestion={nextQuestion} prevQuestion={prevQuestion} check={submitAnswers[problemNumber - 1]} />
                 ) : (
-                  <ExamPaper id={problemNumber} nextQuestion={examEnd} score={score} />
+                  <>
+                    {loading ? (
+                      <Loading>
+                        <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/purple_loading.svg'} />
+                      </Loading>
+                    ) : (
+                      <ExamPaper id={problemNumber} nextQuestion={examEnd} score={score} />
+                    )}
+                    
+                  </>
                 )}
               </>
             )}
@@ -157,6 +181,11 @@ const ExamContent = styled.div`
   @media screen and (max-width: 767px){
     padding: 20px 0;
   }
+`;
+const Loading = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 50px 0;
 `;
 
 export default Exam;
