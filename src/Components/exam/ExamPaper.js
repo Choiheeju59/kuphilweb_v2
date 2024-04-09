@@ -6,30 +6,14 @@ import { useParams } from 'react-router-dom';
 const ExamPaper = (props) => {
   const { id, question, choices, nextQuestion, prevQuestion, check, score } = props;
   const params = useParams();
-  const [loading, setLoading] = useState(false);
   const [openAnswer, setOpenAnswer] = useState(false);
   const [answerDiv, setAnswerDiv] = useState(null);
   const [checked, setChecked] = useState(check);
   const [rank, setRank] = useState('');
 
   useEffect(() => {
-    if(id > 10){
-      // 3초 동안 로딩
-      setLoading(true);
-    }
     setChecked(check);
   }, [id]);
-
-  useEffect(() => {
-    if(loading){
-      // 3초 뒤 로딩 해제
-      const timeoutId = setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [loading]);
 
   useEffect(() => {
     if(openAnswer){
@@ -108,32 +92,23 @@ const ExamPaper = (props) => {
         </>
       ) : (
         <>
-          {loading ? (
-            <Loading>
-              <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/purple_loading.svg'} />
-            </Loading>
-          ) : (
-            <>
-              <ResultDiv>
-                <RankImg src={`${process.env.REACT_APP_KUPHIL_PUBLIC_URL}/images/exam/${rank}.png`} />
-                <Question>당신의 점수는 "{score}점" 입니다!</Question>
-              </ResultDiv>
-              <div>
-                <div>
-                  <ProblemItem onClick={() => {nextQuestion(1)}}>다시하기</ProblemItem>
-                  <ProblemItem onClick={() => {nextQuestion(2)}}>종료하기</ProblemItem>
-                </div>
-              </div>
-              <ShowAnswer>
-                <ShowAnswerBtn onClick={() => setOpenAnswer(v => !v)}>{!openAnswer ? '정답 보기 ▼' : '정답 접기 ▲'}</ShowAnswerBtn>
-                <AnswerArea openanswer={openAnswer}>
-                  {/* 시험 정답 */}
-                  {answerDiv}
-                  <ShowAnswerBtn onClick={() => setOpenAnswer(false)}>정답 접기 ▲</ShowAnswerBtn>
-                </AnswerArea>
-              </ShowAnswer>
-            </>
-          )}
+          <ResultDiv>
+            <RankImg src={`${process.env.REACT_APP_KUPHIL_PUBLIC_URL}/images/exam/${rank}.png`} />
+            <Question>당신의 점수는 "{score}점" 입니다!</Question>
+          </ResultDiv>
+          <div>
+            <div>
+              <ProblemItem onClick={() => {nextQuestion(1)}}>다시하기</ProblemItem>
+              <ProblemItem onClick={() => {nextQuestion(2)}}>종료하기</ProblemItem>
+            </div>
+          </div>
+          <ShowAnswer>
+            <ShowAnswerBtn onClick={() => setOpenAnswer(v => !v)}>{!openAnswer ? '정답 보기 ▼' : '정답 접기 ▲'}</ShowAnswerBtn>
+            <AnswerArea openanswer={openAnswer}>
+              {answerDiv}
+              <ShowAnswerBtn onClick={() => setOpenAnswer(false)}>정답 접기 ▲</ShowAnswerBtn>
+            </AnswerArea>
+          </ShowAnswer>
         </>
       )}
       </div>
@@ -148,7 +123,7 @@ const StyledExamPaper = styled.div`
   overflow: hidden;
   border-radius: 15px;
   background-image: url('/images/exam/exam_paper.png');
-  background-size: cover;
+  background-size: contain;
   
   text-align: start;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
@@ -220,12 +195,6 @@ const ProblemArrowKey = styled.div`
       color: #aaaaaa;
     }
   }
-`;
-
-const Loading = styled.div`
-  width: 100%;
-  text-align: center;
-  padding: 50px 0;
 `;
 
 const ShowAnswer = styled.div`
