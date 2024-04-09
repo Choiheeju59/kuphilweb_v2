@@ -5,7 +5,7 @@ import Footer from '../Components/footer/Footer';
 import TitleGradient from '../Components/TitleGradient';
 import { useParams, useNavigate } from 'react-router-dom';
 import ExamPaper from '../Components/exam/ExamPaper';
-import { getExamData, getExamScoreData } from '../utils/api';
+import { getExamData, postExamScoreData } from '../utils/api';
 import { useScrollTopAlways } from '../hooks/useScrollTop';
 
 const Exam = () => {
@@ -86,7 +86,7 @@ const Exam = () => {
 
   const checkAnswer = () => {
     // 백엔드에 정답 체크 요청
-    getExamScoreData(params.id, submitAnswers)
+    postExamScoreData(params.id, submitAnswers)
       .then((res) => {
         setScore(res.data);
         setIsLoading(true);
@@ -101,6 +101,7 @@ const Exam = () => {
       // 1초 뒤 로딩 해제
       const timeoutId = setTimeout(() => {
         setLoading(false);
+        setIsLoading(false);
       }, 1000);
 
       return () => clearTimeout(timeoutId);
