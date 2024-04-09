@@ -19,7 +19,7 @@ const QuizGame = (props) => {
     ['클래식 병아리',
     '클래식 입문자',
     '클래식 좀 들어본 사람',
-    ''],
+    '클래식 고인물'],
     ['클래식 마니아',
     '클래식 덕후',
     '클래식 마스터',
@@ -38,7 +38,7 @@ const QuizGame = (props) => {
           return {
             ...prev, 
             level: 30, 
-            name: LevelName[quizId - 1][6],
+            name: LevelName[quizId - 1][4],
           }
         });
         postResult();
