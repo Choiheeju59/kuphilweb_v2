@@ -1,6 +1,6 @@
 import { ConcertNumber, PageBtn, PosterContainer, Wrap, WrapConcertNumber, WrapPageNum, WrapPoster } from "./PosterContent.style";
 import React, {useEffect, useState} from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 import { useScrollTopAlways } from '../../hooks/useScrollTop';
 
@@ -23,10 +23,18 @@ const PosterContent = () => {
           window.removeEventListener('resize', handleResize);
         };
       }, []);
-    
+
       let imageName = [42, 36, 30, 24, 18, 12, 6];
       let indexArr = [0, 1, 2, 3, 4, 5];
-      let indexArr2 = [0, 1, 2, 3, 4, 5]
+      let indexArr2 = [0, 1, 2, 3, 4, 5];
+
+      useEffect(() => {
+        const validPageNumbers = [1, 2, 3, 4, 5, 6, 7];
+
+        if (!validPageNumbers.includes(Number(page))) {
+            navigate("/archive/1");
+        }
+    }, [navigate, page]);
       
     return(
         <>
