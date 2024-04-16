@@ -10,10 +10,11 @@ const ConcertInfoContent = () => {
   const { num } = useParams();
   const navigate = useNavigate();
   const [concertData, setConcertData] = useState(null);
+  const [isValidNum, setIsValidNum] = useState(true);
 
   useScrollTopAlways();
 
-  const handleGoBack = () => {
+  const handleGoBack = () => {    
     let page = getValue(num);
     navigate(`/archive/${page}`);
   };
@@ -35,7 +36,7 @@ const ConcertInfoContent = () => {
         }
     }
 
-    return "입력 범위를 벗어났습니다.";
+    return;
 }
 
   useEffect(() => {
@@ -50,6 +51,13 @@ const ConcertInfoContent = () => {
 
     fetchData();
     
+  }, [num]);
+
+  useEffect(() => {
+    const parsedNum = parseInt(num, 10);
+    const isValid = !isNaN(parsedNum) && parsedNum >= 1 && parsedNum <= 42;
+    setIsValidNum(isValid);
+
   }, [num]);
 
 const songtitleObject = concertData && concertData.songtitle;
@@ -83,47 +91,54 @@ const pairedList = songtitleList && songtitleList.map((songtitle, index) => (
 
   return (
     <>
-      <div style={{display: "flex", marginBottom: "20px"}}>
-          {num < 41 && <Button onClick={() => navigate(`/concert/${parseInt(num, 10) + 1}`)}><BiChevronLeft/><div>다음 연주회</div></Button>}
-          <Button onClick={handleGoBack}>
-            <BiMenu/><div>목록으로</div>
-          </Button>
-          {num > 1 && <Button onClick={() => navigate(`/concert/${parseInt(num, 10) - 1}`)}><BiChevronRight/><div>이전 연주회</div></Button>}
-      </div>
-      <Wrap>
-        <PosterImg style={{backgroundImage: `url(../../../images/poster/poster_${num}.jpg)`}}/>
-        <WrapInfo>
-          <Title>제{num}회 정기 연주회</Title>
-          <WrapContent>
-            <ContentTitle>장소 </ContentTitle>
-            <Content>{concertData && concertData.place}</Content>
-          </WrapContent>
-          <WrapContent>
-            <ContentTitle>일시 </ContentTitle>
-            <Content>{concertData && concertData.date.slice(0, 10)}</Content>
-          </WrapContent>
-          <WrapContent>
-            <ContentTitle>지휘 </ContentTitle>
-            <Content>{concertData && concertData.conductor}</Content>
-          </WrapContent>
-          <Divider/>
-          <ContentTitle style={{marginBottom: "5px"}}>프로그램</ContentTitle>
-          <Content>{pairedList}</Content>
-        </WrapInfo>
-      </Wrap>
+    {isValidNum ? (
+      <>
+        <div style={{display: "flex", marginBottom: "20px"}}>
+            {num < 42 && <Button onClick={() => navigate(`/concert/${parseInt(num, 10) + 1}`)}><BiChevronLeft/><div>다음 연주회</div></Button>}
+            <Button onClick={handleGoBack}>
+              <BiMenu/><div>목록으로</div>
+            </Button>
+            {num > 1 && <Button onClick={() => navigate(`/concert/${parseInt(num, 10) - 1}`)}><BiChevronRight/><div>이전 연주회</div></Button>}
+        </div>
+        <Wrap>
+          <PosterImg style={{backgroundImage: `url(../../../images/poster/poster_${num}.jpg)`}}/>
+          <WrapInfo>
+            <Title>제{num}회 정기 연주회</Title>
+            <WrapContent>
+              <ContentTitle>장소 </ContentTitle>
+              <Content>{concertData && concertData.place}</Content>
+            </WrapContent>
+            <WrapContent>
+              <ContentTitle>일시 </ContentTitle>
+              <Content>{concertData && concertData.date.slice(0, 10)}</Content>
+            </WrapContent>
+            <WrapContent>
+              <ContentTitle>지휘 </ContentTitle>
+              <Content>{concertData && concertData.conductor}</Content>
+            </WrapContent>
+            <Divider/>
+            <ContentTitle style={{marginBottom: "5px"}}>프로그램</ContentTitle>
+            <Content>{pairedList}</Content>
+          </WrapInfo>
+        </Wrap>
+      </>
+    ) : (
+      <></>
+      )}
     </>
   );
 };
 
 const Wrap = styled.div`
     display: flex;
-    gap: 20px;
+    gap: 40px;
     width: 100%;
     justify-content: center;
 
     @media screen and (max-width: 767px) {
       flex-direction: column;
       align-items: center;
+      gap: 20px;
     }
 `
 
