@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import Admin from './Pages/Admin';
 import Archive from './Pages/Archive';
 import ArchiveRead from './Pages/ArchiveRead';
 import Cooperate from './Pages/Cooperate';
@@ -9,7 +10,9 @@ import Exam from  './Pages/Exam'
 import History from './Pages/History';
 import Home from "./Pages/Home";
 import Introduce from "./Pages/Introduce";
+import NotFoundPage from './Pages/NotFoundPage';
 import Policy from './Pages/Policy'
+import Quiz from './Pages/Quiz';
 import React from "react";
 import Recruitment from './Pages/Recruitment';
 import Test from './Pages/Test';
@@ -17,8 +20,6 @@ import TestResult from './Pages/TestResult';
 import Worldcup from  './Pages/Worldcup'
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
-import Admin from './Pages/Admin';
-import Quiz from './Pages/Quiz';
 
 const queryClient = new QueryClient()
 
@@ -44,6 +45,7 @@ function App() {
             <Route path="/concert/:num" element={<ArchiveRead />}/>
             <Route path="/quiz/:id" element={<Quiz />}/>
             <Route path="/admin" element={<Admin />}/>
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
       </div>
