@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import Admin from './Pages/Admin';
@@ -13,15 +13,37 @@ import Introduce from "./Pages/Introduce";
 import NotFoundPage from './Pages/NotFoundPage';
 import Policy from './Pages/Policy'
 import Quiz from './Pages/Quiz';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Recruitment from './Pages/Recruitment';
 import Test from './Pages/Test';
 import TestResult from './Pages/TestResult';
 import Worldcup from  './Pages/Worldcup'
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import AdminHome from './Pages/AdminHome';
+import useAuthenticated from './hooks/useAuthenticated';
 
 const queryClient = new QueryClient()
+
+const PrivateRoute = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const checkAuthentication = useAuthenticated();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const authenticate = async () => {
+      const result = await checkAuthentication();
+      if(result){
+        setIsAuthenticated(true);
+      } else{
+        navigate(`/admin`);
+      }
+    };
+    authenticate();
+  }, []);
+
+  return isAuthenticated ? <Outlet /> : null;
+};
 
 function App() {
   return (
@@ -45,6 +67,9 @@ function App() {
             <Route path="/concert/:num" element={<ArchiveRead />}/>
             <Route path="/quiz/:id" element={<Quiz />}/>
             <Route path="/admin" element={<Admin />}/>
+            <Route path="" element={<PrivateRoute />}>
+              <Route path="/admin/home" element={<AdminHome />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
