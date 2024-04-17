@@ -44,3 +44,12 @@ export const postQuizResultData = (quizId, quizOrder) => {
 export const getQuizResultData = (quizId, quizOrder) => {
   return instance.get(`/api/v1/etc/quiz/result?quizId=${quizId}&quizOrder=${quizOrder}`);
 };
+
+export const getLogin = (password) => {
+  return instance.get(`/api/v1/admin/login?password=${password}`);
+}
+
+
+export const getIsAuthenticated = (token) => {
+  return instance.get(`/api/v1/admin/authenticated?token=${token}`)
+}
