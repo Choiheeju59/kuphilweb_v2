@@ -28,7 +28,9 @@ const QuizGame = (props) => {
 
   const toNum = (n) => Math.floor((((n - 25) % 8) + 2) / 2);
   const checkAnswer = (answer) => {
-    let str = process.env.REACT_APP_QUIZ_1;
+    let str = "";
+    if(quizId === 1) str = process.env.REACT_APP_QUIZ_1;
+    else str = process.env.REACT_APP_QUIZ_2;
     let num = str.charCodeAt(quizOrder - 1);
 
     // 맞으면
@@ -38,7 +40,7 @@ const QuizGame = (props) => {
           return {
             ...prev, 
             level: 30, 
-            name: LevelName[quizId - 1][4],
+            name: LevelName[quizId - 1][3],
           }
         });
         postResult();
