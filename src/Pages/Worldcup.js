@@ -15,6 +15,7 @@ const Worldcup = () => {
   const [title, setTitle] = useState('');
   const [gameStart, setGameStart] = useState(false);
   const [round, setRound] = useState(0);
+  const [isActive, setIsActive] = useState(false);
   
   useScrollTopAlways();
   
@@ -22,14 +23,18 @@ const Worldcup = () => {
     if(params.id){
       let _title;
       if(params.id === '1'){
-        _title = '작곡가 ver.'
+        _title = '작곡가 ver.';
+        setIsActive(true);
+        setTitle(_title);
+        setGameId(Number(params.id));
       } else if(params.id === '2'){
-        _title = '곡 ver.'
-      } else{ // 잘못된 주소 접근 -> 404
-        navigate(`/worldcup/1`);
+        _title = '곡 ver.';
+        setIsActive(true);
+        setTitle(_title);
+        setGameId(Number(params.id));
+      } else{
+        setIsActive(false);
       }
-      setTitle(_title);
-      setGameId(Number(params.id));
     }
   }, [params]);
 
@@ -46,14 +51,18 @@ const Worldcup = () => {
           <TitleGradient
             title="나의 최애는?"
             explain={"생각만 해도 두근두근!\n신중하게 최애를 골라봐요!"}
-            link={"/worldcup/" + gameId}
+            link={isActive ? "/worldcup/" + gameId : "/worldcup/1"}
             color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
           />
-          {!gameStart ? (
-            <WorldcupBox title={title} gameId={gameId} start={start} />
-          ) : (
-            <WorldcupGame gameId={gameId} title={title} round={round} setRound={setRound} />
-          )}
+          {isActive ? (
+            <>
+              {!gameStart ? (
+                <WorldcupBox title={title} gameId={gameId} start={start} />
+              ) : (
+                <WorldcupGame gameId={gameId} title={title} round={round} setRound={setRound} />
+              )}
+            </>
+          ) : null}
         </Contents>
       </Wrap>
       <Footer />
