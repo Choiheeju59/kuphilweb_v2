@@ -23,6 +23,8 @@ const Exam = () => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  
+  const [isActive, setIsActive] = useState(false);
 
   useScrollTopAlways();
 
@@ -31,8 +33,9 @@ const Exam = () => {
       if(params.id === '1' || params.id === '2' || params.id === '3'){
         let _title = `제${params.id}회 클래식 능력고사`;
         setTitle(_title);
-      } else{ // 잘못된 주소 접근 -> 404
-        navigate(`/exam/1`);
+        setIsActive(true);
+      } else{
+        setIsActive(false);
       }
     }
   }, [params]);
@@ -127,31 +130,33 @@ const Exam = () => {
             explain={
               "당신은 클래식을 많이 아십니까?\n이곳에서 당신의 능력을 확인해보십시오!"
             }
-            link={"/exam/" + params.id}
+            link={isActive ? "/exam/" + params.id : "/exam/1"}
             color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
           />
-          <ExamContent>
-            {!problemNumber ? (
-              <ExamPaper id={problemNumber} question={title} choices={['바로 시작하기', '다음에 하기']} nextQuestion={examStart} />
-            ) : (
-              <>
-                {problemNumber <= 10 ? (
-                  <ExamPaper id={problemNumber} question={problems[problemNumber - 1]['question']} choices={problems[problemNumber - 1]['choices']} nextQuestion={nextQuestion} prevQuestion={prevQuestion} check={submitAnswers[problemNumber - 1]} />
-                ) : (
-                  <>
-                    {loading ? (
-                      <Loading>
-                        <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/purple_loading.svg'} />
-                      </Loading>
-                    ) : (
-                      <ExamPaper id={problemNumber} nextQuestion={examEnd} score={score} />
-                    )}
-                    
-                  </>
-                )}
-              </>
-            )}
-          </ExamContent>
+          {isActive ? (
+            <ExamContent>
+              {!problemNumber ? (
+                <ExamPaper id={problemNumber} question={title} choices={['바로 시작하기', '다음에 하기']} nextQuestion={examStart} />
+              ) : (
+                <>
+                  {problemNumber <= 10 ? (
+                    <ExamPaper id={problemNumber} question={problems[problemNumber - 1]['question']} choices={problems[problemNumber - 1]['choices']} nextQuestion={nextQuestion} prevQuestion={prevQuestion} check={submitAnswers[problemNumber - 1]} />
+                  ) : (
+                    <>
+                      {loading ? (
+                        <Loading>
+                          <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/purple_loading.svg'} />
+                        </Loading>
+                      ) : (
+                        <ExamPaper id={problemNumber} nextQuestion={examEnd} score={score} />
+                      )}
+                      
+                    </>
+                  )}
+                </>
+              )}
+            </ExamContent>
+          ) : null}
         </Contents>
       </Wrap>
       <Footer />

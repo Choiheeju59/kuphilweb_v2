@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../Components/header/Header';
 import Footer from '../Components/footer/Footer';
 import TitleGradient from '../Components/TitleGradient';
@@ -10,6 +10,8 @@ import { getTestData } from '../utils/api';
 
 const Test = () => {
   const navigate = useNavigate();
+  const params = useParams();
+  const [isActive, setIsActive] = useState(false);
   const [questionId, setQuestionId] = useState(0);
   const [questions, setQuestions] = useState([
     {
@@ -44,6 +46,15 @@ const Test = () => {
   useEffect(() => {
     getData();
   },[]);
+  useEffect(() => {
+    if(params.id){
+      if(params.id === '1'){
+        setIsActive(true);
+      } else{
+        setIsActive(false);
+      }
+    }
+  }, [params]);
   const getData = async () => {
     getTestData()
       .then((res) => {
@@ -94,51 +105,53 @@ const Test = () => {
             link="/test/1"
             color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
           />
-          <TestContent>
-            <StyledQuestionBox>
-              {questionId > 0 ? (
-                <ProgressBox>
-                  <p>{(questionId-1) * 5}%</p>
-                  <progress value={questionId - 1} max={20}></progress>
-                </ProgressBox>
-              ) : (
-                null
-              )}
-              {questionId <= 20 ? (<Question id={questions[questionId].id} question={questions[questionId].question} />) : null}
-              {questionId === 0 ? (
-                <StartSubTitle>
-                  (* 이 테스트는 오로지 재미를 위해 만들어진 테스트입니다.^^)
-                </StartSubTitle>
-              ) : null}
-            </StyledQuestionBox>
-            <StyledAnswerBox>
-              {questionId <= 20 ? (
-                <>
-                  <Answer
-                    id={questions[questionId].id}
-                    answer={questions[questionId].answer}
-                    handleClickAnswer={() => {
-                      if(questionId >= 1) {
-                        setScore(questions[questionId].score, 1);
-                      }
-                      setQuestionId((prev) => prev + 1);
-                    }}
-                  />
-                  <Answer
-                    id={questions[questionId].id}
-                    answer={questions[questionId].sanswer}
-                    handleClickAnswer={() => {
-                      if(questionId >= 1) {
+          {isActive ? (
+            <TestContent>
+              <StyledQuestionBox>
+                {questionId > 0 ? (
+                  <ProgressBox>
+                    <p>{(questionId-1) * 5}%</p>
+                    <progress value={questionId - 1} max={20}></progress>
+                  </ProgressBox>
+                ) : (
+                  null
+                )}
+                {questionId <= 20 ? (<Question id={questions[questionId].id} question={questions[questionId].question} />) : null}
+                {questionId === 0 ? (
+                  <StartSubTitle>
+                    (* 이 테스트는 오로지 재미를 위해 만들어진 테스트입니다.^^)
+                  </StartSubTitle>
+                ) : null}
+              </StyledQuestionBox>
+              <StyledAnswerBox>
+                {questionId <= 20 ? (
+                  <>
+                    <Answer
+                      id={questions[questionId].id}
+                      answer={questions[questionId].answer}
+                      handleClickAnswer={() => {
+                        if(questionId >= 1) {
+                          setScore(questions[questionId].score, 1);
+                        }
                         setQuestionId((prev) => prev + 1);
-                        setScore(questions[questionId].score, 2);
-                      }
-                      else navigate(`/etc`);
-                    }}
-                  />
-                </>
-              ) : null}
-            </StyledAnswerBox>
-          </TestContent>
+                      }}
+                    />
+                    <Answer
+                      id={questions[questionId].id}
+                      answer={questions[questionId].sanswer}
+                      handleClickAnswer={() => {
+                        if(questionId >= 1) {
+                          setQuestionId((prev) => prev + 1);
+                          setScore(questions[questionId].score, 2);
+                        }
+                        else navigate(`/etc`);
+                      }}
+                    />
+                  </>
+                ) : null}
+              </StyledAnswerBox>
+            </TestContent>
+          ) : null}
         </Contents>
       </Wrap>
       <Footer />

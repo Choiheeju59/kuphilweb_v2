@@ -11,13 +11,15 @@ const Quiz = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [quizId, setQuizId] = useState(0);
+  const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     if(params.id){
       if(params.id === '1' || params.id === '2'){
+        setIsActive(true);
         setQuizId(Number(params.id));
         importFile();
       } else{ // 잘못된 주소 접근 -> 404
-        navigate(`/quiz/1`);
+        setIsActive(false);
       }
     }
   }, [params]);
@@ -33,16 +35,18 @@ const Quiz = () => {
         <Header />
         <Contents>
           <TitleGradient
-            title={`악보 퀴즈 (${quizId === 1 ? '쉬움' : '어려움'})`}
+            title={isActive ? `악보 퀴즈 (${quizId === 1 ? '쉬움' : '어려움'})` : `악보 퀴즈`}
             explain={
               "당신은 악보를 보고 곡을 맞출 수 있나요?\n상위 몇 퍼인지 확인해봐요!"
             }
-            link={`/quiz/${quizId}`}
+            link={isActive ? `/quiz/${quizId}` : `/quiz/1`}
             color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
           />
-          <SurvivalContent>
-            <QuizGame imported={imported} quizId={quizId} />
-          </SurvivalContent>
+          {isActive ? (
+            <QuizContent>
+              <QuizGame imported={imported} quizId={quizId} />
+            </QuizContent>
+          ) : null}
         </Contents>
       </Wrap>
       <Footer />
@@ -67,7 +71,7 @@ const Contents = styled.div`
   }
 `;
 
-const SurvivalContent = styled.div`
+const QuizContent = styled.div`
   width: 800px;
   max-width: 100%;
   margin: 0 auto;

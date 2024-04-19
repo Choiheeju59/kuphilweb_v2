@@ -146,11 +146,17 @@ const QuizGame = (props) => {
           </>
         ) : (
           <>
-            <Title>LV.{quizOrder}</Title>
+            
             {quizOrder === 0 ? (
-              <ThumbnailImg src={`${process.env.REACT_APP_KUPHIL_PUBLIC_URL}/images/thumbnail/quiz.jpg`} />
+              <>
+                <Title>악보 퀴즈 LV.{quizOrder}</Title>
+                <ThumbnailImg src={`${process.env.REACT_APP_KUPHIL_PUBLIC_URL}/images/thumbnail/quiz${quizId}.png`} />
+              </>
             ) : (
-              <QuizImg src={`${process.env.REACT_APP_KUPHIL_PUBLIC_URL}/images/quiz/${quizId}/${quizOrder}.png`} />
+              <>
+                <Title>LV.{quizOrder}</Title>
+                <QuizImg src={`${process.env.REACT_APP_KUPHIL_PUBLIC_URL}/images/quiz/${quizId}/${quizOrder}.png`} />
+              </>
             )}
           </>
         )}
@@ -180,14 +186,15 @@ const Loading = styled.div`
 `;
 const Title = styled.p`
   font-size: 25px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 const ThumbnailImg = styled.img`
   width: 300px;
   max-width: 100%;
   height: auto;
   border-radius: 15px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);`;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+`;
 
 const QuizImg = styled.img`
   width: 800px;
