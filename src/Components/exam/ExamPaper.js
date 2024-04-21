@@ -183,6 +183,9 @@ const ProblemItem = styled.div`
   &:hover{
     background-color: white;
     cursor: pointer;
+    @media screen and (max-width: 767px){
+      background-color: #ffffff80;
+    }
   }
 `;
 const ProblemArrowKey = styled.div`

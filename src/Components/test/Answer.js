@@ -34,6 +34,9 @@ const StyledButton = styled.div`
   &:hover{
     cursor: pointer;
     background-color: #f5f5f5;
+    @media screen and (max-width: 767px){
+      background-color: white;
+    }
   }
 
   @media screen and (max-width: 767px){
