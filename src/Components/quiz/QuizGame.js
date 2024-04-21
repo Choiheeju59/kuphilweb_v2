@@ -211,10 +211,14 @@ const Select = styled.div`
   border-radius: 15px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+  background-color: white;
 
   &:hover {
     cursor: pointer;
     background-color: #f5f5f5;
+    @media screen and (max-width: 767px){
+      background-color: white;
+    }
   }
 `;
 
