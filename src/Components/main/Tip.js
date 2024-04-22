@@ -1,27 +1,28 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from 'styled-components';
-import axios from 'axios';
+import { getTipData } from '../../utils/api';
 
 const Tip = () => {
-  const [tip, setTip] = useState(['']);
-  const axiosUrl = process.env.REACT_APP_AXIOS_URL;
+  const [tip, setTip] = useState('');
 
   useEffect(() => {
     getTip();
   },[]);
   
-  //api로 랜덤 하나 들고 오기
   const getTip = async () => {
-    const res = await axios.get(`${axiosUrl}/api/v1/tip`);
-      try {
+    getTipData()
+      .then((res) => {
         let newTip = res.data.tip;
         setTip(newTip);
-      } catch {
-        console.log("오류");
-      }
+      })
+      .catch((err) => {
+        console.log(err);
+        setTip('새로운 Tip을 가져오는 데 오류가 생겼습니다.')
+      })
   };
   const handleReloadTip = () => {
+    setTip('');
     getTip();
   }
 
