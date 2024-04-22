@@ -95,7 +95,11 @@ const DesktopContent = styled.div`
   }
 `;
 const LogoImg = styled.img`
-height: 80px;
+  height: 80px;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
   &:last-child{
     &:hover{
       cursor: pointer;
