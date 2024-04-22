@@ -40,7 +40,7 @@ const Slide = () => {
       <SliderContainer slidenum={image.length}>
         {image.map((v,i) => 
           <SlideList key={i} leftvalue={i} slidenum={image.length} style={{opacity: imageNum === i ? 1 : 0}}>
-            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + v} alt="쿠필 웹사이트" />
+            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + v} alt={`쿠필 웹사이트 배너 #${i + 1}`} />
           </SlideList>)}
       </SliderContainer>
       <SlideMove>
@@ -75,6 +75,10 @@ const SlideList = styled.div`
   flex-shrink: 0;
   transition: opacity 500ms, visibility 500ms;
   & > img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: start;
     width: 100%;
     height: 100%;
     object-fit: cover;

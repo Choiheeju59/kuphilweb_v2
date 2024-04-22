@@ -5,12 +5,12 @@ import styled from 'styled-components';
 const Cooperate = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate(`./recruitment`);
+    navigate(`./cooperate`);
   }
   return (
     <StyledCooperate>
-      <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/main/cooperate.png'} />
-      <button onClick={handleButtonClick}>제휴 및 후원하기</button>
+      <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/main/cooperate.png'} alt="" />
+      <button onClick={handleButtonClick}>쿠필과 제휴 맺기</button>
     </StyledCooperate>
   );
 };
