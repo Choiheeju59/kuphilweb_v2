@@ -15,7 +15,7 @@ const Etc = () => {
         <button onClick={handleButtonClick}>Go</button>
       </div>
       <div>
-        <img src={process.env.PUBLIC_URL + '/images/main/etc.png'} />
+        <img src={process.env.PUBLIC_URL + '/images/main/etc.png'} alt="" />
       </div>
     </StyledEtc>
   );

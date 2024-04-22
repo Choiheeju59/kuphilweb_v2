@@ -9,7 +9,7 @@ const Cooperate = () => {
   }
   return (
     <StyledCooperate>
-      <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/main/cooperate.png'} />
+      <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/main/cooperate.png'} alt="" />
       <button onClick={handleButtonClick}>쿠필과 제휴 맺기</button>
     </StyledCooperate>
   );
