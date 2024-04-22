@@ -21,7 +21,7 @@ const Tip = () => {
       .catch((err) => {
         console.log(err);
         setError(true);
-        setTip('새로운 Tip을 가져오는 데 오류가 생겼습니다.')
+        setTip('');
       })
   };
   const handleReloadTip = () => {
@@ -40,7 +40,7 @@ const Tip = () => {
         {error ? (
           <>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-            <p style={{color: 'red'}}>새로운 Tip을 가져오는 데 오류가 생겼습니다.</p>
+            <p style={{color: 'red'}}>오류가 발생했습니다. 새로고침 해주세요.</p>
           </>
         ) : (
           <>{tip}</>
