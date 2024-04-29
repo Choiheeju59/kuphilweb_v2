@@ -42,10 +42,24 @@ const PrivateRoute = () => {
     authenticate();
   }, []);
 
+
   return isAuthenticated ? <Outlet /> : null;
 };
 
 function App() {
+  useEffect(() => {
+    console.log(`
+_________________
+|               |  
+|  쿠필 화이팅!!!  |  
+|______  _______|
+       \\/
+     /\\**/\\
+    ( o_o  )_)
+    ,(u  u  ,),
+   {}{}{}{}{}{}  
+ `);
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
