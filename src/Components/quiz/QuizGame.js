@@ -43,7 +43,7 @@ const QuizGame = (props) => {
             name: LevelName[quizId - 1][3],
           }
         });
-        postResult();
+        postResult(0);
         setQuizOption([]);
         setQuizOrder(-1);
       } else{
@@ -72,8 +72,8 @@ const QuizGame = (props) => {
     }
   };
 
-  const postResult = async () => {
-    postQuizResultData(quizId, quizOrder - 1)
+  const postResult = async (temp = -1) => {
+    postQuizResultData(quizId, quizOrder + temp)
       .then(() => {
         setErr(0);
         getResult();
@@ -88,6 +88,7 @@ const QuizGame = (props) => {
     getQuizResultData(quizId, quizOrder - 1)
       .then((res) => {
         setErr(0);
+        console.log(res.data);
         setResult((prev) => {
           return {
             ...prev,
