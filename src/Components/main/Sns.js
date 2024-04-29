@@ -10,8 +10,8 @@ const Sns = () => {
   return (
     <StyledSns>
       {sns.map((v, i) => (
-        <div>
-          <a key={i}
+        <div key={i}>
+          <a
             role='button'
             style={{backgroundImage: `url(${process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/sns/' + v[0]})`}}
             href={v[1]}
