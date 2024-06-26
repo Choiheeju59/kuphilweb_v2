@@ -1,51 +1,56 @@
-import React, { useEffect } from "react";
-import styled from 'styled-components';
-import Header from '../Components/header/Header';
-import Footer from '../Components/footer/Footer';
-import TitleGradient from '../Components/TitleGradient';
-import Sns from '../Components/Sns';
+import React from "react";
+import styled from "styled-components";
+import TitleGradient from "../Components/TitleGradient";
+import Sns from "../Components/Sns";
 
 const Cooperate = () => {
-  
   return (
     <>
-      <Wrap>
-        <Header />
-        <Contents>
-          <TitleGradient
-            title="모집"
-            explain={"쿠필과 함께할 수 있는 다양한 제안들을 기다립니다.\n후원을 원하시면 하단의 sns를 통해 연락주세요!"}
-            link="/recruitment"
-            color="linear-gradient(91.48deg, #E5FAFD 0%, rgba(189, 193, 236, 0.31) 100%)"
-            title2="제휴"
-            link2="/cooperate"
+      <Contents>
+        <TitleGradient
+          title="모집"
+          explain={
+            "쿠필과 함께할 수 있는 다양한 제안들을 기다립니다.\n후원을 원하시면 하단의 sns를 통해 연락주세요!"
+          }
+          link="/recruitment"
+          color="linear-gradient(91.48deg, #E5FAFD 0%, rgba(189, 193, 236, 0.31) 100%)"
+          title2="제휴"
+          link2="/cooperate"
+        />
+        <Sns />
+        <Image>
+          <img
+            src={
+              process.env.REACT_APP_KUPHIL_PUBLIC_URL +
+              "/images/cooperate/cooperation1.jpeg"
+            }
+            alt="KUPHIL 제휴 안내"
           />
-          <Sns />
-          <Image>
-            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation1.jpeg'} alt='KUPHIL 제휴 안내' />
-            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation2.jpeg'} alt='KUPHIL 제휴 안내' />
-            <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/cooperate/cooperation3.jpeg'} alt='KUPHIL 제휴 안내' />
-          </Image>
-        </Contents>
-      </Wrap>
-      <Footer />
+          <img
+            src={
+              process.env.REACT_APP_KUPHIL_PUBLIC_URL +
+              "/images/cooperate/cooperation2.jpeg"
+            }
+            alt="KUPHIL 제휴 안내"
+          />
+          <img
+            src={
+              process.env.REACT_APP_KUPHIL_PUBLIC_URL +
+              "/images/cooperate/cooperation3.jpeg"
+            }
+            alt="KUPHIL 제휴 안내"
+          />
+        </Image>
+      </Contents>
     </>
   );
 };
-const Wrap = styled.div`
-  width: 100%;
-  height: auto;
 
-  min-height: calc(100vh - 202px);
-  @media screen and (max-width: 767px){
-    min-height: calc(100vh - 152px);
-  }
-`;
 const Contents = styled.div`
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     max-width: 400px;
   }
 `;
@@ -100,6 +105,5 @@ const Image = styled.div`
     }
   }
 `;
-
 
 export default Cooperate;
