@@ -1,5 +1,4 @@
 import {
-  BrowserRouter,
   Outlet,
   Route,
   Routes,
@@ -30,6 +29,7 @@ import AdminHome from "./Pages/AdminHome";
 import useAuthenticated from "./hooks/useAuthenticated";
 import Header from "./Components/header/Header";
 import Footer from "./Components/footer/Footer";
+import { useScrollTopLocation, useScrollTopRefresh } from './hooks/useScrollTop';
 
 const queryClient = new QueryClient();
 
@@ -66,38 +66,41 @@ _________________
     ,(u  u  ,),
    {}{}{}{}{}{}  
  `);
+    window.scrollTo(0,0);
   }, []);
+
+  useScrollTopRefresh();
+  useScrollTopLocation();
+
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
         <GlobalStyles />
-        <BrowserRouter>
-          <Wrap>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/introduce" element={<Introduce />} />
-              <Route path="/history" element={<History />} />
-              <Route path="/archive/:page" element={<Archive />} />
-              <Route path="/recruitment" element={<Recruitment />} />
-              <Route path="/cooperate" element={<Cooperate />} />
-              <Route path="/policy" element={<Policy />} />
-              <Route path="/etc" element={<Etc />} />
-              <Route path="/test/:id" element={<Test />} />
-              <Route path="/test/:id/result/:code" element={<TestResult />} />
-              <Route path="/worldcup/:id" element={<Worldcup />} />
-              <Route path="/exam/:id" element={<Exam />} />
-              <Route path="/concert/:num" element={<ArchiveRead />} />
-              <Route path="/quiz/:id" element={<Quiz />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="" element={<PrivateRoute />}>
-                <Route path="/admin/home" element={<AdminHome />} />
-              </Route>
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </Wrap>
-          <Footer />
-        </BrowserRouter>
+        <Wrap>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/introduce" element={<Introduce />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/archive/:page" element={<Archive />} />
+            <Route path="/recruitment" element={<Recruitment />} />
+            <Route path="/cooperate" element={<Cooperate />} />
+            <Route path="/policy" element={<Policy />} />
+            <Route path="/etc" element={<Etc />} />
+            <Route path="/test/:id" element={<Test />} />
+            <Route path="/test/:id/result/:code" element={<TestResult />} />
+            <Route path="/worldcup/:id" element={<Worldcup />} />
+            <Route path="/exam/:id" element={<Exam />} />
+            <Route path="/concert/:num" element={<ArchiveRead />} />
+            <Route path="/quiz/:id" element={<Quiz />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="" element={<PrivateRoute />}>
+              <Route path="/admin/home" element={<AdminHome />} />
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Wrap>
+        <Footer />
       </div>
     </QueryClientProvider>
   );

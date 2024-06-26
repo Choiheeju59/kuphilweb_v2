@@ -1,14 +1,21 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const useScrollTop = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  } ,[]);
-}
 export const useScrollTopAlways = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
 }
-
-export default useScrollTop;
+export const useScrollTopLocation = () => {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+}
+export const useScrollTopRefresh = () => {
+  useEffect(() => { 
+    window.onbeforeunload = function pushRefresh() {
+      window.scrollTo(0, 0);
+    };
+  }, []);
+}
