@@ -88,7 +88,6 @@ const QuizGame = (props) => {
     getQuizResultData(quizId, quizOrder - 1)
       .then((res) => {
         setErr(0);
-        console.log(res.data);
         setResult((prev) => {
           return {
             ...prev,

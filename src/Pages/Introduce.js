@@ -1,173 +1,269 @@
-import React, {useState} from "react";
-
-import Footer from '../Components/footer/Footer';
-import Header from '../Components/header/Header';
-import MainContentsTitle from '../Components/introduce/MainContentsTitle';
-import TitleGradient from '../Components/TitleGradient';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import MainContentsTitle from "../Components/introduce/MainContentsTitle";
+import TitleGradient from "../Components/TitleGradient";
+import styled from "styled-components";
 
 const Introduce = () => {
-    const [selectMap, setSelectMap] = useState("map_front");
+  const [selectMap, setSelectMap] = useState("map_front");
 
-    const onClick = (e) => {
-        setSelectMap(e.target.value);
-    }
-    
-    return(
-        <>
-            <Wrap>
-                <Header/>
-                <Contents>
-                    <TitleGradient
-                        title="소개"
-                        explain={"건국대학교 아마추어 오케스트라 동아리 'KUphil'입니다.\nKUphil의 전반적인 활동 내용 및 위치를 소개합니다."}
-                        link="/introduce"
-                        color="linear-gradient(91.48deg, rgba(255, 224, 196, 0.44) 0%, #FFFBD9 100%)"
-                    />
-                    <MainContents>
-                        <MainContentsTitle
-                            title="인사말"
-                        />
-                        <Welcome>
-                            <WrapImgProfessor>
-                                <ImgProfessor src="./images/introduce/professor.jpg" alt="교수님 사진"/>
-                            </WrapImgProfessor>
-                            <div>
-                                <ProfessorWelcomeTitle>
-                                    "건국인들의 열정이 모여 만들어진 오케스트라, KUPhil을 소개합니다."
-                                </ProfessorWelcomeTitle>
-                                <br/>
-                                <ProfessorWelcome>건국대학교 내 아마추어 오케스트라 동아리 KU Philharmonic orchestra(이하 KUPhil)는 정기연주회, 음악캠프, 창립제, 병원 연주 등 활발한 연주 활동을 지속하며 대학 문화 내 클래식 음악 전파를 위해 노력하고 있습니다.</ProfessorWelcome>
-                                <br/><br/>
-                                <ProfessorWelcome>2003년, 저는 클래식 음악에 대한 애정을 표출하기 위해 10여 명의 건국대학교 재학생들과 함께 오케스트라 동아리 'Serenade'를 결성했습니다. 소규모로 시작했던 Serenade에서의 모임은 해를 거듭하며 점차 그 규모를 키워 나갔습니다. 그리고 창립 10주년을 맞은 해인 2013년 3월, Serenade는 'KUPhil'로 개칭하며 새로운 시작을 맞았습니다.</ProfessorWelcome>
-                                <br/><br/>
-                                <ProfessorWelcome>비록 시간이 흐르며 우리를 둘러싼 많은 것들이 바뀌어 갔지만, 클래식 문화의 저변 확대와 건국대학교 발전에 이바지하고자 했던 창립 당시의 목표는 조금도 달라지지 않았습니다. 여러 격변을 겪으면서도 KUPhil은 임원들의 헌신과 희생, 단원들의 끈기어린 노력, 그리고 졸업생들의 아낌없는 후원에 힘입어 발전을 거듭하고 있습니다.</ProfessorWelcome>
-                                <br/><br/>
-                                <ProfessorWelcome>이들을 응원해 주시는 모든 분들께 감사와 축복의 인사를 드리며, 앞으로도 꾸준히 활동을 이어갈 KUPhil을 사랑으로 지켜봐 주시길 부탁드립니다.</ProfessorWelcome>
-                                <br/><br/><br/>
-                                <Closing>건국대학교 필하모닉 오케스트라 KUPhil <br/> 지도교수 이형식</Closing>
-                            </div>
-                        </Welcome>
-                    </MainContents>
-                    <MainContents>
-                        <MainContentsTitle title="ABOUT KUPhil"/>
-                        <WrapImgIntroduce>
-                            <ImgIntroduce src="./images/introduce/introduce_2.png"/>
-                            <ImgDeskTopIntroduce src="./images/introduce/introduce_1.png"/>
-                        </WrapImgIntroduce>
-                    </MainContents>
-                    <MainContents>
-                        <MainContentsTitle
-                            title="찾아오시는 길"
-                        />
-                        <Directions>
-                            <WrapWay>
-                                <LabelWay>
-                                    <Way type="radio" name="map" value="map_front" onClick={onClick} style={{appearance: "none"}} defaultChecked/>
-                                    <span style={selectMap === "map_front" ? {color: "#000000"} : {color: "#989898"}}>수의과대학 (정문)</span>
-                                </LabelWay>
-                                <LabelWay>
-                                    <Way type="radio" name="map" value="map_library" onClick={onClick} style={{appearance: "none"}}/>
-                                    <span style={selectMap === "map_library" ? {color: "#000000"} : {color: "#989898"}}>도서관 (중문)</span>
-                                </LabelWay>
-                                <LabelWay>
-                                    <Way type="radio" name="map" value="map_back" onClick={onClick} style={{appearance: "none"}}/>
-                                    <span style={selectMap === "map_back" ? {color: "#000000"} : {color: "#989898"}}>경영대학 (후문)</span>
-                                </LabelWay>
-                            </WrapWay>
-                            <div style={{display: "flex", width: "inherit", justifyContent: "center"}}>
-                                {
-                                    selectMap === "map_front" ?
-                                    <WrapMap>
-                                        <Map src="./images/introduce/map_front.jpg" alt="정문에서 동아리방 오는 길 이미지" style={{zIndex: "1", opacity: "1"}}/> 
-                                        <Map src="./images/introduce/map_library.jpg" alt="중문에서 동아리방 오는 길 이미지" style={{zIndex: "2", opacity: "0"}}/>
-                                        <Map src="./images/introduce/map_back.jpg" alt="후문에서 동아리방 오는 길 이미지" style={{zIndex: "3", opacity: "0"}}/>
-                                    </WrapMap>
-                                    : null
-                                }
-                                {
-                                    selectMap === "map_library" ? 
-                                    <WrapMap>
-                                        <Map src="./images/introduce/map_front.jpg" alt="정문에서 동아리방 오는 길 이미지" style={{zIndex: "1", opacity: "0"}}/> 
-                                        <Map src="./images/introduce/map_library.jpg" alt="중문에서 동아리방 오는 길 이미지" style={{zIndex: "2", opacity: "1"}}/>
-                                        <Map src="./images/introduce/map_back.jpg" alt="후문에서 동아리방 오는 길 이미지" style={{ zIndex: "3", opacity: "0"}}/>
-                                    </WrapMap>
-                                    : null
-                                }
-                                {
-                                    selectMap === "map_back" ? 
-                                    <WrapMap>
-                                        <Map src="./images/introduce/map_front.jpg" alt="정문에서 동아리방 오는 길 이미지" style={{zIndex: "1", opacity: "0"}}/> 
-                                        <Map src="./images/introduce/map_library.jpg" alt="중문에서 동아리방 오는 길 이미지" style={{zIndex: "2", opacity: "0"}}/>
-                                        <Map src="./images/introduce/map_back.jpg" alt="후문에서 동아리방 오는 길 이미지" style={{zIndex: "3", opacity: "1"}}/>
-                                    </WrapMap>
-                                    : null
-                                }
-                            </div>
-                            <LocationInfo>
-                                쿠필 동아리방은 <Location>제2학생회관 지하 B117호</Location>입니다.<br/>
-                                제2학생회관 지하로 내려오는 계단은 홍예교 앞 또는 공과대학 맞은편 노천극장 입구에 있습니다.
-                            </LocationInfo>
-                        </Directions>
-                    </MainContents>
-                    
-                </Contents>
-            </Wrap>
-            <Footer/>
-        </>
-    );
-}
+  const onClick = (e) => {
+    setSelectMap(e.target.value);
+  };
 
-const Wrap = styled.div`
-  width: 100%;
-  height: auto;
-
-  min-height: calc(100vh - 202px);
-  @media screen and (max-width: 767px){
-    min-height: calc(100vh - 152px);
-  }
-`;
+  return (
+    <>
+      <Contents>
+        <TitleGradient
+          title="소개"
+          explain={
+            "건국대학교 아마추어 오케스트라 동아리 'KUphil'입니다.\nKUphil의 전반적인 활동 내용 및 위치를 소개합니다."
+          }
+          link="/introduce"
+          color="linear-gradient(91.48deg, rgba(255, 224, 196, 0.44) 0%, #FFFBD9 100%)"
+        />
+        <MainContents>
+          <MainContentsTitle title="인사말" />
+          <Welcome>
+            <WrapImgProfessor>
+              <ImgProfessor
+                src="./images/introduce/professor.jpg"
+                alt="교수님 사진"
+              />
+            </WrapImgProfessor>
+            <div>
+              <ProfessorWelcomeTitle>
+                "건국인들의 열정이 모여 만들어진 오케스트라, KUPhil을
+                소개합니다."
+              </ProfessorWelcomeTitle>
+              <br />
+              <ProfessorWelcome>
+                건국대학교 내 아마추어 오케스트라 동아리 KU Philharmonic
+                orchestra(이하 KUPhil)는 정기연주회, 음악캠프, 창립제, 병원 연주
+                등 활발한 연주 활동을 지속하며 대학 문화 내 클래식 음악 전파를
+                위해 노력하고 있습니다.
+              </ProfessorWelcome>
+              <br />
+              <br />
+              <ProfessorWelcome>
+                2003년, 저는 클래식 음악에 대한 애정을 표출하기 위해 10여 명의
+                건국대학교 재학생들과 함께 오케스트라 동아리 'Serenade'를
+                결성했습니다. 소규모로 시작했던 Serenade에서의 모임은 해를
+                거듭하며 점차 그 규모를 키워 나갔습니다. 그리고 창립 10주년을
+                맞은 해인 2013년 3월, Serenade는 'KUPhil'로 개칭하며 새로운
+                시작을 맞았습니다.
+              </ProfessorWelcome>
+              <br />
+              <br />
+              <ProfessorWelcome>
+                비록 시간이 흐르며 우리를 둘러싼 많은 것들이 바뀌어 갔지만,
+                클래식 문화의 저변 확대와 건국대학교 발전에 이바지하고자 했던
+                창립 당시의 목표는 조금도 달라지지 않았습니다. 여러 격변을
+                겪으면서도 KUPhil은 임원들의 헌신과 희생, 단원들의 끈기어린
+                노력, 그리고 졸업생들의 아낌없는 후원에 힘입어 발전을 거듭하고
+                있습니다.
+              </ProfessorWelcome>
+              <br />
+              <br />
+              <ProfessorWelcome>
+                이들을 응원해 주시는 모든 분들께 감사와 축복의 인사를 드리며,
+                앞으로도 꾸준히 활동을 이어갈 KUPhil을 사랑으로 지켜봐 주시길
+                부탁드립니다.
+              </ProfessorWelcome>
+              <br />
+              <br />
+              <br />
+              <Closing>
+                건국대학교 필하모닉 오케스트라 KUPhil <br /> 지도교수 이형식
+              </Closing>
+            </div>
+          </Welcome>
+        </MainContents>
+        <MainContents>
+          <MainContentsTitle title="ABOUT KUPhil" />
+          <WrapImgIntroduce>
+            <ImgIntroduce src="./images/introduce/introduce_2.png" />
+            <ImgDeskTopIntroduce src="./images/introduce/introduce_1.png" />
+          </WrapImgIntroduce>
+        </MainContents>
+        <MainContents>
+          <MainContentsTitle title="찾아오시는 길" />
+          <Directions>
+            <WrapWay>
+              <LabelWay>
+                <Way
+                  type="radio"
+                  name="map"
+                  value="map_front"
+                  onClick={onClick}
+                  style={{ appearance: "none" }}
+                  defaultChecked
+                />
+                <span
+                  style={
+                    selectMap === "map_front"
+                      ? { color: "#000000" }
+                      : { color: "#989898" }
+                  }
+                >
+                  수의과대학 (정문)
+                </span>
+              </LabelWay>
+              <LabelWay>
+                <Way
+                  type="radio"
+                  name="map"
+                  value="map_library"
+                  onClick={onClick}
+                  style={{ appearance: "none" }}
+                />
+                <span
+                  style={
+                    selectMap === "map_library"
+                      ? { color: "#000000" }
+                      : { color: "#989898" }
+                  }
+                >
+                  도서관 (중문)
+                </span>
+              </LabelWay>
+              <LabelWay>
+                <Way
+                  type="radio"
+                  name="map"
+                  value="map_back"
+                  onClick={onClick}
+                  style={{ appearance: "none" }}
+                />
+                <span
+                  style={
+                    selectMap === "map_back"
+                      ? { color: "#000000" }
+                      : { color: "#989898" }
+                  }
+                >
+                  경영대학 (후문)
+                </span>
+              </LabelWay>
+            </WrapWay>
+            <div
+              style={{
+                display: "flex",
+                width: "inherit",
+                justifyContent: "center",
+              }}
+            >
+              {selectMap === "map_front" ? (
+                <WrapMap>
+                  <Map
+                    src="./images/introduce/map_front.jpg"
+                    alt="정문에서 동아리방 오는 길 이미지"
+                    style={{ zIndex: "1", opacity: "1" }}
+                  />
+                  <Map
+                    src="./images/introduce/map_library.jpg"
+                    alt="중문에서 동아리방 오는 길 이미지"
+                    style={{ zIndex: "2", opacity: "0" }}
+                  />
+                  <Map
+                    src="./images/introduce/map_back.jpg"
+                    alt="후문에서 동아리방 오는 길 이미지"
+                    style={{ zIndex: "3", opacity: "0" }}
+                  />
+                </WrapMap>
+              ) : null}
+              {selectMap === "map_library" ? (
+                <WrapMap>
+                  <Map
+                    src="./images/introduce/map_front.jpg"
+                    alt="정문에서 동아리방 오는 길 이미지"
+                    style={{ zIndex: "1", opacity: "0" }}
+                  />
+                  <Map
+                    src="./images/introduce/map_library.jpg"
+                    alt="중문에서 동아리방 오는 길 이미지"
+                    style={{ zIndex: "2", opacity: "1" }}
+                  />
+                  <Map
+                    src="./images/introduce/map_back.jpg"
+                    alt="후문에서 동아리방 오는 길 이미지"
+                    style={{ zIndex: "3", opacity: "0" }}
+                  />
+                </WrapMap>
+              ) : null}
+              {selectMap === "map_back" ? (
+                <WrapMap>
+                  <Map
+                    src="./images/introduce/map_front.jpg"
+                    alt="정문에서 동아리방 오는 길 이미지"
+                    style={{ zIndex: "1", opacity: "0" }}
+                  />
+                  <Map
+                    src="./images/introduce/map_library.jpg"
+                    alt="중문에서 동아리방 오는 길 이미지"
+                    style={{ zIndex: "2", opacity: "0" }}
+                  />
+                  <Map
+                    src="./images/introduce/map_back.jpg"
+                    alt="후문에서 동아리방 오는 길 이미지"
+                    style={{ zIndex: "3", opacity: "1" }}
+                  />
+                </WrapMap>
+              ) : null}
+            </div>
+            <LocationInfo>
+              쿠필 동아리방은 <Location>제2학생회관 지하 B117호</Location>
+              입니다.
+              <br />
+              제2학생회관 지하로 내려오는 계단은 홍예교 앞 또는 공과대학 맞은편
+              노천극장 입구에 있습니다.
+            </LocationInfo>
+          </Directions>
+        </MainContents>
+      </Contents>
+    </>
+  );
+};
 
 const Contents = styled.div`
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     max-width: 400px;
   }
 `;
 
 const MainContents = styled.div`
-    width: 84%;
-    padding: 0 8%;
-    margin: 70px auto;
+  width: 84%;
+  padding: 0 8%;
+  margin: 70px auto;
 `;
 
 const Welcome = styled.div`
-    margin: 30px auto;
-    padding: 0 1.5%;
-    display: flex;
-    align-items: flex-start;
-    gap: 50px;
+  margin: 30px auto;
+  padding: 0 1.5%;
+  display: flex;
+  align-items: flex-start;
+  gap: 50px;
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     justify-content: center;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-}  
-`
+  }
+`;
 
 const WrapImgProfessor = styled.div`
-    width: 180px;
-    height: 180px;
+  width: 180px;
+  height: 180px;
 
-    @media screen and (max-width: 767px){
-        width: 150px;
-        height: 150px;
-        margin-bottom: 20px;
-    }
-`
+  @media screen and (max-width: 767px) {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+`;
 
 const ImgProfessor = styled.img`
   width: 180px;
@@ -175,146 +271,144 @@ const ImgProfessor = styled.img`
   min-height: 180px;
   border-radius: 50%;
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     width: 150px;
     height: 150px;
     min-height: 150px;
     margin-bottom: 20px;
-}
-`
+  }
+`;
 
 const ProfessorWelcomeTitle = styled.article`
-    width: 100%;
-    font-size: 21px;
-    line-height: 180%;
-    text-align: left;
-    font-weight: bold;
+  width: 100%;
+  font-size: 21px;
+  line-height: 180%;
+  text-align: left;
+  font-weight: bold;
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     font-size: 16px;
-}
-`
+  }
+`;
 
 const ProfessorWelcome = styled.p`
-    width: 100%;
-    font-size: 18px;
-    line-height: 150%;
-    text-align: left;
+  width: 100%;
+  font-size: 18px;
+  line-height: 150%;
+  text-align: left;
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     font-size: 12.5px;
-}
-`
+  }
+`;
 
 const Closing = styled.p`
-    width: 100%;
-    font-size: 18px;
-    text-align: right;
-    line-height: 150%;
+  width: 100%;
+  font-size: 18px;
+  text-align: right;
+  line-height: 150%;
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     font-size: 12.5px;
-}
-`
+  }
+`;
 
 const WrapImgIntroduce = styled.div`
-    width: 750px;
-    height: 580px;
-    margin: 0 auto;
-    
-    @media screen and (max-width: 767px){
-        width: 300px;
-        height: 975px;
-    }
-`
+  width: 750px;
+  height: 580px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    height: 975px;
+  }
+`;
 
 const ImgIntroduce = styled.img`
-    display: none;
+  display: none;
 
-    @media screen and (max-width: 767px){
-        width: 300px;
-        display: block;
-        margin: 0 auto;
-    }
-`
-
-const ImgDeskTopIntroduce = styled.img`
-    width: 750px;
+  @media screen and (max-width: 767px) {
+    width: 300px;
     display: block;
     margin: 0 auto;
+  }
+`;
 
-    @media screen and (max-width: 767px){
-        display: none;
-    }
-`
+const ImgDeskTopIntroduce = styled.img`
+  width: 750px;
+  display: block;
+  margin: 0 auto;
 
-const Directions = styled.div`
-`
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+`;
+
+const Directions = styled.div``;
 
 const WrapWay = styled.div`
-    margin: 30px auto;
-    display: flex;
-    justify-content: space-evenly;
-`
+  margin: 30px auto;
+  display: flex;
+  justify-content: space-evenly;
+`;
 
 const LabelWay = styled.label`
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 18px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
 
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-use-select: none;
-    user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
 
-    @media screen and (max-width: 767px){
-        font-size: 12.5px;
-    }
-`
+  @media screen and (max-width: 767px) {
+    font-size: 12.5px;
+  }
+`;
 
-const Way = styled.input`
-`
+const Way = styled.input``;
 const WrapMap = styled.div`
-    width: 500px;
-    height: 490px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 500px;
+  height: 490px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    @media screen and (max-width: 767px){
-        width: 300px;
-        height: 294px;
-    }
-`
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    height: 294px;
+  }
+`;
 
 const Map = styled.img`
-    width: 500px;
-    margin: -245px -250px;
-    
-    @media screen and (max-width: 767px){
-        width: 300px;
-        margin: -147px -150px;
-    }
-`
+  width: 500px;
+  margin: -245px -250px;
+
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    margin: -147px -150px;
+  }
+`;
 
 const LocationInfo = styled.div`
-    margin: 30px auto;
-    line-height: 30px;
-    font-size: 16px;
+  margin: 30px auto;
+  line-height: 30px;
+  font-size: 16px;
 
-    @media screen and (max-width: 767px){
-        font-size: 11.5px;
-        line-height: 20px;
-    }
-`
+  @media screen and (max-width: 767px) {
+    font-size: 11.5px;
+    line-height: 20px;
+  }
+`;
 
 const Location = styled.span`
-    font-size: 16px;
-    font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
 
-    @media screen and (max-width: 767px){
-        font-size: 11.5px;
-    }
-`
+  @media screen and (max-width: 767px) {
+    font-size: 11.5px;
+  }
+`;
 
 export default Introduce;

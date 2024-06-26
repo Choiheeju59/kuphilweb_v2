@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
-import Header from '../Components/header/Header';
-import Footer from '../Components/footer/Footer';
 import TitleGradient from '../Components/TitleGradient';
 
 const TestResult = () => {
@@ -13,8 +11,6 @@ const TestResult = () => {
 
   return (
     <>
-      <Wrap>
-        <Header />
         <Contents>
           <TitleGradient
             title="너의 악기는?"
@@ -29,19 +25,10 @@ const TestResult = () => {
             <RestartButton onClick={() => navigate(`../test/${testId}`)}>다시하기</RestartButton>
           </TestContent>
         </Contents>
-      </Wrap>
-      <Footer />
     </>
   );
 };
-const Wrap = styled.div`
-  width: 100%;
-  height: auto;
-  min-height: calc(100vh - 202px);
-  @media screen and (max-width: 767px){
-    min-height: calc(100vh - 152px);
-  }
-`;
+
 const Contents = styled.div`
   width: 90%;
   max-width: 1200px;

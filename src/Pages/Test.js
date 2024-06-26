@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styled from 'styled-components';
-import { useNavigate, useParams } from 'react-router-dom';
-import Header from '../Components/header/Header';
-import Footer from '../Components/footer/Footer';
-import TitleGradient from '../Components/TitleGradient';
-import Question from '../Components/test/Question';
-import Answer from '../Components/test/Answer';
-import { getTestData } from '../utils/api';
+import styled from "styled-components";
+import { useNavigate, useParams } from "react-router-dom";
+import TitleGradient from "../Components/TitleGradient";
+import Question from "../Components/test/Question";
+import Answer from "../Components/test/Answer";
+import { getTestData } from "../utils/api";
 
 const Test = () => {
   const navigate = useNavigate();
@@ -16,9 +14,9 @@ const Test = () => {
   const [questions, setQuestions] = useState([
     {
       id: 0,
-      question: '악기 추천 받으러 갈까요?',
-      answer: '너무 좋아요 :)',
-      sanswer: '다음에 봐요 :(',
+      question: "악기 추천 받으러 갈까요?",
+      answer: "너무 좋아요 :)",
+      sanswer: "다음에 봐요 :(",
       score: [],
     },
   ]);
@@ -41,16 +39,34 @@ const Test = () => {
     { id: 15, score: 0 },
     { id: 16, score: 0 },
   ]);
-  const result = ['cr0o0n','f0ni1r','sn0e2c','v0ai3o','co0e4l','c0so5n','fe0l6u','o0eb7o','ct0l8a','b0na9s','tt1r0u','t1er1o','hn1o2r','t1au3b','ti1i4m','p1ne5r','po1i6a']
+  const result = [
+    "cr0o0n",
+    "f0ni1r",
+    "sn0e2c",
+    "v0ai3o",
+    "co0e4l",
+    "c0so5n",
+    "fe0l6u",
+    "o0eb7o",
+    "ct0l8a",
+    "b0na9s",
+    "tt1r0u",
+    "t1er1o",
+    "hn1o2r",
+    "t1au3b",
+    "ti1i4m",
+    "p1ne5r",
+    "po1i6a",
+  ];
 
   useEffect(() => {
     getData();
-  },[]);
+  }, []);
   useEffect(() => {
-    if(params.id){
-      if(params.id === '1'){
+    if (params.id) {
+      if (params.id === "1") {
         setIsActive(true);
-      } else{
+      } else {
         setIsActive(false);
       }
     }
@@ -58,119 +74,109 @@ const Test = () => {
   const getData = async () => {
     getTestData()
       .then((res) => {
-        res.data.forEach((v) => v.score = v.score.split(','));
+        res.data.forEach((v) => (v.score = v.score.split(",")));
         let arr = [...questions];
         arr = arr.concat(res.data);
         setQuestions(arr);
       })
       .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
-  useEffect(()=>{
-    if(questionId > 20){
+  useEffect(() => {
+    if (questionId > 20) {
       let _code = result[instrument.sort((a, b) => b.score - a.score)[0].id];
       navigate(`./result/${_code}`);
     }
-  },[questionId]);
-
+  }, [questionId]);
 
   const setScore = (score, answer) => {
     let addition = [...instrument];
-    if(answer === 1){
+    if (answer === 1) {
       // 1번 버튼 클릭
-      for(let i = 0; i < 17; i++){
+      for (let i = 0; i < 17; i++) {
         addition[i].score += Number(score[i]);
       }
-    } else{
+    } else {
       // 2번 버튼 클릭
-      for(let i = 0; i < 17; i++){
+      for (let i = 0; i < 17; i++) {
         addition[i].score += Number(5 - score[i]);
       }
     }
     setInstrument(addition);
-  }
+  };
 
   return (
     <>
-      <Wrap>
-        <Header />
-        <Contents>
-          <TitleGradient
-            title="너의 악기는?"
-            explain={
-              "새로운 악기를 시도해보고 싶다면?\n당신에게 어울리는 악기를 추천해드립니다!"
-            }
-            link="/test/1"
-            color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
-          />
-          {isActive ? (
-            <TestContent>
-              <StyledQuestionBox>
-                {questionId > 0 ? (
-                  <ProgressBox>
-                    <p>{(questionId-1) * 5}%</p>
-                    <progress value={questionId - 1} max={20}></progress>
-                  </ProgressBox>
-                ) : (
-                  null
-                )}
-                {questionId <= 20 ? (<Question id={questions[questionId].id} question={questions[questionId].question} />) : null}
-                {questionId === 0 ? (
-                  <StartSubTitle>
-                    (* 이 테스트는 오로지 재미를 위해 만들어진 테스트입니다.^^)
-                  </StartSubTitle>
-                ) : null}
-              </StyledQuestionBox>
-              <StyledAnswerBox>
-                {questionId <= 20 ? (
-                  <>
-                    <Answer
-                      id={questions[questionId].id}
-                      answer={questions[questionId].answer}
-                      handleClickAnswer={() => {
-                        if(questionId >= 1) {
-                          setScore(questions[questionId].score, 1);
-                        }
+      <Contents>
+        <TitleGradient
+          title="너의 악기는?"
+          explain={
+            "새로운 악기를 시도해보고 싶다면?\n당신에게 어울리는 악기를 추천해드립니다!"
+          }
+          link="/test/1"
+          color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
+        />
+        {isActive ? (
+          <TestContent>
+            <StyledQuestionBox>
+              {questionId > 0 ? (
+                <ProgressBox>
+                  <p>{(questionId - 1) * 5}%</p>
+                  <progress value={questionId - 1} max={20}></progress>
+                </ProgressBox>
+              ) : null}
+              {questionId <= 20 ? (
+                <Question
+                  id={questions[questionId].id}
+                  question={questions[questionId].question}
+                />
+              ) : null}
+              {questionId === 0 ? (
+                <StartSubTitle>
+                  (* 이 테스트는 오로지 재미를 위해 만들어진 테스트입니다.^^)
+                </StartSubTitle>
+              ) : null}
+            </StyledQuestionBox>
+            <StyledAnswerBox>
+              {questionId <= 20 ? (
+                <>
+                  <Answer
+                    id={questions[questionId].id}
+                    answer={questions[questionId].answer}
+                    handleClickAnswer={() => {
+                      if (questionId >= 1) {
+                        setScore(questions[questionId].score, 1);
+                      }
+                      setQuestionId((prev) => prev + 1);
+                    }}
+                  />
+                  <Answer
+                    id={questions[questionId].id}
+                    answer={questions[questionId].sanswer}
+                    handleClickAnswer={() => {
+                      if (questionId >= 1) {
                         setQuestionId((prev) => prev + 1);
-                      }}
-                    />
-                    <Answer
-                      id={questions[questionId].id}
-                      answer={questions[questionId].sanswer}
-                      handleClickAnswer={() => {
-                        if(questionId >= 1) {
-                          setQuestionId((prev) => prev + 1);
-                          setScore(questions[questionId].score, 2);
-                        }
-                        else navigate(`/etc`);
-                      }}
-                    />
-                  </>
-                ) : null}
-              </StyledAnswerBox>
-            </TestContent>
-          ) : null}
-        </Contents>
-      </Wrap>
-      <Footer />
+                        setScore(questions[questionId].score, 2);
+                      } else navigate(`/etc`);
+                    }}
+                  />
+                </>
+              ) : null}
+            </StyledAnswerBox>
+          </TestContent>
+        ) : null}
+      </Contents>
     </>
   );
 };
-const Wrap = styled.div`
-  width: 100%;
-  height: auto;
-  min-height: calc(100vh - 202px);
-  @media screen and (max-width: 767px){
-    min-height: calc(100vh - 152px);
-  }
-`;
+
 const Contents = styled.div`
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     max-width: 400px;
   }
 `;
@@ -180,7 +186,7 @@ const TestContent = styled.div`
   padding-top: 100px;
   padding-bottom: 100px;
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     padding-top: 80px;
   }
 `;
@@ -188,49 +194,48 @@ const StyledQuestionBox = styled.div`
   width: 100%;
   margin-bottom: 40px;
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     margin-bottom: 30px;
   }
 `;
 const ProgressBox = styled.div`
   width: 600px;
-  
+
   margin: 0 auto;
   margin-bottom: 40px;
   display: flex;
   justify-content: center;
   align-items: baseline;
-  
-  @media screen and (max-width: 767px){
+
+  @media screen and (max-width: 767px) {
     width: 90%;
   }
 
-  & > p{
+  & > p {
     flex-shrink: 0;
     width: 55px;
     text-align: start;
     margin-right: 10px;
     font-size: 20px;
-    @media screen and (max-width: 767px){
+    @media screen and (max-width: 767px) {
       font-size: 16px;
       width: 45px;
     }
   }
-  & > progress{
+  & > progress {
     width: 100%;
     height: 15px;
     appearance: none;
 
-    &::-webkit-progress-bar{
-      background-color: #FFFFFF;
+    &::-webkit-progress-bar {
+      background-color: #ffffff;
       border-radius: 20px;
       border: 1px solid #cccccc;
       overflow: hidden;
     }
-    &::-webkit-progress-value{
-      background-color: #E6E0F8;
+    &::-webkit-progress-value {
+      background-color: #e6e0f8;
       animation: 3s linear slidein;
-      
     }
   }
 `;
@@ -239,7 +244,7 @@ const StartSubTitle = styled.p`
   font-size: 12px;
   color: red;
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     font-size: 11px;
   }
 `;
@@ -249,7 +254,7 @@ const StyledAnswerBox = styled.div`
   flex-direction: row;
   align-items: center;
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     flex-direction: column;
   }
 `;

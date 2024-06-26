@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import styled from 'styled-components';
-import Header from '../Components/header/Header';
-import Footer from '../Components/footer/Footer';
-import TitleGradient from '../Components/TitleGradient';
-import { useParams, useNavigate } from 'react-router-dom';
-import ExamPaper from '../Components/exam/ExamPaper';
-import { getExamData, postExamScoreData } from '../utils/api';
-import { useScrollTopAlways } from '../hooks/useScrollTop';
+import styled from "styled-components";
+import TitleGradient from "../Components/TitleGradient";
+import { useParams, useNavigate } from "react-router-dom";
+import ExamPaper from "../Components/exam/ExamPaper";
+import { getExamData, postExamScoreData } from "../utils/api";
+import { useScrollTopAlways } from "../hooks/useScrollTop";
 
 const Exam = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const [problemNumber, setProblemNumber] = useState(0); // 문제 번호
   const [problems, setProblems] = useState([]); // 문제, 보기, 답
   // [
@@ -19,34 +17,38 @@ const Exam = () => {
   //   {id:2, question:"", choices:["","","",""]},
   //   ...
   // ]
-  const [submitAnswers, setSubmitAnswers] = useState([0,0,0,0,0,0,0,0,0,0]); // 사용자 답
+  const [submitAnswers, setSubmitAnswers] = useState([
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  ]); // 사용자 답
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const [isActive, setIsActive] = useState(false);
 
   useScrollTopAlways();
 
   useEffect(() => {
-    if(params.id){
-      if(params.id === '1' || params.id === '2' || params.id === '3'){
+    if (params.id) {
+      if (params.id === "1" || params.id === "2" || params.id === "3") {
         let _title = `제${params.id}회 클래식 능력고사`;
         setTitle(_title);
         setIsActive(true);
-      } else{
+      } else {
         setIsActive(false);
       }
     }
   }, [params]);
 
   const examStart = (start) => {
-    if(start === 1){ // 바로 시작하기
+    if (start === 1) {
+      // 바로 시작하기
       getData();
-    } else{ // 다음에 하기
+    } else {
+      // 다음에 하기
       navigate(-1);
     }
-  }
+  };
 
   const getData = async () => {
     getExamData(params.id)
@@ -56,33 +58,33 @@ const Exam = () => {
       })
       .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
   const nextQuestion = (num) => {
     let _answer = [...submitAnswers];
     _answer[problemNumber - 1] = num;
 
     let temp = 1;
-    if(problemNumber === 10 && _answer.indexOf(0) > -1){
-      if(window.confirm('풀지 않은 문제가 있습니다. 그래도 채점하시겠습니까?')) temp = 1;
+    if (problemNumber === 10 && _answer.indexOf(0) > -1) {
+      if (window.confirm("풀지 않은 문제가 있습니다. 그래도 채점하시겠습니까?"))
+        temp = 1;
       else temp = 0;
     }
-    if(temp){
+    if (temp) {
       setSubmitAnswers(_answer);
-      if(problemNumber <= 10) setProblemNumber(n => n + 1);
+      if (problemNumber <= 10) setProblemNumber((n) => n + 1);
     }
-    
-  }
+  };
   const prevQuestion = (num) => {
     let _answer = [...submitAnswers];
     _answer[problemNumber - 1] = num;
     setSubmitAnswers(_answer);
-    if(problemNumber <= 10) setProblemNumber(n => n - 1);
-  }
+    if (problemNumber <= 10) setProblemNumber((n) => n - 1);
+  };
 
   useEffect(() => {
-    if(problemNumber > 10){
+    if (problemNumber > 10) {
       checkAnswer();
     }
   }, [problemNumber]);
@@ -96,11 +98,11 @@ const Exam = () => {
       })
       .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
   useEffect(() => {
-    if(loading && isLoading){
+    if (loading && isLoading) {
       // 1초 뒤 로딩 해제
       const timeoutId = setTimeout(() => {
         setLoading(false);
@@ -111,71 +113,82 @@ const Exam = () => {
     }
   }, [isLoading]);
 
-
   const examEnd = (end) => {
-    if(end === 1){ // 다시하기
+    if (end === 1) {
+      // 다시하기
       window.location.reload();
-    } else{ // 종료하기
+    } else {
+      // 종료하기
       navigate(`/etc`);
     }
-  }
+  };
 
   return (
     <>
-      <Wrap>
-        <Header />
-        <Contents>
-          <TitleGradient
-            title="클래식 능력고사"
-            explain={
-              "당신은 클래식을 많이 아십니까?\n이곳에서 당신의 능력을 확인해보십시오!"
-            }
-            link={isActive ? "/exam/" + params.id : "/exam/1"}
-            color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
-          />
-          {isActive ? (
-            <ExamContent>
-              {!problemNumber ? (
-                <ExamPaper id={problemNumber} question={title} choices={['바로 시작하기', '다음에 하기']} nextQuestion={examStart} />
-              ) : (
-                <>
-                  {problemNumber <= 10 ? (
-                    <ExamPaper id={problemNumber} question={problems[problemNumber - 1]['question']} choices={problems[problemNumber - 1]['choices']} nextQuestion={nextQuestion} prevQuestion={prevQuestion} check={submitAnswers[problemNumber - 1]} />
-                  ) : (
-                    <>
-                      {loading ? (
-                        <Loading>
-                          <img src={process.env.REACT_APP_KUPHIL_PUBLIC_URL + '/images/purple_loading.svg'} />
-                        </Loading>
-                      ) : (
-                        <ExamPaper id={problemNumber} nextQuestion={examEnd} score={score} />
-                      )}
-                      
-                    </>
-                  )}
-                </>
-              )}
-            </ExamContent>
-          ) : null}
-        </Contents>
-      </Wrap>
-      <Footer />
+      <Contents>
+        <TitleGradient
+          title="클래식 능력고사"
+          explain={
+            "당신은 클래식을 많이 아십니까?\n이곳에서 당신의 능력을 확인해보십시오!"
+          }
+          link={isActive ? "/exam/" + params.id : "/exam/1"}
+          color="linear-gradient(91.48deg, #EFF2FF 0%, rgba(252, 225, 225, 0.31) 100%)"
+        />
+        {isActive ? (
+          <ExamContent>
+            {!problemNumber ? (
+              <ExamPaper
+                id={problemNumber}
+                question={title}
+                choices={["바로 시작하기", "다음에 하기"]}
+                nextQuestion={examStart}
+              />
+            ) : (
+              <>
+                {problemNumber <= 10 ? (
+                  <ExamPaper
+                    id={problemNumber}
+                    question={problems[problemNumber - 1]["question"]}
+                    choices={problems[problemNumber - 1]["choices"]}
+                    nextQuestion={nextQuestion}
+                    prevQuestion={prevQuestion}
+                    check={submitAnswers[problemNumber - 1]}
+                  />
+                ) : (
+                  <>
+                    {loading ? (
+                      <Loading>
+                        <img
+                          src={
+                            process.env.REACT_APP_KUPHIL_PUBLIC_URL +
+                            "/images/purple_loading.svg"
+                          }
+                          alt=''
+                        />
+                      </Loading>
+                    ) : (
+                      <ExamPaper
+                        id={problemNumber}
+                        nextQuestion={examEnd}
+                        score={score}
+                      />
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </ExamContent>
+        ) : null}
+      </Contents>
     </>
   );
 };
-const Wrap = styled.div`
-  width: 100%;
-  height: auto;
-  min-height: calc(100vh - 202px);
-  @media screen and (max-width: 767px){
-    min-height: calc(100vh - 152px);
-  }
-`;
+
 const Contents = styled.div`
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     max-width: 400px;
   }
 `;
@@ -184,7 +197,7 @@ const ExamContent = styled.div`
   height: auto;
   padding: 50px 0;
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     padding: 20px 0;
   }
 `;
