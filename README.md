@@ -1,5 +1,5 @@
 # 쿠웹(Kuphil Website) version.2
-웹사이트 링크 : [https://www.kuphil.com]([http://3.38.46.26](https://www.kuphil.com))
+웹사이트 링크 : [Kuphil Website](https://www.kuphil.com)
 
 ## 프로젝트 소개
 건국대학교 교내 오케스트라 동아리 '쿠필(Kuphil)'의 자체 제작 홈페이지입니다.
