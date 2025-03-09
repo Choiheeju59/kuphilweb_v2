@@ -1,11 +1,20 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Youtube = () => {
   return (
     <StyledYoutube>
       <div>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/D6Fjxs6dMaQ?si=sjudL2jHW3n0Vcim" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube-nocookie.com/embed/t_Wznb7kZr4?si=Tr__ypqQ-340Be4g"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
       </div>
     </StyledYoutube>
   );
@@ -20,18 +29,18 @@ const StyledYoutube = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  & > div{
+  & > div {
     position: relative;
     width: 60%;
     padding-bottom: calc(56.2% * 6 / 10);
-    & > iframe{
+    & > iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
     }
-    @media screen and (max-width: 767px){
+    @media screen and (max-width: 767px) {
       width: 80%;
       padding-bottom: calc(56.2% * 8 / 10);
     }
