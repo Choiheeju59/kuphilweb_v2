@@ -18,7 +18,6 @@ const Etc = () => {
     },
     { title: "제1회 클래식 능력고사", src: "exam1.png", link: "/exam/1" },
     { title: "제2회 클래식 능력고사", src: "exam2.png", link: "/exam/2" },
-    { title: "제3회 클래식 능력고사", src: "exam3.png", link: "/exam/3" },
     { title: "악보 퀴즈 (쉬움)", src: "quiz1.png", link: "/quiz/1" },
     { title: "악보 퀴즈 (어려움)", src: "quiz2.png", link: "/quiz/2" },
   ];
@@ -40,7 +39,11 @@ const Etc = () => {
         </Box>
         <ComingSoon>
           <p>Coming Soon</p>
-          <a href="https://open.kakao.com/o/sDHHVdig" target="_blank">
+          <a
+            href="https://open.kakao.com/o/sDHHVdig"
+            target="_blank"
+            rel="noreferrer"
+          >
             버그 제보 및 새 콘텐츠 제안 →
           </a>
         </ComingSoon>

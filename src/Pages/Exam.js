@@ -30,7 +30,7 @@ const Exam = () => {
 
   useEffect(() => {
     if (params.id) {
-      if (params.id === "1" || params.id === "2" || params.id === "3") {
+      if (params.id === "1" || params.id === "2") {
         let _title = `제${params.id}회 클래식 능력고사`;
         setTitle(_title);
         setIsActive(true);
@@ -163,7 +163,7 @@ const Exam = () => {
                             process.env.REACT_APP_KUPHIL_PUBLIC_URL +
                             "/images/purple_loading.svg"
                           }
-                          alt=''
+                          alt=""
                         />
                       </Loading>
                     ) : (
