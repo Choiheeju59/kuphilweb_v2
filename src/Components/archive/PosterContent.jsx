@@ -1,77 +1,97 @@
-import { ConcertNumber, PageBtn, PosterContainer, Wrap, WrapConcertNumber, WrapPageNum, WrapPoster } from "./PosterContent.style";
-import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {
+  ConcertNumber,
+  PageBtn,
+  PosterContainer,
+  Wrap,
+  WrapConcertNumber,
+  WrapPageNum,
+  WrapPoster,
+} from "./PosterContent.style";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { useScrollTopAlways } from '../../hooks/useScrollTop';
+import { useScrollTopAlways } from "../../hooks/useScrollTop";
 
 const PosterContent = () => {
-    const { page } = useParams();
-    const navigate = useNavigate();
+  const TOTAL_POSTERS = 44;
+  const POSTERS_PER_PAGE = 6;
 
-    const [divWidth, setDivWidth] = useState(window.innerWidth * 0.15);
+  const { page } = useParams();
+  const navigate = useNavigate();
+  const currentPage = Number(page) || 1;
 
-    useScrollTopAlways();
-    
-      useEffect(() => {
-        const handleResize = () => {
-          setDivWidth(window.innerWidth * 0.15);
-        };
-    
-        window.addEventListener('resize', handleResize);
-    
-        return () => {
-          window.removeEventListener('resize', handleResize);
-        };
-      }, []);
+  const [divWidth, setDivWidth] = useState(window.innerWidth * 0.15);
 
-      let imageName = [42, 36, 30, 24, 18, 12, 6];
-      let indexArr = [0, 1, 2, 3, 4, 5];
-      let indexArr2 = [0, 1, 2, 3, 4, 5];
+  useScrollTopAlways();
 
-      useEffect(() => {
-        const validPageNumbers = [1, 2, 3, 4, 5, 6, 7];
+  useEffect(() => {
+    const handleResize = () => {
+      setDivWidth(window.innerWidth * 0.15);
+    };
 
-        if (!validPageNumbers.includes(Number(page))) {
-            navigate("/archive/1");
-        }
-    }, [navigate, page]);
-      
-    return(
-        <>
-            <PosterContainer>
-            {page !== String(imageName.length) ? indexArr.map((elem, idx) => {
-        return(
-            <Wrap key={idx} onClick={() => navigate(`/concert/${imageName[Number(page)-1]-elem}`)}>
-                <WrapPoster divWidth={divWidth} style={{backgroundImage: `url(../../../images/poster/poster_${imageName[Number(page)-1]-elem}.jpg)` }}/>
-                <WrapConcertNumber>
-                    <ConcertNumber>제</ConcertNumber>
-                    <ConcertNumber>{imageName[Number(page)-1]-elem}</ConcertNumber>
-                    <ConcertNumber>회</ConcertNumber>
-                </WrapConcertNumber>
-            </Wrap>
-            )}
-            ) : indexArr2.map((elem, idx) => {
-        return(
-            <Wrap key={idx} onClick={() => navigate(`/concert/${imageName[Number(page)-1]-elem}`)}>
-                <WrapPoster divWidth={divWidth} style={{backgroundImage: `url(../../../images/poster/poster_${imageName[Number(page)-1]-elem}.jpg)` }}/>
-                <WrapConcertNumber>
-                    <ConcertNumber>제</ConcertNumber>
-                    <ConcertNumber>{imageName[Number(page)-1]-elem}</ConcertNumber>
-                    <ConcertNumber>회</ConcertNumber>
-                </WrapConcertNumber>
-            </Wrap>
-            )}
-        )}
-            </PosterContainer>
-            <WrapPageNum>
-                {imageName.map((elem, idx) => {
-                    return(
-                        <PageBtn key={idx} name="page" id={(idx + 1).toString()} onClick={() => navigate(`/archive/${idx + 1}`)} style={(idx + 1).toString() === page ? { color: "#555555", border: "1px solid #555555", borderRadius: '5px'} : {color: "black"}}>{idx + 1}</PageBtn>
-                    )
-                })}
-            </WrapPageNum>
-        </>
-    )
-}
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const totalPages = Math.ceil(TOTAL_POSTERS / POSTERS_PER_PAGE);
+
+  useEffect(() => {
+    if (currentPage < 1 || currentPage > totalPages) {
+      navigate("/archive/1");
+    }
+  }, [currentPage, totalPages, navigate]);
+
+  const postersToShow = Array.from({ length: POSTERS_PER_PAGE }, (_, i) => {
+    const posterNumber =
+      TOTAL_POSTERS - ((currentPage - 1) * POSTERS_PER_PAGE + i);
+    return posterNumber > 0 ? posterNumber : null;
+  }).filter(Boolean);
+
+  return (
+    <>
+      <PosterContainer>
+        {postersToShow.map((posterNumber) => (
+          <Wrap
+            key={posterNumber}
+            onClick={() => navigate(`/concert/${posterNumber}`)}
+          >
+            <WrapPoster
+              divWidth={divWidth}
+              style={{
+                backgroundImage: `url(../../../images/poster/poster_${posterNumber}.jpg)`,
+              }}
+            />
+            <WrapConcertNumber>
+              <ConcertNumber>제</ConcertNumber>
+              <ConcertNumber>{posterNumber}</ConcertNumber>
+              <ConcertNumber>회</ConcertNumber>
+            </WrapConcertNumber>
+          </Wrap>
+        ))}
+      </PosterContainer>
+
+      <WrapPageNum>
+        {Array.from({ length: totalPages }, (_, i) => (
+          <PageBtn
+            key={i}
+            id={(i + 1).toString()}
+            onClick={() => navigate(`/archive/${i + 1}`)}
+            style={
+              currentPage === i + 1
+                ? {
+                    color: "#555555",
+                    border: "1px solid #555555",
+                    borderRadius: "5px",
+                  }
+                : { color: "black" }
+            }
+          >
+            {i + 1}
+          </PageBtn>
+        ))}
+      </WrapPageNum>
+    </>
+  );
+};
 
 export default PosterContent;
