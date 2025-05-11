@@ -92,7 +92,7 @@ const ConcertInfoContent = () => {
       {isValidNum ? (
         <>
           <div style={{ display: "flex", marginBottom: "20px" }}>
-            {num < 42 && (
+            {num < totalConcerts && (
               <Button
                 onClick={() => navigate(`/concert/${parseInt(num, 10) + 1}`)}
               >
