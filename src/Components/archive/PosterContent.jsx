@@ -13,7 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useScrollTopAlways } from "../../hooks/useScrollTop";
 
 const PosterContent = () => {
-  const TOTAL_POSTERS = 44;
+  const TOTAL_POSTERS = 46;
   const POSTERS_PER_PAGE = 6;
 
   const { page } = useParams();
