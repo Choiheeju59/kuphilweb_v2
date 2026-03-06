@@ -11,7 +11,7 @@ const ConcertInfoContent = () => {
   const navigate = useNavigate();
   const [concertData, setConcertData] = useState(null);
   const [isValidNum, setIsValidNum] = useState(true);
-  const totalConcerts = 44;
+  const totalConcerts = 46;
   const perPage = 6;
 
   useScrollTopAlways();
